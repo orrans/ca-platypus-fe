@@ -6,7 +6,6 @@ import { AppHeader } from './cmps/AppHeader'
 import { AppFooter } from './cmps/AppFooter'
 import { UserMsg } from './cmps/UserMsg.jsx'
 
-
 export function RootCmp() {
     return (
         <div className="main-container">
@@ -19,8 +18,6 @@ export function RootCmp() {
                 </Routes>
             </main>
             <AppFooter />
-        </div >
+        </div>
     )
 }
-
-
