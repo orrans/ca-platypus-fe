@@ -4,8 +4,12 @@ import { loadStays, addStay } from '../store/actions/stay.actions'
 import { stayService } from '../services/stay'
 import { userService } from '../services/user'
 
+
+
+
 export function StayIndex() {
     const stays = useSelector(storeState => storeState.stayModule.stays)
+
 
     useEffect(() => {
         loadStays()
