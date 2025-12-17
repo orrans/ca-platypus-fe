@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 export function StayFilter({ filterBy, setFilterBy }) {
-    const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy))
+    const [ filterToEdit, setFilterToEdit ] = useState(structuredClone(filterBy))
 
     useEffect(() => {
         setFilterBy(filterToEdit)
@@ -16,7 +16,7 @@ export function StayFilter({ filterBy, setFilterBy }) {
             case 'text':
             case 'radio':
                 value = field === 'sortDir' ? +ev.target.value : ev.target.value
-                if (!filterToEdit.sortDir) filterToEdit.sortDir = 1
+                if(!filterToEdit.sortDir) filterToEdit.sortDir = 1
                 break
             case 'number':
                 value = +ev.target.value || ''
@@ -28,13 +28,12 @@ export function StayFilter({ filterBy, setFilterBy }) {
     function clearFilter() {
         setFilterToEdit({ ...filterToEdit, txt: '', date: null, guests: 0 })
     }
-
+    
     function clearSort() {
         setFilterToEdit({ ...filterToEdit, sortField: '', sortDir: '' })
     }
 
-    return (
-        <section className="stay-filter">
+    return <section className="stay-filter">
             <h3>Filter:</h3>
             <input
                 type="text"
@@ -53,9 +52,9 @@ export function StayFilter({ filterBy, setFilterBy }) {
                 onChange={handleChange}
                 required
             />
-            <button className="btn-clear" onClick={clearFilter}>
-                Clear
-            </button>
+            <button 
+                className="btn-clear" 
+                onClick={clearFilter}>Clear</button>
             <h3>Sort:</h3>
             <div className="sort-field">
                 <label>
@@ -68,6 +67,16 @@ export function StayFilter({ filterBy, setFilterBy }) {
                         onChange={handleChange}
                     />
                 </label>
+                <label>
+                    <span>Vendor</span>
+                    <input
+                        type="radio"
+                        name="sortField"
+                        value="vendor"
+                        checked={filterToEdit.sortField === 'vendor'}            
+                        onChange={handleChange}
+                    />
+                </label>
             </div>
             <div className="sort-dir">
                 <label>
@@ -76,7 +85,7 @@ export function StayFilter({ filterBy, setFilterBy }) {
                         type="radio"
                         name="sortDir"
                         value="1"
-                        checked={filterToEdit.sortDir === 1}
+                        checked={filterToEdit.sortDir === 1}                        
                         onChange={handleChange}
                     />
                 </label>
@@ -87,13 +96,12 @@ export function StayFilter({ filterBy, setFilterBy }) {
                         name="sortDir"
                         value="-1"
                         onChange={handleChange}
-                        checked={filterToEdit.sortDir === -1}
+                        checked={filterToEdit.sortDir === -1}                        
                     />
                 </label>
             </div>
-            <button className="btn-clear" onClick={clearSort}>
-                Clear
-            </button>
-        </section>
-    )
+            <button 
+                className="btn-clear" 
+                onClick={clearSort}>Clear</button>
+    </section>
 }

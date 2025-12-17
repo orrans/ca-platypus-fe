@@ -3,83 +3,83 @@ import { storageService } from '../async-storage.service'
 import { makeId } from '../util.service'
 import { userService } from '../user'
 
-const STORAGE_KEY = 'car'
+const STORAGE_KEY = 'stay'
 
-export const carService = {
+export const stayService = {
     query,
     getById,
     save,
     remove,
-    addCarMsg
+    addStayMsg
 }
-window.cs = carService
+window.cs = stayService
 
 
-async function query(filterBy = { txt: '', minSpeed: 0 }) {
-    var cars = await storageService.query(STORAGE_KEY)
-    const { txt, minSpeed, sortField, sortDir } = filterBy
+async function query(filterBy = { txt: '', rsrvDate: 0 }) {
+    var stays = await storageService.query(STORAGE_KEY)
+    const { txt, rsrvDate, sortField, sortDir } = filterBy
 
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
-        cars = cars.filter(car => regex.test(car.vendor) || regex.test(car.description))
+        stays = stays.filter(stay => regex.test(stay.guest) || regex.test(stay.description))
     }
-    if (minSpeed) {
-        cars = cars.filter(car => car.speed >= minSpeed)
+    if (rsrvDate) {
+        stays = stays.filter(stay => stay.date >= rsrvDate)
     }
-    if(sortField === 'vendor'){
-        cars.sort((car1, car2) => 
-            car1[sortField].localeCompare(car2[sortField]) * +sortDir)
+    if(sortField === 'guest'){
+        stays.sort((stay1, stay2) => 
+            stay1[sortField].localeCompare(stay2[sortField]) * +sortDir)
     }
-    if(sortField === 'speed'){
-        cars.sort((car1, car2) => 
-            (car1[sortField] - car2[sortField]) * +sortDir)
+    if(sortField === 'date'){
+        stays.sort((stay1, stay2) => 
+            (stay1[sortField] - stay2[sortField]) * +sortDir)
     }
     
-    cars = cars.map(({ _id, vendor, speed, owner }) => ({ _id, vendor, speed, owner }))
-    return cars
+    stays = stays.map(({ _id, guest, date, owner }) => ({ _id, guest, date, owner }))
+    return stays
 }
 
-function getById(carId) {
-    return storageService.get(STORAGE_KEY, carId)
+function getById(stayId) {
+    return storageService.get(STORAGE_KEY, stayId)
 }
 
-async function remove(carId) {
+async function remove(stayId) {
     // throw new Error('Nope')
-    await storageService.remove(STORAGE_KEY, carId)
+    await storageService.remove(STORAGE_KEY, stayId)
 }
 
-async function save(car) {
-    var savedCar
-    if (car._id) {
-        const carToSave = {
-            _id: car._id,
-            speed: car.speed
+async function save(stay) {
+    var savedStay
+    if (stay._id) {
+        const stayToSave = {
+            _id: stay._id,
+            date: stay.date
         }
-        savedCar = await storageService.put(STORAGE_KEY, carToSave)
+        savedStay = await storageService.put(STORAGE_KEY, stayToSave)
     } else {
-        const carToSave = {
-            vendor: car.vendor,
-            speed: car.speed,
+        const stayToSave = {
+            guest: stay.guest,
+            date: stay.date,
             // Later, owner is set by the backend
             owner: userService.getLoggedinUser(),
             msgs: []
         }
-        savedCar = await storageService.post(STORAGE_KEY, carToSave)
+        savedStay = await storageService.post(STORAGE_KEY, stayToSave)
     }
-    return savedCar
+    return savedStay
 }
 
-async function addCarMsg(carId, txt) {
+async function addStayMsg(stayId, txt) {
     // Later, this is all done by the backend
-    const car = await getById(carId)
+    const stay = await getById(stayId)
 
     const msg = {
         id: makeId(),
         by: userService.getLoggedinUser(),
         txt
     }
-    car.msgs.push(msg)
-    await storageService.put(STORAGE_KEY, car)
+    stay.msgs.push(msg)
+    await storageService.put(STORAGE_KEY, stay)
 
     return msg
 }
