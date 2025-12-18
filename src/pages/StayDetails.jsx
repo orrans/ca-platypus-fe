@@ -55,6 +55,7 @@ export function StayDetails() {
 
 //   For demo purposes
 const stayType = 'Apartment'
+const hostName = 'Platy'
 
   return (
   <section className="stay-details">
@@ -85,6 +86,18 @@ const stayType = 'Apartment'
   {stayType}, {stay.loc.country}
 </p>
 
+<section className="stay-host">
+  <img
+    className="host-avatar"
+    src="/img/platy.jpg"
+    alt="Host Platy"
+  />
+
+  <div className="host-info">
+    <h3>Host: Platy</h3>
+    <p>Superhost · 8 years hosting</p>
+  </div>
+</section>
 
 
         <section className="stay-highlights">
