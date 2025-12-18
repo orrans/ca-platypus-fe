@@ -1,38 +1,35 @@
 /*  Setup */
-@import 'setup/variables';
-@import 'setup/functions';
-@import 'setup/mixins';
-@import 'setup/typography';
+@import 'setup/_variables.css';
+@import 'setup/_typography.css';
 
 /*  Basics*/
-@import 'basics/helpers';
-@import 'basics/layout';
-@import 'basics/base';
-/*  @import "basics/links";*/
-@import 'basics/forms';
+@import 'basics/_layout.css';
+@import 'basics/_base.css';
+/*  @import "basics/links.css";*/
+@import 'basics/_forms.css';
 
 /*  pages*/
-@import 'RootCmp';
+@import 'RootCmp.css';
 
-@import 'pages/AboutUs';
+@import 'pages/AboutUs.css';
 /*  @import "pages/HomePage";*/
-@import 'pages/CarIndex';
-@import 'pages/UserDetails';
-@import 'pages/TaskDetails';
-@import 'pages/LoginSignup';
-@import 'pages/Chat';
+@import 'pages/CarIndex.css';
+@import 'pages/UserDetails.css';
+@import 'pages/TaskDetails.css';
+@import 'pages/LoginSignup.css';
+@import 'pages/Chat.css';
 
 /*  Components*/
-@import 'cmps/list';
-@import 'cmps/preview';
+@import 'cmps/list.css';
+@import 'cmps/preview.css';
 
-@import 'cmps/AppHeader';
-@import 'cmps/AppFooter';
-@import 'cmps/UserMsg';
+@import 'cmps/AppHeader.css';
+@import 'cmps/AppFooter.css';
+@import 'cmps/UserMsg.css';
 
-@import 'cmps/CarFilter';
-@import 'cmps/ReviewEdit';
-@import 'cmps/ReviewList';
-@import 'cmps/ReviewPreview';
-@import 'cmps/StayList';
-@import 'cmps/StayPreview';
+@import 'cmps/CarFilter.css';
+@import 'cmps/ReviewEdit.css';
+@import 'cmps/ReviewList.css';
+@import 'cmps/ReviewPreview.css';
+@import 'cmps/StayList.css';
+@import 'cmps/StayPreview.css';
