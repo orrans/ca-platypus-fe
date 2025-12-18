@@ -1,0 +1,119 @@
+.date-picker-container {
+    background-color: var(--clr-bg);
+    width: 350px;
+    padding: 0 12px;
+}
+
+.date-picker-popup {
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 22px 0;
+    margin-bottom: 10px;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--clr-text-main);
+    transition: background-color 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: var(--clr-bg-light);
+}
+
+.month-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--clr-text-main);
+}
+
+.weekdays-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.weekday-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--clr-text-sub);
+    padding-bottom: 8px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 2px;
+}
+
+.day-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--clr-text-main);
+    position: relative;
+    border-radius: 50%;
+    border: 1.5px solid transparent;
+    margin: 1px 0;
+}
+
+.day-cell.empty {
+    cursor: default;
+    pointer-events: none;
+}
+
+.day-cell:not(.selected):not(.in-range):not(.empty):hover {
+    border-color: var(--clr-text-main);
+}
+
+
+.day-cell.in-range {
+    background-color: var(--clr-bg-light);
+    border-radius: 0;
+}
+
+.day-cell.selected {
+    background-color: var(--clr-text-main);
+    color: var(--clr-bg);
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+}
+
+.day-cell.range-start::before,
+.day-cell.range-end::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background-color: var(--clr-bg-light);
+    z-index: -1;
+}
+
+.day-cell.range-start::before {
+    right: 0;
+}
+
+.day-cell.range-end::before {
+    left: 0;
+}

@@ -1,48 +1,45 @@
 import { Link, NavLink } from 'react-router-dom'
-import { useNavigate } from 'react-router'
-import { useSelector } from 'react-redux'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { logout } from '../store/actions/user.actions'
+import { StaySearch } from './StaySearch.jsx'
 
 export function AppHeader() {
-	const user = useSelector(storeState => storeState.userModule.user)
-	const navigate = useNavigate()
+    return (
+        <header className="app-header full">
+            <div className="header-container">
 
-	async function onLogout() {
-		try {
-			await logout()
-			navigate('/')
-			showSuccessMsg(`Bye now`)
-		} catch (err) {
-			showErrorMsg('Cannot logout')
-		}
-	}
+                {/* Top Row: Logo, Nav, User Actions */}
+                <div className="header-top">
+                    <div className="logo">
+                        <Link to="/">
+                            <h1 className="logo-text">PlatypusBNB</h1>
+                        </Link>
+                    </div>
 
-	return (
-		<header className="app-header full">
-			<nav>
-				<NavLink to="/" className="logo">
-					E2E Demo
-				</NavLink>
-				<NavLink to="about">About</NavLink>
-				<NavLink to="car">Cars</NavLink>
-				<NavLink to="chat">Chat</NavLink>
-				<NavLink to="review">Review</NavLink>
+                    <nav className="main-nav">
+                        <NavLink to="/" className="nav-link">Homes</NavLink>
+                        <NavLink to="/experiences" className="nav-link">Experiences</NavLink>
+                        <NavLink to="/online" className="nav-link">Services</NavLink>
+                    </nav>
 
-                {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
+                    <div className="user-actions">
+                        <button className="host-btn">Become a Host</button>
 
-				{!user && <NavLink to="login" className="login-link">Login</NavLink>}
-				{user && (
-					<div className="user-info">
-						<Link to={`user/${user._id}`}>
-							{/* {user.imgUrl && <img src={user.imgUrl} />} */}
-							{user.fullname}
-						</Link>
-						{/* <span className="score">{user.score?.toLocaleString()}</span> */}
-						<button onClick={onLogout}>logout</button>
-					</div>
-				)}
-			</nav>
-		</header>
-	)
+                        <div className="user-avatar-placeholder">
+                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false" style={{ display: 'block', height: '100%', width: '100%', fill: 'currentcolor' }}><path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z"></path></svg>
+                        </div>
+
+                        <div className="user-menu-btn">
+                            <div className="menu-toggle-btn">
+                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false" style={{ display: 'block', fill: 'none', height: '16px', width: '16px', stroke: 'currentcolor', strokeWidth: '3', overflow: 'visible' }}><g fill="none"><path d="m2 16h28"></path><path d="m2 24h28"></path><path d="m2 8h28"></path></g></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bottom Row: Search Bar */}
+                <div className="header-bottom">
+                    <StaySearch />
+                </div>
+            </div>
+        </header>
+    )
 }

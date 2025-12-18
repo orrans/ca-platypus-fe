@@ -1,61 +1,231 @@
+/* Scoped AppHeader Styles */
 .app-header {
+    background-color: var(--clr-bg);
+    height: 170px;
+    /* Expanded height for 2 rows */
+    border-bottom: 1px solid var(--clr-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}
+
+.app-header.full {
+    width: 100%;
+}
+
+.app-header .header-container {
+    max-width: 1760px;
+    /* Standard wide content width */
+    margin: 0 auto;
+    padding: 0 80px;
+    /* More padding on sides for wide look */
+    height: 100%;
     display: flex;
-    min-height: 3.5rem;
+    flex-direction: column;
+    /* Stack top and bottom rows */
+}
 
-    background-color: var(--clr4);
-    padding: 0.65rem 1rem;
-    
-    nav {
-        display: flex;
-        width: 100%;
-        align-items: center;
-        gap: 1em;
-        
-        font-size: .8em;
-
-        .active {
-            color: var(--clr1);
-        }
-
-        .logo {
-            font-size: 1.4em;
-            font-weight: bold;
-            margin-inline-end: 2em;
-        }
-
-        .login-link {
-            margin-inline-start: auto;
-        }
-
-        button {
-            margin-inline-end: 0;
-        }
+/* Responsive padding for smaller screens */
+@media (max-width: 1200px) {
+    .app-header .header-container {
+        padding: 0 40px;
     }
+}
 
-    .user-info {
-        display: flex;
-        align-items: center;
-        margin-inline-start: auto;
-
-        color: var(--clr1);
-
-        .score {
-            padding: 8px;
-            background-color: var(--clr2);
-            border-radius: 50%;
-            margin: 10px;
-
-            color: var(--clr6);
-        }
-
-        img {
-            width: 32px;
-            aspect-ratio: 1;
-            border-radius: 50%;
-        }
-        
-        .btn-link {
-            color: var(--clr2);
-        }
+@media (max-width: 720px) {
+    .app-header .header-container {
+        padding: 0 24px;
     }
+}
+
+/* --- Top Row (Logo, Nav, User) --- */
+.app-header .header-top {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Logo */
+.app-header .logo {
+    flex: 1 0 140px;
+    display: flex;
+    align-items: center;
+}
+
+.app-header .logo a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.app-header .logo-text {
+    color: var(--clr-brand);
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+/* Navigation (Centered) */
+.app-header .main-nav {
+    flex: 0 1 auto;
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.app-header .main-nav .nav-link {
+    text-decoration: none;
+    color: var(--clr-text-sub);
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px 0;
+    position: relative;
+    transition: color 0.2s, font-weight 0.1s;
+    background: transparent;
+}
+
+.app-header .main-nav .nav-link:hover {
+    color: var(--clr-text-main);
+    background-color: transparent;
+    /* Override any potential default */
+}
+
+.app-header .main-nav .nav-link.active {
+    color: var(--clr-text-main);
+    font-weight: 600;
+}
+
+/* Active indicator dot/line if desired, usually just bold in this state */
+.app-header .main-nav .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    /* Align to bottom of container roughly */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background-color: var(--clr-text-main);
+    display: none;
+    /* Often hidden in expanded view, visible on hover or compact */
+}
+
+/* User Actions */
+.app-header .user-actions {
+    flex: 1 0 140px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.app-header .host-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--clr-text-main);
+    line-height: 18px;
+    padding: 12px;
+    border-radius: 22px;
+    transition: background-color 0.2s;
+}
+
+.app-header .host-btn:hover {
+    background-color: var(--clr-bg-light);
+}
+
+.app-header .globe-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 46px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    color: var(--clr-text-main);
+    transition: background-color 0.2s;
+}
+
+.app-header .globe-btn:hover {
+    background-color: var(--clr-bg-light);
+}
+
+/* User Menu Pill (Hamburger + Avatar) */
+
+.app-header .user-menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    margin-left: 8px;
+}
+
+.app-header .user-menu-btn:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}
+
+.app-header .user-avatar-placeholder {
+    width: 30px;
+    height: 30px;
+    color: #717171;
+    /* Generic gray avatar */
+}
+
+.app-header .avatar-btn {
+    width: 42px;
+    height: 42px;
+    padding: 6px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.app-header .avatar-btn .user-avatar-placeholder {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.app-header .menu-toggle-btn {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--clr-bg-light, #f1f1f1);
+    border: none;
+    cursor: pointer;
+    color: var(--clr-text-main);
+}
+
+.app-header .menu-toggle-btn:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+/* --- Bottom Row (Search) --- */
+.app-header .header-bottom {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+    /* Space from bottom */
+    width: 100%;
 }
