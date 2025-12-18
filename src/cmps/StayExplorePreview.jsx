@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { differenceInDays, format } from 'date-fns'
 import { shortDateFmt } from '../services/stay/date.service'
 
-export function StayPreview({ stay, fromDate, toDate }) {
+export function StayExplorePreview({ stay, fromDate, toDate }) {
     const days = differenceInDays(toDate, fromDate)
     return (
         <Link to={`/stay/${stay._id}`} target="_blank" className="stay-preview">
@@ -12,9 +12,8 @@ export function StayPreview({ stay, fromDate, toDate }) {
             <h4>
                 {stay.type} in {stay.name}
             </h4>
-            <span>{stay.summary}</span>
             <span>
-                {stay.beds} &bull; {stay.bedrooms}
+                {format(fromDate, shortDateFmt)} - {format(toDate, shortDateFmt)}
             </span>
             <span>
                 ${stay.price * days} for {days} nights
