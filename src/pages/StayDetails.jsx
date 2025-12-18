@@ -51,11 +51,24 @@ export function StayDetails() {
     }
   }
 
-  if (!stay) return <div>Loading...</div>
+  
+  //   For demo purposes
+  const stayType = 'Apartment'
+  const hostName = 'Platy'
+  const hostYears = 8
+  
+  const [isDescOpen, setIsDescOpen] = useState(false)
+  
+  const description = `
+  Beautiful and spacious guest house for couples in the Galilee.
+  Surrounded by nature, with sea and cliff views.
+  Bright interior, large double bed, fully equipped kitchen,
+  unique shower and cozy living area overlooking the wadi.
+  `
+//   for the future 
+//   const description = stay.description
 
-//   For demo purposes
-const stayType = 'Apartment'
-const hostName = 'Platy'
+  if (!stay) return <div>Loading...</div>
 
   return (
   <section className="stay-details">
@@ -125,6 +138,21 @@ const hostName = 'Platy'
             </div>
           </div>
         </section>
+
+<section className="stay-description">
+  <p className="description-preview">
+    {description}
+  </p>
+
+  <button
+    className="show-more-btn"
+    onClick={() => setIsDescOpen(true)}
+  >
+    Show more
+  </button>
+</section>
+
+
       </div>
 
       <aside className="stay-booking">
@@ -168,6 +196,10 @@ const hostName = 'Platy'
 
     </div>
   </section>
+
+  
 )
+
+
 
 }
