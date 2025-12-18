@@ -53,6 +53,9 @@ export function StayDetails() {
 
   if (!stay) return <div>Loading...</div>
 
+//   For demo purposes
+const stayType = 'Apartment'
+
   return (
   <section className="stay-details">
 
@@ -77,8 +80,12 @@ export function StayDetails() {
     <div className="stay-details-layout">
 
       <div className="stay-details-main">
-        {/* <h1>{stay.name}</h1>
-        <p>{stay.loc.city}, {stay.loc.country}</p> */}
+      
+<p className="stay-meta">
+  {stayType}, {stay.loc.country}
+</p>
+
+
 
         <section className="stay-highlights">
           <div className="highlight">

@@ -155,3 +155,9 @@
   height: 100%;
   object-fit: cover;
 }
+
+.stay-meta {
+  font-size: 14px;
+  color: var(--clr-text-sub);
+  margin-bottom: 16px;
+}
