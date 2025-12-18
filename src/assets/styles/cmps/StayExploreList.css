@@ -1,0 +1,12 @@
+.stay-explore-list {
+    display: grid;
+    grid-template-columns: repeat(8, 250px);
+    gap: 11px;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.explore-grid-container {
+    white-space: noWrap;
+    overflow-x: auto;
+}
