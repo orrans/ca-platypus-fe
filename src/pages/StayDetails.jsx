@@ -1,11 +1,13 @@
 
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { stayService } from '../services/stay'
 
 export function StayDetails() {
   const { stayId } = useParams()
   const [stay, setStay] = useState(null)
+  const navigate = useNavigate()
+
 
   
   useEffect(() => {
@@ -53,22 +55,22 @@ export function StayDetails() {
 
   return (
   <section className="stay-details">
+
+    <div className="stay-gallery">
+      <div className="gallery-main">
+        <img src={stay.imgUrls[0]} alt={stay.name} />
+      </div>
+
+      <div className="gallery-side">
+        {stay.imgUrls.slice(1, 5).map((img, idx) => (
+          <img key={idx} src={img} alt={stay.name} />
+        ))}
+      </div>
+    </div>
+
     <div className="stay-details-layout">
 
       <div className="stay-details-main">
-
-        <div className="stay-gallery">
-          <div className="gallery-main">
-            <img src={stay.imgUrls[0]} alt={stay.name} />
-          </div>
-
-          <div className="gallery-side">
-            {stay.imgUrls.slice(1, 5).map((img, idx) => (
-              <img key={idx} src={img} alt={stay.name} />
-            ))}
-          </div>
-        </div>
-
         <h1>{stay.name}</h1>
         <p>{stay.loc.city}, {stay.loc.country}</p>
 
@@ -97,12 +99,10 @@ export function StayDetails() {
             </div>
           </div>
         </section>
-
       </div>
 
       <aside className="stay-booking">
         <div className="booking-card">
-
           <div className="booking-price">
             <span className="price">$5,992</span>
             <span className="sub"> for 5 nights</span>
@@ -126,18 +126,22 @@ export function StayDetails() {
             </div>
           </div>
 
-          <button className="reserve-btn">
-            Reserve
-          </button>
+          <button
+  className="reserve-btn"
+  onClick={() => navigate(`/stay/${stayId}/checkout`)}
+>
+  Reserve
+</button>
+
 
           <p className="booking-note">
             You won’t be charged yet
           </p>
-
         </div>
       </aside>
 
     </div>
   </section>
 )
+
 }
