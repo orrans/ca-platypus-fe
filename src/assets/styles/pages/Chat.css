@@ -23,7 +23,7 @@
     gap: 1em;
 
     padding: 0.5em;
-    background-color: $clr4;
+    background-color: var(--clr4);
 
     accent-color: black;
 

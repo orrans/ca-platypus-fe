@@ -5,7 +5,7 @@
 	margin: auto;
 
 	padding: 1em;
-	background-color: $clr4;
+	background-color: var(--clr4);
 }
 
 .signup-form {
@@ -34,14 +34,14 @@
 
 	a {
 		font-size: 0.8em;
-		color: $clr4;
+		color: var(--clr4);
 
 		&:hover {
-			color: $clr1;
+			color: var(--clr1);
 		}
 	}
 	a.active {
 		text-decoration: underline;
-		color: $clr2;
+		color: var(--clr2);
 	}
 }
