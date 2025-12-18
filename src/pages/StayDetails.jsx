@@ -56,6 +56,12 @@ export function StayDetails() {
   return (
   <section className="stay-details">
 
+    <header className="stay-title">
+  <h1>{stay.name}</h1>
+  <p>{stay.loc.city}, {stay.loc.country}</p>
+</header>
+
+
     <div className="stay-gallery">
       <div className="gallery-main">
         <img src={stay.imgUrls[0]} alt={stay.name} />
@@ -71,8 +77,8 @@ export function StayDetails() {
     <div className="stay-details-layout">
 
       <div className="stay-details-main">
-        <h1>{stay.name}</h1>
-        <p>{stay.loc.city}, {stay.loc.country}</p>
+        {/* <h1>{stay.name}</h1>
+        <p>{stay.loc.city}, {stay.loc.country}</p> */}
 
         <section className="stay-highlights">
           <div className="highlight">
