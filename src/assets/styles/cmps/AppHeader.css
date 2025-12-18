@@ -58,7 +58,8 @@
 }
 
 .app-header .main-nav {
-    display: none; /* default hidden, show via media queries if needed */
+    display: none;
+    /* default hidden, show via media queries if needed */
     gap: 20px;
     margin-bottom: 10px;
 }
