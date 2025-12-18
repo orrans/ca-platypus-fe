@@ -209,15 +209,67 @@
   overflow: hidden;
 }
 
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 
-.show-more-btn {
-  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  position: relative;
+  background: #fff;
+  width: 100%;
+  max-width: 780px;
+  max-height: 85vh;
+  padding: 32px;
+  border-radius: 12px;
+  overflow-y: auto;
+
+  font-family: 'Airbnb Cereal', sans-serif;
+}
+
+.modal-content h2 {
+  margin-bottom: 24px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.modal-text p {
+  margin-bottom: 16px;
+  line-height: 1.6;
+  color: #222;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+ .show-more-btn {
   background: none;
   border: none;
   padding: 0;
+  margin-top: 12px;
+
   font-size: 16px;
   font-weight: 600;
   color: #222;
-  text-decoration: underline;
+
+  /* text-decoration: underline; */
   cursor: pointer;
 }
+
+.show-more-btn:hover {
+  color: #000;
+}
+

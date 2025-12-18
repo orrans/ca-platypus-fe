@@ -60,10 +60,27 @@ export function StayDetails() {
   const [isDescOpen, setIsDescOpen] = useState(false)
   
   const description = `
-  Beautiful and spacious guest house for couples in the Galilee.
-  Surrounded by nature, with sea and cliff views.
-  Bright interior, large double bed, fully equipped kitchen,
-  unique shower and cozy living area overlooking the wadi.
+  Looking for a serene and unforgettable escape on the edge of nature, far from the rush yet close to authentic local life? Welcome to Azure Cliff Retreat, a peaceful hideaway overlooking the Mediterranean coastline near a quiet seaside village.
+
+Perched above the sea, Azure Cliff Retreat offers breathtaking panoramic views, gentle ocean breezes, and an atmosphere designed for complete relaxation. This is the perfect destination for travelers seeking a balance between tranquility, inspiration, and meaningful connection to the surrounding landscape and culture.
+
+The Accommodation
+
+You will stay in a beautifully designed retreat that blends modern comfort with natural materials and soft coastal aesthetics. Warm wood textures, stone details, and large open windows create a bright and calming space that feels both elegant and welcoming — a true home away from home.
+
+Each suite is thoughtfully arranged to provide privacy, comfort, and stunning views of the sea or surrounding cliffs. Whether you’re enjoying your morning coffee on the terrace or unwinding indoors at sunset, every moment is designed to slow you down and help you reconnect with yourself.
+
+Relaxation & Experience
+
+Azure Cliff Retreat features a peaceful outdoor infinity pool overlooking the horizon, a private spa area with a sauna and relaxation room, and shaded lounge spaces perfect for reading or quiet conversation. After a day of coastal walks, swimming, or exploring nearby villages, you can fully unwind in an environment made for rest and renewal.
+
+For those interested in culture and connection, the retreat occasionally hosts small gatherings, sunset dinners, and creative workshops where guests can meet fellow travelers and local artists, sharing stories, ideas, and experiences in an intimate and welcoming setting.
+
+A Different Way to Travel
+
+Azure Cliff Retreat is more than just a place to stay — it is an invitation to experience the coast slowly and deeply. Here, time feels unhurried, nature sets the rhythm, and comfort meets authenticity.
+
+Book your stay through Airbnb or Booking and allow yourself to experience a dream vacation where calm, beauty, and inspiration come together above the sea.
   `
 //   for the future 
 //   const description = stay.description
@@ -195,7 +212,34 @@ export function StayDetails() {
       </aside>
 
     </div>
+{isDescOpen && (
+  <div className="modal-overlay" onClick={() => setIsDescOpen(false)}>
+    <div
+      className="modal-content"
+      onClick={(ev) => ev.stopPropagation()}
+    >
+      <button
+        className="modal-close-btn"
+        onClick={() => setIsDescOpen(false)}
+      >
+        ✕
+      </button>
+
+      <h2>About this place</h2>
+
+      <div className="modal-text">
+        {description.split('\n').map((line, idx) => (
+          <p key={idx}>{line}</p>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
+
+
   </section>
+
+  
 
   
 )
