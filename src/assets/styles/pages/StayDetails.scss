@@ -1,0 +1,38 @@
+.stay-highlights {
+  border-top: 1px solid #dddddd;
+  margin-top: 32px;
+  padding-top: 24px;
+}
+
+.highlight {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  column-gap: 16px;
+  margin-bottom: 24px;
+}
+
+.highlight:last-child {
+  margin-bottom: 0;
+}
+
+.highlight .icon {
+  font-size: 22px;
+  color: #222222;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.highlight h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #222222;
+  line-height: 1.25;
+}
+
+.highlight p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #717171;
+  line-height: 1.4;
+}
