@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 
 export function Carousel({ imgs = [] }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
-    const [containerWidth, setContainerWidth] = useState(0) // Width now in state
+    const [containerWidth, setContainerWidth] = useState(0)
     const containerRef = useRef(null)
 
     useEffect(() => {
