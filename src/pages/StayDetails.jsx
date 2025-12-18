@@ -79,7 +79,35 @@ export function StayDetails() {
     <p>
       {stay.loc.city}, {stay.loc.country}
     </p>
+ <section className="stay-highlights">
 
+  <div className="highlight">
+    <span className="icon">🛁</span>
+    <div>
+      <h4>Relax in the hot tub</h4>
+      <p>One of the few places in the area with this amenity.</p>
+    </div>
+  </div>
+
+  <div className="highlight">
+    <span className="icon">🔑</span>
+    <div>
+      <h4>Self check-in</h4>
+      <p>You can check in with the building staff.</p>
+    </div>
+  </div>
+
+  <div className="highlight">
+    <span className="icon">⭐</span>
+    <div>
+      <h4>Highly rated location</h4>
+      <p>Guests love the area for its convenience and atmosphere.</p>
+    </div>
+  </div>
+
+</section>
+
+ 
     <p>
       <strong>${stay.price}</strong> / night
     </p>
