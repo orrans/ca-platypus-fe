@@ -1,6 +1,6 @@
 button {
 	border: 0;
-	background-color: $clr1;
+	background-color: var(--clr1);
 	color: whitesmoke;
 	padding: 5px 10px;
 	margin: 5px;
@@ -9,16 +9,16 @@ button {
 
 form > * {
 	display: block;
-	// width: 200px;
+	/* width: 200px; */
 	margin: 10px 0px;
 }
 
 .btn-link {
 	border: 0;
 	background-color: transparent;
-	// text-decoration: underline;
+	/* text-decoration: underline; */
 	transition: 0.5s;
 }
 .btn-link:hover {
-	background-color: $clr1;
+	background-color: var(--clr1);
 }

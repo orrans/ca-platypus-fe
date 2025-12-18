@@ -1,6 +1,8 @@
+import { userService } from '../services/user/index.js'
+import { StayExplorePreview } from './StayExplorePreview.jsx'
 import { StayPreview } from './StayPreview.jsx'
 
-export function StayList({ stays, onRemoveStay, onUpdateStay }) {
+export function StayExploreList({ stays }) {
     const fromDate = new Date()
     const toDate = new Date()
     toDate.setDate(toDate.getDate() + 2)
@@ -10,7 +12,7 @@ export function StayList({ stays, onRemoveStay, onUpdateStay }) {
             <ul className="stay-list">
                 {stays.map((stay) => (
                     <li key={stay._id}>
-                        <StayPreview stay={stay} fromDate={fromDate} toDate={toDate} />
+                        <StayExplorePreview stay={stay} fromDate={fromDate} toDate={toDate} />
                     </li>
                 ))}
             </ul>

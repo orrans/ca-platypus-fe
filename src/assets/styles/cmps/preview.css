@@ -1,8 +1,6 @@
-.stay-preview {
-    display: flex;
-    flex-direction: column;
+.preview {
     a {
-        color: $clr4;
+        color: var(--clr4);
         padding: 0;
     }    
 	p {

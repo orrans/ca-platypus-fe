@@ -1,0 +1,189 @@
+/* Merged AppHeader styles (converted from SCSS where needed). */
+.app-header {
+    background-color: var(--clr4);
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--clr-border);
+    height: 80px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.app-header.full {
+    grid-column: 1 / -1;
+}
+
+.app-header .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 24px;
+    max-width: 1760px;
+    margin: 0 auto;
+    color: var(--clr1);
+}
+
+.app-header .header-container .logo {
+    flex: 1 0 140px;
+}
+
+.app-header .header-container .logo a {
+    display: flex;
+    align-items: center;
+    color: var(--clr-brand);
+}
+
+.app-header .logo .logo-text {
+    font-size: 24px;
+    color: var(--clr-brand);
+    margin: 0;
+    letter-spacing: -1px;
+    font-weight: 700;
+}
+
+.app-header .score {
+    padding: 8px;
+    background-color: var(--clr2);
+    border-radius: 50%;
+    margin: 10px;
+    color: var(--clr6);
+}
+
+/* Center - Nav & Search */
+.app-header .header-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-header .main-nav {
+    display: none; /* default hidden, show via media queries if needed */
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.app-header .main-nav a {
+    color: var(--clr-text-main);
+    font-weight: 400;
+}
+
+.app-header .main-nav a.active {
+    font-weight: 600;
+    color: var(--clr7);
+}
+
+.app-header .stay-search {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--clr-border);
+    border-radius: 40px;
+    background-color: var(--clr-bg);
+    padding: 8px 8px 8px 24px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.app-header .stay-search:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}
+
+.app-header .search-btn {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--clr-text-main);
+    padding: 0 8px;
+    white-space: nowrap;
+}
+
+.app-header .separator {
+    display: block;
+    width: 1px;
+    height: 24px;
+    background-color: var(--clr-border);
+    margin: 0 5px;
+}
+
+.app-header .search-icon-btn {
+    background-color: var(--clr-brand);
+    color: var(--clr-bg);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    font-size: 12px;
+}
+
+/* Right side - User actions */
+.app-header .user-actions {
+    flex: 1 0 140px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.app-header .user-actions .host-btn,
+.app-header .user-actions .lang-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--clr-text-main);
+    padding: 12px;
+    border-radius: 22px;
+    transition: background-color 0.2s;
+}
+
+.app-header .user-actions .host-btn:hover,
+.app-header .user-actions .lang-btn:hover {
+    background-color: var(--clr-bg-light);
+}
+
+.app-header .user-actions .lang-btn {
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+.app-header .user-actions .user-menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 5px 5px 5px 12px;
+    border: 1px solid var(--clr-border);
+    border-radius: 21px;
+    background-color: var(--clr-bg);
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.app-header .user-actions .user-menu-btn:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}
+
+.app-header .user-actions .user-menu-btn span {
+    font-size: 16px;
+    color: var(--clr-text-main);
+}
+
+.app-header .user-actions .user-avatar {
+    background-color: var(--gray3);
+    color: var(--clr-bg);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    overflow: hidden;
+}
+
+.app-header .btn-link {
+    color: var(--clr2);
+}

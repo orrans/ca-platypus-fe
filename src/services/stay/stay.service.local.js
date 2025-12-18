@@ -1,4 +1,3 @@
-
 import { storageService } from '../async-storage.service'
 import { makeId } from '../util.service'
 import { userService } from '../user'
@@ -10,22 +9,21 @@ export const stayService = {
     getById,
     save,
     remove,
-    addStayMsg
+    addStayMsg,
 }
 window.cs = stayService
-
-
 
 async function query(filterBy = { txt: '', price: 0 }) {
     var stays = await storageService.query(STORAGE_KEY)
 
     if (filterBy.txt) {
         const regex = new RegExp(filterBy.txt, 'i')
-        stays = stays.filter(stay =>
-            regex.test(stay.name) ||
-            regex.test(stay.summary) ||
-            regex.test(stay.loc.city) ||
-            regex.test(stay.loc.country)
+        stays = stays.filter(
+            (stay) =>
+                regex.test(stay.name) ||
+                regex.test(stay.summary) ||
+                regex.test(stay.loc.city) ||
+                regex.test(stay.loc.country)
         )
     }
 
@@ -49,7 +47,7 @@ async function save(stay) {
             ...stay,
             imgUrls: stay.imgUrls && stay.imgUrls.length ? stay.imgUrls : [],
             owner: userService.getLoggedinUser(),
-            msgs: []
+            msgs: [],
         }
         savedStay = await storageService.post(STORAGE_KEY, stayToSave)
     }
@@ -62,7 +60,7 @@ async function addStayMsg(stayId, txt) {
     const msg = {
         id: makeId(),
         by: userService.getLoggedinUser(),
-        txt
+        txt,
     }
     stay.msgs.push(msg)
     await storageService.put(STORAGE_KEY, stay)
@@ -86,12 +84,19 @@ const demoStays = [
         name: 'Ribeira Charming Duplex',
         type: 'House',
         imgUrls: [
-            'https://a0.muscache.com/im/pictures/e83e702f-ef49-40fb-8fa0-6512d7e26e9b.jpg?aki_policy=large',
-            'otherImg.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
         ],
         price: 80.0,
         summary: 'Fantastic duplex apartment...',
         capacity: 8,
+        beds: '1 bed',
+        bedrooms: '2 bedrooms',
         amenities: ['TV', 'Wifi', 'Kitchen', 'Smoking allowed', 'Pets allowed', 'Cooking basics'],
         labels: ['Top of the world', 'Trending', 'Play', 'Tropical'],
         host: {
@@ -127,11 +132,18 @@ const demoStays = [
         type: 'Apartment',
         imgUrls: [
             'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
-            'otherImg.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
         ],
         price: 120.0,
         summary: 'Bright modern apartment with a stunning sea view.',
         capacity: 4,
+        beds: '1 bed',
+        bedrooms: '2 bedrooms',
         amenities: ['TV', 'Wifi', 'Air conditioning', 'Kitchen', 'Elevator'],
         labels: ['Trending', 'Sea view', 'Romantic'],
         host: {
@@ -155,12 +167,19 @@ const demoStays = [
         name: 'Cozy Mountain Cabin',
         type: 'Cabin',
         imgUrls: [
-            'https://cdn.pixabay.com/photo/2012/11/21/10/24/building-66789_960_720.jpg',
-            'otherImg.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
         ],
         price: 95.0,
         summary: 'Quiet wooden cabin surrounded by nature.',
         capacity: 6,
+        beds: '1 bed',
+        bedrooms: '2 bedrooms',
         amenities: ['Fireplace', 'Wifi', 'Kitchen', 'Free parking'],
         labels: ['Nature', 'Relax', 'Mountain'],
         host: {
@@ -185,11 +204,18 @@ const demoStays = [
         type: 'Loft',
         imgUrls: [
             'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
-            'otherImg.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
         ],
         price: 110.0,
         summary: 'Stylish loft in the heart of the city.',
         capacity: 2,
+        beds: '1 bed',
+        bedrooms: '2 bedrooms',
         amenities: ['Wifi', 'Kitchen', 'Washer', 'Dryer'],
         labels: ['City', 'Design', 'Business'],
         host: {
@@ -214,11 +240,18 @@ const demoStays = [
         type: 'Lodge',
         imgUrls: [
             'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
-            'otherImg.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
         ],
         price: 70.0,
         summary: 'Eco friendly lodge with breathtaking desert views.',
         capacity: 5,
+        beds: '1 bed',
+        bedrooms: '2 bedrooms',
         amenities: ['Kitchen', 'Free parking', 'Outdoor shower'],
         labels: ['Eco', 'Adventure', 'Unique'],
         host: {
@@ -243,11 +276,18 @@ const demoStays = [
         type: 'Villa',
         imgUrls: [
             'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
-            'otherImg.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
+            'https://cdn.pixabay.com/photo/2019/08/19/13/58/bed-4416515_1280.jpg',
         ],
         price: 180.0,
         summary: 'Private villa with pool and lush tropical garden.',
         capacity: 10,
+        beds: '1 bed',
+        bedrooms: '2 bedrooms',
         amenities: ['Pool', 'Wifi', 'Kitchen', 'Air conditioning', 'Free parking'],
         labels: ['Luxury', 'Tropical', 'Family'],
         host: {
