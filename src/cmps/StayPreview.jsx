@@ -5,6 +5,7 @@ import { Fragment, useState } from 'react'
 import { StarIcon } from './icons/StarIcon'
 import { Heart } from 'lucide-react'
 import { HeartIcon } from './icons/HeartIcon'
+import { Carousel } from './Carousel'
 
 export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
     const days = differenceInDays(toDate, fromDate)
@@ -24,9 +25,10 @@ export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
                         fill={isFavorite ? `var(--clr-brand)` : undefined}
                     />
                 </div>
-                {stay.imgUrls && stay.imgUrls.length > 0 && (
+                {variant === 'explore' && stay.imgUrls && stay.imgUrls.length > 0 && (
                     <img src={stay.imgUrls[0]} alt={stay.name} />
                 )}
+                {variant === 'normal' && <Carousel imgs={stay.imgUrls} />}
             </div>
             <div className="stay-inner-details">
                 <h4>

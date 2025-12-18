@@ -1,0 +1,42 @@
+.img-carousel {
+    .nav-button {
+        opacity: 0;
+    }
+
+    &:hover {
+        .nav-button {
+            opacity: 1;
+        }
+    }
+}
+
+.imgs-container {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    white-space: noWrap;
+    scroll-behavior: smooth;
+}
+
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 33px;
+    height: 33px;
+    background-color: #ffffff;
+    color: #222222;
+    border-radius: 50%;
+    font-size: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    padding: 0;
+    line-height: 1;
+
+    &.right {
+        right: 0;
+    }
+}
