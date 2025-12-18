@@ -1,0 +1,140 @@
+.date-picker-container {
+    /* Scoped container */
+    background-color: var(--clr-bg);
+    width: 350px;
+    /* Adjust based on desired width */
+    padding: 0 12px;
+}
+
+.date-picker-popup {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header with Month and Nav Buttons */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 22px 0;
+    margin-bottom: 10px;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--clr-text-main);
+    transition: background-color 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: var(--clr-bg-light);
+}
+
+.month-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--clr-text-main);
+}
+
+/* Weekday Names Row */
+.weekdays-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.weekday-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--clr-text-sub);
+    padding-bottom: 8px;
+}
+
+/* The Grid of Days */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 2px;
+}
+
+.day-cell {
+    aspect-ratio: 1;
+    /* Make cells square */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--clr-text-main);
+    position: relative;
+    border-radius: 50%;
+    /* Default hover shape */
+    border: 1.5px solid transparent;
+    /* Prevent jump on hover border */
+    margin: 1px 0;
+}
+
+.day-cell.empty {
+    cursor: default;
+    pointer-events: none;
+}
+
+/* Hover effect for unselected days */
+.day-cell:not(.selected):not(.in-range):not(.empty):hover {
+    border-color: var(--clr-text-main);
+}
+
+/* --- Range Logic Styling --- */
+
+/* The background for the range strip */
+.day-cell.in-range {
+    background-color: var(--clr-bg-light);
+    /* Light gray for range */
+    border-radius: 0;
+    /* Square edges for connecting flow */
+}
+
+/* First day of range */
+.day-cell.selected {
+    background-color: var(--clr-text-main);
+    /* Black */
+    color: var(--clr-bg);
+    /* White text */
+    border-radius: 50%;
+    /* Circle */
+    position: relative;
+    z-index: 2;
+    /* Sit on top of potential range background */
+}
+
+/* Logic to add the gray background "under" the start/end circles if they are part of a range */
+.day-cell.range-start::before,
+.day-cell.range-end::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background-color: var(--clr-bg-light);
+    z-index: -1;
+}
+
+/* Range start needs background on the right half */
+.day-cell.range-start::before {
+    right: 0;
+}
+
+/* Range end needs background on the left half */
+.day-cell.range-end::before {
+    left: 0;
+}
