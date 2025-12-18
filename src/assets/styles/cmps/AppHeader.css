@@ -1,7 +1,8 @@
-/* AppHeader Styles - Scoped */
+/* Scoped AppHeader Styles */
 .app-header {
     background-color: var(--clr-bg);
-    height: 80px;
+    height: 170px;
+    /* Expanded height for 2 rows */
     border-bottom: 1px solid var(--clr-border);
     position: sticky;
     top: 0;
@@ -15,15 +16,39 @@
 
 .app-header .header-container {
     max-width: 1760px;
+    /* Standard wide content width */
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 80px;
+    /* More padding on sides for wide look */
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Stack top and bottom rows */
+}
+
+/* Responsive padding for smaller screens */
+@media (max-width: 1200px) {
+    .app-header .header-container {
+        padding: 0 40px;
+    }
+}
+
+@media (max-width: 720px) {
+    .app-header .header-container {
+        padding: 0 24px;
+    }
+}
+
+/* --- Top Row (Logo, Nav, User) --- */
+.app-header .header-top {
+    height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
-/* Logo Section */
+/* Logo */
 .app-header .logo {
     flex: 1 0 140px;
     display: flex;
@@ -34,7 +59,6 @@
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 8px;
 }
 
 .app-header .logo-text {
@@ -45,50 +69,54 @@
     letter-spacing: -0.5px;
 }
 
-/* Center Section (Nav + Search) */
-.app-header .header-center {
+/* Navigation (Centered) */
+.app-header .main-nav {
     flex: 0 1 auto;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    gap: 32px;
     justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
-.app-header .main-nav {
-    display: none;
-    /* Hidden for the compact 80px header view similar to scroll state */
-    /* To enable stacked view (tall header), we would need header height ~160px */
-    gap: 24px;
-    margin-bottom: 16px;
-}
-
-.app-header .main-nav a {
+.app-header .main-nav .nav-link {
     text-decoration: none;
     color: var(--clr-text-sub);
     font-size: 16px;
     font-weight: 400;
+    padding: 10px 0;
     position: relative;
-    padding-bottom: 4px;
-    transition: color 0.2s;
+    transition: color 0.2s, font-weight 0.1s;
+    background: transparent;
 }
 
-.app-header .main-nav a:hover,
-.app-header .main-nav a.active {
+.app-header .main-nav .nav-link:hover {
+    color: var(--clr-text-main);
+    background-color: transparent;
+    /* Override any potential default */
+}
+
+.app-header .main-nav .nav-link.active {
     color: var(--clr-text-main);
     font-weight: 600;
 }
 
-.app-header .main-nav a.active::after {
+/* Active indicator dot/line if desired, usually just bold in this state */
+.app-header .main-nav .nav-link.active::after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
+    /* Align to bottom of container roughly */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
     height: 2px;
     background-color: var(--clr-text-main);
+    display: none;
+    /* Often hidden in expanded view, visible on hover or compact */
 }
 
-/* User Actions Section */
+/* User Actions */
 .app-header .user-actions {
     flex: 1 0 140px;
     display: flex;
@@ -113,30 +141,32 @@
     background-color: var(--clr-bg-light);
 }
 
-.app-header .user-avatar {
-    /* Usually this is a globe icon in Airbnb structure, strictly styling the div provided */
-    width: 40px;
-    height: 40px;
+.app-header .globe-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 46px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 16px;
+    border-radius: 22px;
+    color: var(--clr-text-main);
     transition: background-color 0.2s;
-    background: transparent;
 }
 
-.app-header .user-avatar:hover {
+.app-header .globe-btn:hover {
     background-color: var(--clr-bg-light);
 }
 
+/* User Menu Pill (Hamburger + Avatar) */
 .app-header .user-menu-btn {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 12px;
     padding: 5px 5px 5px 12px;
+    /* Less padding right for avatar */
     border: 1px solid var(--clr-border);
     border-radius: 21px;
     background-color: var(--clr-bg);
@@ -145,15 +175,24 @@
     margin-left: 8px;
     height: 42px;
     min-width: 80px;
-    /* Ensure pill shape width */
 }
 
 .app-header .user-menu-btn:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
 }
 
-.app-header .user-menu-btn span {
-    font-size: 18px;
-    color: var(--clr-text-main);
-    line-height: 1;
+.app-header .user-avatar-placeholder {
+    width: 30px;
+    height: 30px;
+    color: #717171;
+    /* Generic gray avatar */
+}
+
+/* --- Bottom Row (Search) --- */
+.app-header .header-bottom {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+    /* Space from bottom */
+    width: 100%;
 }
