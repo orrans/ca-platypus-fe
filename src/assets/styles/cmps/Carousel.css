@@ -85,13 +85,11 @@
         flex-shrink: 0;
         transform-origin: center;
         transform: scale(0.8);
-        opacity: 0.9;
     }
 
     .dot.active {
         background-color: rgba(255, 255, 255, 1);
         transform: scale(1.2);
-        opacity: 1;
     }
 
     .dot.active + .dot,
