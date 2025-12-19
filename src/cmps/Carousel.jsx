@@ -55,6 +55,35 @@ export function Carousel({ imgs = [] }) {
         setCurrentImageIndex((prev) => (prev < imgs.length - 1 ? prev + 1 : prev))
     }
 
+    const calculateDotsOffset = () => {
+        const maxVisibleDots = 5
+        const totalImages = imgs.length
+        const dotWidth = 6
+        const dotGap = 5 
+        const dotSpacing = dotWidth + dotGap
+
+        if (totalImages <= maxVisibleDots) {
+            return 0
+        }
+
+        if (currentImageIndex < 2) {
+            return 0
+        } else if (currentImageIndex >= totalImages - 3) {
+            return (totalImages - 5) * dotSpacing
+        } else {
+            return (currentImageIndex - 2) * dotSpacing
+        }
+    }
+
+    const dotsOffset = calculateDotsOffset()
+
+    const getDotClass = (dotIndex) => {
+        const distance = Math.abs(dotIndex - currentImageIndex)
+        if (distance === 0) return 'active'
+        if (distance === 1 || distance === 2) return 'near'
+        return 'far'
+    }
+
     return (
         <div className="img-carousel" style={{ position: 'relative' }}>
             <div
@@ -62,9 +91,8 @@ export function Carousel({ imgs = [] }) {
                 className="imgs-container"
                 style={{ display: 'flex', overflow: 'hidden' }}>
                 {imgs.map((img, idx) => (
-                    <div>
+                    <div key={idx}>
                         <img
-                            key={idx}
                             src={img}
                             alt={`Slide ${idx}`}
                             style={{
@@ -88,6 +116,16 @@ export function Carousel({ imgs = [] }) {
                     &gt;
                 </button>
             )}
+
+            <div className="dots">
+                <div className="dots-wrapper">
+                    <div className="dots-container" style={{ transform: `translateX(-${dotsOffset}px)` }}>
+                        {imgs.map((_, index) => (
+                            <span key={index} className={`dot ${getDotClass(index)}`}></span>
+                        ))}
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
