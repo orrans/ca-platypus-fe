@@ -5,13 +5,14 @@ export function Carousel({ imgs = [] }) {
     const [containerWidth, setContainerWidth] = useState(0)
     const containerRef = useRef(null)
     const lastWidthRef = useRef(0)
+    const widthForScroll = Math.max(0, Math.round(containerWidth))
 
     useEffect(() => {
         if (!containerRef.current) return
 
         const observer = new ResizeObserver((entries) => {
             for (let entry of entries) {
-                const newWidth = entry.contentRect.width
+                const newWidth = Math.round(entry.contentRect.width)
                 setContainerWidth(newWidth)
             }
         })
@@ -21,29 +22,26 @@ export function Carousel({ imgs = [] }) {
     }, [])
 
     useEffect(() => {
-        if (!containerRef.current || containerWidth <= 0) return
-
-        if (lastWidthRef.current === containerWidth) return
-        lastWidthRef.current = containerWidth
+        if (!containerRef.current || widthForScroll <= 0) return
 
         const el = containerRef.current
+        const isResize = lastWidthRef.current !== widthForScroll
+        lastWidthRef.current = widthForScroll
+
         const prevBehavior = el.style.scrollBehavior
+        const targetLeft = currentImageIndex * widthForScroll
 
-        el.style.scrollBehavior = 'auto'
-        el.scrollLeft = currentImageIndex * containerWidth
-
-        requestAnimationFrame(() => {
+        if (isResize) {
+            el.style.scrollBehavior = 'auto'
+            el.scrollTo({ left: targetLeft, top: 0 })
+            requestAnimationFrame(() => {
+                el.style.scrollBehavior = prevBehavior || 'smooth'
+            })
+        } else {
             el.style.scrollBehavior = prevBehavior || 'smooth'
-        })
-    }, [containerWidth, currentImageIndex])
-
-    useEffect(() => {
-        if (!containerRef.current || containerWidth <= 0) return
-
-        const el = containerRef.current
-        el.style.scrollBehavior = 'smooth'
-        el.scrollLeft = currentImageIndex * containerWidth
-    }, [currentImageIndex, containerWidth])
+            el.scrollTo({ left: targetLeft, top: 0, behavior: 'smooth' })
+        }
+    }, [widthForScroll, currentImageIndex])
 
     const handlePreviousClick = (ev) => {
         ev.stopPropagation()
@@ -69,7 +67,9 @@ export function Carousel({ imgs = [] }) {
                         src={img}
                         alt={`Slide ${idx}`}
                         style={{
-                            width: containerWidth ? `${containerWidth}px` : undefined,
+                            flex: '0 0 100%',
+                            width: widthForScroll ? `${widthForScroll}px` : '100%',
+                            maxWidth: '100%',
                         }}
                     />
                 ))}

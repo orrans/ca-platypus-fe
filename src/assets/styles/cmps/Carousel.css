@@ -1,4 +1,6 @@
 .img-carousel {
+    overflow: hidden;
+
     .nav-button {
         opacity: 0;
     }
@@ -16,6 +18,18 @@
     overflow: hidden;
     white-space: nowrap;
     scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    gap: 0;
+}
+
+.imgs-container img {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    object-fit: cover;
+    box-sizing: border-box;
+    scroll-snap-align: start;
 }
 
 .nav-button {
