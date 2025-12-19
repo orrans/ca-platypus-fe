@@ -4,6 +4,7 @@ export function Carousel({ imgs = [] }) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
     const [containerWidth, setContainerWidth] = useState(0)
     const containerRef = useRef(null)
+    const lastWidthRef = useRef(0)
 
     useEffect(() => {
         if (!containerRef.current) return
@@ -20,9 +21,28 @@ export function Carousel({ imgs = [] }) {
     }, [])
 
     useEffect(() => {
-        if (containerRef.current && containerWidth > 0) {
-            containerRef.current.scrollLeft = currentImageIndex * containerWidth
-        }
+        if (!containerRef.current || containerWidth <= 0) return
+
+        if (lastWidthRef.current === containerWidth) return
+        lastWidthRef.current = containerWidth
+
+        const el = containerRef.current
+        const prevBehavior = el.style.scrollBehavior
+
+        el.style.scrollBehavior = 'auto'
+        el.scrollLeft = currentImageIndex * containerWidth
+
+        requestAnimationFrame(() => {
+            el.style.scrollBehavior = prevBehavior || 'smooth'
+        })
+    }, [containerWidth, currentImageIndex])
+
+    useEffect(() => {
+        if (!containerRef.current || containerWidth <= 0) return
+
+        const el = containerRef.current
+        el.style.scrollBehavior = 'smooth'
+        el.scrollLeft = currentImageIndex * containerWidth
     }, [currentImageIndex, containerWidth])
 
     const handlePreviousClick = (ev) => {
