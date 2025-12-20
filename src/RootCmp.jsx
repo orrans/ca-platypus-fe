@@ -9,7 +9,7 @@ import { AppFooter } from './cmps/AppFooter'
 import { UserMsg } from './cmps/UserMsg.jsx'
 import { StayDetails } from './pages/StayDetails.jsx'
 import { StayCheckout } from './pages/StayCheckout.jsx'
-
+import { StayExploreList } from './cmps/StayExploreList.jsx'
 
 export function RootCmp() {
     return (
@@ -22,6 +22,7 @@ export function RootCmp() {
                     <Route path="/" element={<StayIndex />} />
                     <Route path="/stay/:stayId/checkout" element={<StayCheckout />} />
                     <Route path="/stay/:stayId" element={<StayDetails />} />
+                    <Route path="/stay" element={<StayExploreList stays={[]} />} />
                 </Routes>
 
             </main>

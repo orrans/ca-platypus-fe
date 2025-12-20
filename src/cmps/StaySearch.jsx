@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { useNavigate, createSearchParams } from 'react-router-dom'
 import { DatePicker } from './DatePicker.jsx'
 import { GuestCounterRow } from './GuestCounterRow.jsx'
 
@@ -19,6 +20,7 @@ export function StaySearch() {
     const [activeField, setActiveField] = useState(null) // 'loc', 'date', 'guests', or null
     const [filteredLocs, setFilteredLocs] = useState(POPULAR_DESTINATIONS)
     const [currentMonth, setCurrentMonth] = useState(new Date())
+    const navigate = useNavigate()
 
     const modalRef = useRef(null)
     const searchBarRef = useRef(null)
@@ -99,6 +101,25 @@ export function StaySearch() {
         })
     }
 
+    function handleSearch(e) {
+        e.stopPropagation()
+
+        const params = {
+            loc,
+            checkIn: dateRange.start ? dateRange.start.toISOString() : '',
+            checkOut: dateRange.end ? dateRange.end.toISOString() : '',
+            adults: guests.adults,
+            children: guests.children,
+            infants: guests.infants,
+            pets: guests.pets
+        }
+
+        navigate({
+            pathname: '/stay',
+            search: `?${createSearchParams(params)}`
+        })
+    }
+
     function formatDate(date) {
         if (!date) return ''
         return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
@@ -148,11 +169,7 @@ export function StaySearch() {
                         <div className={`placeholder ${totalGuests > 0 ? 'bold' : ''}`}>{guestLabel}</div>
                     </div>
 
-                    <button className="search-btn-primary" onClick={(e) => {
-                        e.stopPropagation()
-                        // TODO: Execute actual search (e.g. navigate to /s/homes?loc=...)
-                        console.log('Searching:', { loc, dateRange, guests })
-                    }}>
+                    <button className="search-btn-primary" onClick={handleSearch}>
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{ display: 'block', fill: 'none', height: '16px', width: '16px', stroke: 'currentcolor', strokeWidth: '4', overflow: 'visible' }}><g fill="none"><path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"></path></g></svg>
                     </button>
                 </div>
