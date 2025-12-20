@@ -5,6 +5,8 @@ import { stayService } from '../services/stay'
 import { StayExploreList } from '../cmps/StayExploreList.jsx'
 import { StayList } from '../cmps/StayList.jsx'
 import { GoogleMap } from '../cmps/GoogleMaps.jsx'
+import { useParams, useSearchParams } from 'react-router-dom'
+import { Explore } from './Explore.jsx'
 
 export function StayIndex() {
     const stays = useSelector((storeState) => storeState.stayModule.stays)
@@ -17,10 +19,10 @@ export function StayIndex() {
 
     return (
         <main className="stay-index">
-            {filtered && <StayList stays={stays} />}
-            <StayExploreList stays={stays} title="Nearby Hotel" />
+            {/* <Explore /> */}
+
+            {/* <StayExploreList stays={stays} title="Nearby Hotel" /> */}
             {/* <StayList stays={stays} /> */}
-            {/* <GoogleMap /> */}
         </main>
     )
 }

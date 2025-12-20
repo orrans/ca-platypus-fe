@@ -1,6 +1,6 @@
 import { StayPreview } from './StayPreview.jsx'
 
-export function StayList({ stays, onRemoveStay, onUpdateStay }) {
+export function StayList({ stays }) {
     const fromDate = new Date()
     const toDate = new Date()
     toDate.setDate(toDate.getDate() + 2)
