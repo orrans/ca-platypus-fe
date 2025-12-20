@@ -30,6 +30,10 @@ async function query(filterBy = {}) {
         stays = stays.filter((stay) => filterBy.guests <= stay.capacity)
     }
 
+    if (filterBy.pets) {
+        stays = stays.filter((stay) => stay.amenities.includes('Pets allowed'))
+    }
+
     return stays
 }
 
@@ -148,7 +152,7 @@ const demoStays = [
         capacity: 4,
         beds: '1 bed',
         bedrooms: '2 bedrooms',
-        amenities: ['TV', 'Wifi', 'Air conditioning', 'Kitchen', 'Elevator'],
+        amenities: ['TV', 'Wifi', 'Air conditioning', 'Pets allowed', 'Kitchen', 'Elevator'],
         labels: ['Trending', 'Sea view', 'Romantic'],
         host: {
             _id: 'u102',

@@ -25,11 +25,13 @@ export function SearchResults({}) {
         const adults = +searchParams.get('adults') || 0
         const children = +searchParams.get('children') || 0
         const infants = +searchParams.get('infants') || 0
+        const pets = +searchParams.get('pets') || 0
         const guests = adults + children + infants
 
         const filterBy = {
             loc,
             guests,
+            pets,
             checkIn,
             checkOut,
         }
