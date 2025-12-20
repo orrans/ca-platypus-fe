@@ -135,7 +135,7 @@ export function StaySearch() {
     return (
         <div className="stay-search-container">
 
-            <div className="search-bar" ref={searchBarRef}>
+            <div className={`search-bar ${activeField ? 'bar-active' : ''}`} ref={searchBarRef}>
 
                 {/* 1. Location Section */}
                 <div
