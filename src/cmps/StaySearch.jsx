@@ -2,13 +2,25 @@ import { useState, useRef, useEffect } from 'react'
 import { DatePicker } from './DatePicker.jsx'
 import { GuestCounterRow } from './GuestCounterRow.jsx'
 
+const POPULAR_DESTINATIONS = [
+    "I'm flexible",
+    "New York, United States",
+    "London, United Kingdom",
+    "Paris, France",
+    "Tel Aviv, Israel",
+    "Amsterdam, Netherlands",
+    "Barcelona, Spain"
+]
+
 export function StaySearch() {
     const [loc, setLoc] = useState('')
     const [dateRange, setDateRange] = useState({ start: null, end: null })
     const [guests, setGuests] = useState({ adults: 0, children: 0, infants: 0, pets: 0 })
     const [activeField, setActiveField] = useState(null) // 'loc', 'date', 'guests', or null
+    const [filteredLocs, setFilteredLocs] = useState(POPULAR_DESTINATIONS)
 
     const modalRef = useRef(null)
+    const searchBarRef = useRef(null)
 
     // Calculate total guests for display
     const totalGuests = guests.adults + guests.children
@@ -35,12 +47,11 @@ export function StaySearch() {
                 return
             }
 
-            const isClickOnSearchBar = event.target.closest('.search-bar')
-
-            if (!isClickOnSearchBar) {
-                setActiveField(null)
+            if (searchBarRef.current && searchBarRef.current.contains(event.target)) {
+                return
             }
 
+            setActiveField(null)
         }
 
         document.addEventListener("mousedown", handleClickOutside)
@@ -55,6 +66,32 @@ export function StaySearch() {
         })
     }
 
+    function handleLocChange(e) {
+        const value = e.target.value
+        setLoc(value)
+        if (!value) {
+            setFilteredLocs(POPULAR_DESTINATIONS)
+        } else {
+            const filtered = POPULAR_DESTINATIONS.filter(dest =>
+                dest.toLowerCase().includes(value.toLowerCase())
+            )
+            setFilteredLocs(filtered)
+        }
+    }
+
+    function handleLocSelect(location) {
+        setLoc(location === "I'm flexible" ? '' : location)
+        setActiveField('date')
+    }
+
+    function handleLocKeyDown(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault()
+            // If user types something and hits enter, move to next field
+            setActiveField('date')
+        }
+    }
+
     function formatDate(date) {
         if (!date) return ''
         return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
@@ -63,7 +100,7 @@ export function StaySearch() {
     return (
         <div className="stay-search-container">
 
-            <div className="search-bar">
+            <div className="search-bar" ref={searchBarRef}>
 
                 {/* 1. Location Section */}
                 <div
@@ -75,7 +112,8 @@ export function StaySearch() {
                         type="text"
                         placeholder="Search destinations"
                         value={loc}
-                        onChange={(e) => setLoc(e.target.value)}
+                        onChange={handleLocChange}
+                        onKeyDown={handleLocKeyDown}
                         className="search-input-clean"
                     />
                 </div>
@@ -103,7 +141,11 @@ export function StaySearch() {
                         <div className={`placeholder ${totalGuests > 0 ? 'bold' : ''}`}>{guestLabel}</div>
                     </div>
 
-                    <button className="search-btn-primary">
+                    <button className="search-btn-primary" onClick={(e) => {
+                        e.stopPropagation()
+                        // TODO: Execute actual search (e.g. navigate to /s/homes?loc=...)
+                        console.log('Searching:', { loc, dateRange, guests })
+                    }}>
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{ display: 'block', fill: 'none', height: '16px', width: '16px', stroke: 'currentcolor', strokeWidth: '4', overflow: 'visible' }}><g fill="none"><path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"></path></g></svg>
                     </button>
                 </div>
@@ -115,11 +157,13 @@ export function StaySearch() {
 
                     {activeField === 'loc' && (
                         <div className="modal-content location-suggestions">
-                            <div className="suggestion-title">Recent searches</div>
-                            <div className="suggestion-item">
-                                <div className="icon-box">📍</div>
-                                <span>I'm flexible</span>
-                            </div>
+                            <div className="suggestion-title">Suggested destinations</div>
+                            {filteredLocs.map((dest, idx) => (
+                                <div key={idx} className="suggestion-item" onClick={() => handleLocSelect(dest)}>
+                                    <div className="icon-box">📍</div>
+                                    <span>{dest}</span>
+                                </div>
+                            ))}
                         </div>
                     )}
 
