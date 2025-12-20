@@ -57,6 +57,8 @@ export function StayDetails() {
   const hostName = 'Platy'
   const hostYears = 8
   
+
+  const [isAmenitiesOpen, setIsAmenitiesOpen] = useState(false)
   const [isDescOpen, setIsDescOpen] = useState(false)
   
   const description = `
@@ -173,6 +175,8 @@ Book your stay through Airbnb or Booking and allow yourself to experience a drea
       </div>
 
       <aside className="stay-booking">
+        {/* test */}
+        <div className="booking-sticky">
         <div className="booking-card">
           <div className="booking-price">
             <span className="price">$5,992</span>
@@ -208,6 +212,8 @@ Book your stay through Airbnb or Booking and allow yourself to experience a drea
           <p className="booking-note">
             You won’t be charged yet
           </p>
+        </div>
+        {/* test */}
         </div>
       </aside>
 
@@ -250,6 +256,68 @@ Book your stay through Airbnb or Booking and allow yourself to experience a drea
   </div>
 </section>
 
+<section className="stay-amenities">
+  <h2>What this place offers</h2>
+
+  <ul className="amenities-list">
+    <li>🌆 City skyline view</li>
+    <li>📶 Wifi</li>
+    <li>🚗 Free street parking</li>
+    <li>📺 42 inch HDTV with standard cable</li>
+    <li>🛗 Elevator</li>
+  </ul>
+
+  <button
+    className="show-more-btn"
+    onClick={() => setIsAmenitiesOpen(true)}
+  >
+    Show all 20 amenities
+  </button>
+</section>
+
+{isAmenitiesOpen && (
+  <div className="modal-overlay" onClick={() => setIsAmenitiesOpen(false)}>
+    <div className="modal" onClick={(ev) => ev.stopPropagation()}>
+
+      <div className="modal-header">
+        <button
+          className="modal-close-btn"
+          onClick={() => setIsAmenitiesOpen(false)}
+        >
+          ✕
+        </button>
+      </div>
+
+      <div className="modal-body">
+        <h2>What this place offers</h2>
+
+        <ul className="amenities-modal-list">
+          <li>🌆 City skyline view</li>
+          <li>📶 Wifi</li>
+          <li>🚗 Free street parking</li>
+          <li>📺 42 inch HDTV with standard cable</li>
+          <li>🛗 Elevator</li>
+          <li>❄️ Air conditioning</li>
+          <li>🔥 Heating</li>
+          <li>🍳 Kitchen</li>
+          <li>🧺 Washer</li>
+          <li>🧴 Essentials</li>
+          <li>🛏 Extra pillows & blankets</li>
+          <li>☕ Coffee maker</li>
+          <li>🌿 Balcony</li>
+          <li>🔑 Self check-in</li>
+          <li>🚿 Hot water</li>
+          <li>🧯 Fire extinguisher</li>
+          <li>🚨 Smoke alarm</li>
+          <li>📦 Luggage dropoff allowed</li>
+          <li>🧹 Cleaning available</li>
+          <li>📡 Ethernet connection</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+)}
 
   </section>
 
