@@ -10,7 +10,7 @@ export function StayList({ stays, onRemoveStay, onUpdateStay }) {
             <ul className="stay-list">
                 {stays.map((stay) => (
                     <li key={stay._id}>
-                        <StayPreview stay={stay} fromDate={fromDate} toDate={toDate} variant='normal' />
+                        <StayPreview stay={stay} fromDate={fromDate} toDate={toDate} variant='filtered' />
                     </li>
                 ))}
             </ul>
