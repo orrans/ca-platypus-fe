@@ -1,5 +1,3 @@
-import React, { useState, useEffect, useRef } from 'react'
-
 export function StarIcon({ size = 8 }) {
     return (
         <svg

@@ -26,9 +26,8 @@
     .stay-inner-details {
         display: flex;
         flex-direction: column;
-        font-size: 0.75rem;
+        font-size: 0.8125rem;
         color: rgb(106, 106, 106);
-        font-weight: 300;
     }
 
     &:hover {
