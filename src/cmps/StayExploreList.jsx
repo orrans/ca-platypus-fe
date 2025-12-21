@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { userService } from '../services/user/index.js'
 import { ChevronRightIcon } from './icons/ChevronRightIcon.jsx'
 import { StayPreview } from './StayPreview.jsx'
@@ -12,7 +13,9 @@ export function StayExploreList({ stays, title }) {
         <section className="explore-list-container">
             <div className="stay-list-title-row">
                 <h2>
-                    {title} <ChevronRightIcon strokeWidth={5.33333} />
+                    <Link>
+                        {title} <ChevronRightIcon strokeWidth={5.33333} />
+                    </Link>
                 </h2>
             </div>
             <div className="explore-grid-container">

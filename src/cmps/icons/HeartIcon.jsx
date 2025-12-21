@@ -16,7 +16,6 @@ export function HeartIcon({
             role="presentation"
             focusable="false"
             style={{
-                display: 'block',
                 fill: fill,
                 height: size,
                 width: size,

@@ -78,13 +78,12 @@
 }
 
 .stay-list-title-row {
-    h2 {
-        display: flex;
-        align-items: center;
+    h2,
+    a {
         font-size: 1.25rem;
         font-weight: 600;
         color: rgb(34, 34, 34);
         margin-bottom: 0;
+        text-decoration: none;
     }
 }
-
