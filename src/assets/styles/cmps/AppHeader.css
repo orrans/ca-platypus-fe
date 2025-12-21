@@ -9,6 +9,10 @@
     z-index: 100;
 }
 
+.app-header.compact {
+    height: 80px;
+}
+
 .app-header.full {
     width: 100%;
 }
@@ -25,18 +29,6 @@
     /* Stack top and bottom rows */
 }
 
-/* Responsive padding for smaller screens */
-@media (max-width: 1200px) {
-    .app-header .header-container {
-        padding: 0 40px;
-    }
-}
-
-@media (max-width: 720px) {
-    .app-header .header-container {
-        padding: 0 24px;
-    }
-}
 
 /* --- Top Row (Logo, Nav, User) --- */
 .app-header .header-top {
@@ -265,4 +257,18 @@
     padding-bottom: 20px;
     /* Space from bottom */
     width: 100%;
+}
+
+
+/* Responsive padding for smaller screens */
+@media (max-width: 1200px) {
+    .app-header .header-container {
+        padding: 0 40px;
+    }
+}
+
+@media (max-width: 720px) {
+    .app-header .header-container {
+        padding: 0 24px;
+    }
 }

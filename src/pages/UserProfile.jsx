@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 export function UserProfile() {
     const [activeTab, setActiveTab] = useState('about')
@@ -8,7 +8,6 @@ export function UserProfile() {
         fullname: "Puki Puki",
         imgUrl: "https://robohash.org/RemoteCar?set=set4&size=180x180",
         joined: "2023",
-        isSuperhost: false
     }
 
     return (

@@ -25,7 +25,7 @@ export function AppHeader() {
     const isUserProfile = location.pathname.includes('/user/profile')
 
     return (
-        <header className="app-header full">
+        <header className={`app-header full ${isUserProfile ? 'compact' : ''}`}>
             <div className="header-container">
 
                 {/* Top Row: Logo, Nav, User Actions */}

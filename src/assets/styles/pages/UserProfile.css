@@ -56,7 +56,7 @@
 .profile-card .guest-label {
     font-size: 14px;
     color: var(--clr-text-main);
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .profile-nav nav {
