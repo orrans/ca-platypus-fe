@@ -12,7 +12,7 @@ export function StayExploreList({ stays, title }) {
         <section className="explore-list-container">
             <div className="stay-list-title-row">
                 <h2>
-                    {title} <ChevronRightIcon />
+                    {title} <ChevronRightIcon strokeWidth={5.33333} />
                 </h2>
             </div>
             <div className="explore-grid-container">

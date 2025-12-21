@@ -12,7 +12,6 @@ export function Explore({}) {
     }, [])
 
     const groups = groupBy(stays, 'loc.country')
-    console.log(stays)
 
     return (
         <section className="stay-explore-list-container">
