@@ -3,23 +3,17 @@ import {
     APIProvider,
     InfoWindow,
     Map,
-    useAdvancedMarkerRef,
     useMap,
 } from '@vis.gl/react-google-maps'
 import { differenceInDays } from 'date-fns'
 import { useEffect, useState } from 'react'
 import { formatPrice } from '../services/util.service'
+import { StayPreview } from './StayPreview'
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
 export function GoogleMap({ stays, fromDate, toDate }) {
-    const [isOpen, setIsOpen] = useState(false)
-    const [markerRef, marker] = useAdvancedMarkerRef()
+    const [selectedStay, setSelectedStay] = useState(null)
     const days = differenceInDays(toDate, fromDate)
-
-    function handleMapClick(ev) {
-        ev.map.panTo(ev.detail.latLng)
-        setCoords(ev.detail.latLng)
-    }
 
     function MapHandler({ stays }) {
         const map = useMap()
@@ -43,63 +37,6 @@ export function GoogleMap({ stays, fromDate, toDate }) {
         return null
     }
 
-    const exampleMapStyles = [
-        {
-            featureType: 'all',
-            elementType: 'labels.text.fill',
-            stylers: [{ color: '#7c93a3' }],
-        },
-        {
-            featureType: 'administrative',
-            elementType: 'geometry.fill',
-            stylers: [{ color: '#fefefe' }, { lightness: 20 }],
-        },
-        {
-            featureType: 'landscape',
-            elementType: 'geometry',
-            stylers: [{ color: '#f5f5f5' }, { lightness: 20 }],
-        },
-        {
-            featureType: 'poi',
-            elementType: 'geometry',
-            stylers: [{ color: '#f5f5f5' }, { lightness: 21 }],
-        },
-        {
-            featureType: 'poi.park',
-            elementType: 'geometry',
-            stylers: [{ color: '#dedede' }, { lightness: 21 }],
-        },
-        {
-            featureType: 'road.highway',
-            elementType: 'geometry.fill',
-            stylers: [{ color: '#ffffff' }, { lightness: 17 }],
-        },
-        {
-            featureType: 'road.highway',
-            elementType: 'geometry.stroke',
-            stylers: [{ color: '#ffffff' }, { lightness: 29 }, { weight: 0.2 }],
-        },
-        {
-            featureType: 'road.arterial',
-            elementType: 'geometry',
-            stylers: [{ color: '#ffffff' }, { lightness: 18 }],
-        },
-        {
-            featureType: 'road.local',
-            elementType: 'geometry',
-            stylers: [{ color: '#ffffff' }, { lightness: 16 }],
-        },
-        {
-            featureType: 'transit',
-            elementType: 'geometry',
-            stylers: [{ color: '#f2f2f2' }, { lightness: 19 }],
-        },
-        {
-            featureType: 'water',
-            elementType: 'geometry',
-            stylers: [{ color: '#c9e7f1' }, { lightness: 17 }],
-        },
-    ]
 
     return (
         <section className="google-map-container">
@@ -109,22 +46,28 @@ export function GoogleMap({ stays, fromDate, toDate }) {
                         className="map"
                         defaultZoom={12}
                         mapId="cce1a61f00cdb4a0a238fe28"
-                        disableDefaultUI={true}
-                        defaultOptions={{ styles: exampleMapStyles }}
-                        onClick={handleMapClick}>
+                        disableDefaultUI={true}>
                         <MapHandler stays={stays} />
                         {stays.map((stay) => (
                             <AdvancedMarker
                                 key={stay._id}
                                 position={stay.loc}
-                                ref={markerRef}
-                                onClick={() => setIsOpen(!isOpen)}>
+                                onClick={() => setSelectedStay(stay)}>
                                 <div className="map-marker">{formatPrice(stay.price * days)}</div>
                             </AdvancedMarker>
                         ))}
-                        {isOpen && (
-                            <InfoWindow anchor={marker} onCloseClick={() => setIsOpen(false)}>
-                                <h3>This marker is at {JSON.stringify(coords)}</h3>
+                        {selectedStay && (
+                            <InfoWindow 
+                                position={selectedStay.loc} 
+                                onCloseClick={() => setSelectedStay(null)}>
+                                <div className="map-stay-preview">
+                                    <StayPreview 
+                                        stay={selectedStay} 
+                                        fromDate={fromDate} 
+                                        toDate={toDate}
+                                        variant="explore"
+                                    />
+                                </div>
                             </InfoWindow>
                         )}
                     </Map>
