@@ -81,4 +81,8 @@
         display: flex;
         justify-content: space-between;
     }
+
+    .filtered-beds-capacity {
+        margin-bottom: 12px;
+    }
 }

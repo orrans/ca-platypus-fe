@@ -36,20 +36,22 @@ export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
                     {stay.type} in {stay.name}
                     <span className="filtered-rating">
                         <StarIcon size={12} />
-                        4.9 (509)
+                        &nbsp;4.9 (509)
                     </span>
                 </h4>
                 {variant === 'filtered' && (
                     <div className="filtered-summary">
                         <span>{stay.summary}</span>
-                        <span>
+                        <span className='filtered-beds-capacity'>
                             {stay.beds}&nbsp;·&nbsp;{stay.bedrooms}
                         </span>
-                        <span>
+                        {/* <span className="filtered-dates">
                             {format(fromDate, shortDateFmt)} - {format(toDate, 'dd')}
+                        </span> */}
+                        <span>
+                            <span className="filtered-price">{formatPrice(stay.price * days)}</span>{' '}
+                            for {days} nights
                         </span>
-                        <span className="filtered-price">{formatPrice(stay.price * days)}</span>
-                        <span> for {days} nights</span>
                     </div>
                 )}
                 {variant === 'explore' && (
@@ -61,7 +63,7 @@ export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
                             <span>
                                 {formatPrice(stay.price * days)} for {days} nights
                             </span>
-                            &nbsp; &bull; &nbsp;
+                            &nbsp;·&nbsp;
                             <span>
                                 <StarIcon />
                                 4.9
