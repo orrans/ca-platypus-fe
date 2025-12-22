@@ -7,6 +7,7 @@ export function StayList({ stays, fromDate, toDate }) {
 
     return (
         <section className="stay-list-container">
+            <span className='stay-list-title'>Over 1,000 homes in Rome</span>
             <ul className="stay-list">
                 {stays.map((stay) => (
                     <li key={stay._id}>
