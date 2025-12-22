@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { useNavigate, createSearchParams } from 'react-router-dom'
+import { useNavigate, createSearchParams, useLocation } from 'react-router-dom'
 import { DatePicker } from './DatePicker.jsx'
 import { GuestCounterRow } from './GuestCounterRow.jsx'
 import { ClearIcon } from './icons/ClearIcon.jsx'
@@ -22,6 +22,7 @@ export function StaySearch() {
     const [filteredLocs, setFilteredLocs] = useState(POPULAR_DESTINATIONS)
     const [currentMonth, setCurrentMonth] = useState(new Date())
     const navigate = useNavigate()
+    const location = useLocation()
 
     const modalRef = useRef(null)
     const searchBarRef = useRef(null)
@@ -37,7 +38,7 @@ export function StaySearch() {
         guests.adults > 0 || guests.children > 0 || guests.infants > 0 || guests.pets > 0
 
     // Format date label for the single "Date" field
-    let dateLabel = 'Any week'
+    let dateLabel = 'Add dates'
     if (dateRange.start && dateRange.end) {
         dateLabel = `${formatDate(dateRange.start)} - ${formatDate(dateRange.end)}`
     } else if (dateRange.start) {
@@ -63,6 +64,29 @@ export function StaySearch() {
         document.addEventListener('mousedown', handleClickOutside)
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [activeField])
+
+    // Reset state on navigation to home or profile
+    const prevPathnameRef = useRef(location.pathname)
+    useEffect(() => {
+        const prevPathname = prevPathnameRef.current
+        const currentPathname = location.pathname
+
+        const isReturningHome = currentPathname === '/' && prevPathname !== '/'
+        const isEnteringProfile = currentPathname.startsWith('/user')
+
+        if (isReturningHome || isEnteringProfile) {
+            resetSearchState()
+        }
+
+        prevPathnameRef.current = currentPathname
+    }, [location.pathname])
+
+    function resetSearchState() {
+        setLoc('')
+        setDateRange({ start: null, end: null })
+        setGuests({ adults: 0, children: 0, infants: 0, pets: 0 })
+        setActiveField(null)
+    }
 
     function handleGuestChange(type, operation) {
         setGuests((prev) => {
@@ -112,6 +136,9 @@ export function StaySearch() {
     function handleSearch(e) {
         e.stopPropagation()
 
+        // Close any open modals
+        setActiveField(null)
+
         const params = {
             loc,
             checkIn: dateRange.start ? dateRange.start.toISOString() : '',
@@ -125,7 +152,7 @@ export function StaySearch() {
         navigate({
             pathname: '/stay',
             search: `?${createSearchParams(params)}`,
-        })
+        }, { replace: true })
     }
 
     function formatDate(date) {
@@ -210,7 +237,7 @@ export function StaySearch() {
             {/* Floating Modals Area */}
             {activeField && (
                 <div
-                    className="search-modal-dropdown"
+                    className={`search-modal-dropdown ${activeField}`}
                     ref={modalRef}
                     onClick={(e) => e.stopPropagation()}>
                     {activeField === 'loc' && (
@@ -221,8 +248,10 @@ export function StaySearch() {
                                     key={idx}
                                     className="suggestion-item"
                                     onClick={() => handleLocSelect(dest)}>
-                                    <div className="icon-box">📍</div>
-                                    <span>{dest}</span>
+                                    <div className="icon-box">
+                                        <img src="https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-hawaii-autosuggest-destination-icons-2/original/d2d9f652-03f0-4c23-9246-f825ffd1f0d4.png" alt="Location" />
+                                    </div>
+                                    <span className="suggestion-text">{dest}</span>
                                 </div>
                             ))}
                         </div>

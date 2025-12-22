@@ -7,7 +7,6 @@ export function ClearIcon({ size = 12, strokeWidth = 4 }) {
             role="presentation"
             focusable="false"
             style={{
-                display: 'block',
                 fill: 'none',
                 height: size,
                 width: size,

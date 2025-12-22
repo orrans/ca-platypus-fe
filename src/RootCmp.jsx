@@ -11,7 +11,6 @@ import { StayCheckout } from './pages/StayCheckout.jsx'
 import { StayExploreList } from './cmps/StayExploreList.jsx'
 import { UserProfile } from './pages/UserProfile'
 import { SearchResults } from './pages/SearchResults.jsx'
-import { Explore } from './pages/Explore.jsx'
 
 export function RootCmp() {
     return (
@@ -21,7 +20,7 @@ export function RootCmp() {
 
             <main>
                 <Routes>
-                    <Route path="/" element={<Explore />} />
+                    <Route path="/" element={<StayIndex />} />
                     <Route path="/stay/:stayId/checkout" element={<StayCheckout />} />
                     <Route path="/stay/:stayId" element={<StayDetails />} />
                     <Route path="/stay" element={<SearchResults />} />
