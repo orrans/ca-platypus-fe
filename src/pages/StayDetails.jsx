@@ -3,6 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { stayService } from '../services/stay'
 import { StarIcon } from '../cmps/icons/StarIcon'
+import { PetsIcon } from '../cmps/icons/amenities/PetsIcon'
+import { CheckIn } from '../cmps/icons/highlights/CheckIn'
+import { GreatLocation } from '../cmps/icons/highlights/GreatLocation'
+import { RemoteWork } from '../cmps/icons/highlights/RemoteWork'
 
 export function StayDetails() {
   const { stayId } = useParams()
@@ -26,7 +30,7 @@ export function StayDetails() {
 }
 
 const getAmenityIcon = (amenity) =>
-  AMENITY_ICON_MAP[amenity] || '✔️'
+  AMENITY_ICON_MAP[amenity] || <PetsIcon/>
 
   
   useEffect(() => {
@@ -114,10 +118,7 @@ Book your stay through Airbnb or Booking and allow yourself to experience a drea
   return (
   <section className="stay-details">
 
-    {/* <header className="stay-title">
-  <h1>{stay.name}</h1>
-  <p>{stay.loc.city}, {stay.loc.country}</p>
-</header> */}
+
 
 <header className="stay-header">
   <h1 className="stay-title-main">
@@ -139,15 +140,12 @@ Book your stay through Airbnb or Booking and allow yourself to experience a drea
       </div>
     </div>
 
-{/* the new div  */}
-{/* <div className="stay-overview"> */}
     <div className="stay-details-layout">
 
       <div className="stay-details-main">
       
-{/* <p className="stay-meta">
-  {stayType}, {stay.loc.country}
-</p> */}
+      {/* need more love  */}
+<div className="stay-overview">
 
 <p className="stay-subtitle">
   Apartment, {stay.loc.city}, {stay.loc.country}
@@ -163,8 +161,7 @@ Book your stay through Airbnb or Booking and allow yourself to experience a drea
   <span className="reviews">116 reviews</span>
 </div>
 
-{/* end of new div  */}
-{/* </div> */}
+</div>
 
 <section className="stay-host">
   <img
@@ -182,15 +179,15 @@ Book your stay through Airbnb or Booking and allow yourself to experience a drea
 
         <section className="stay-highlights">
           <div className="highlight">
-            <span className="icon">🛁</span>
+            <span className="icon"><GreatLocation/></span>
             <div>
-              <h4>Relax in the hot tub</h4>
-              <p>One of the few places in the area with this amenity.</p>
+              <h4>Great location</h4>
+              <p>Guests who stayed here in the past year loved the location.</p>
             </div>
           </div>
 
           <div className="highlight">
-            <span className="icon">🔑</span>
+            <span className="icon"><CheckIn/></span>
             <div>
               <h4>Self check-in</h4>
               <p>You can check in with the building staff.</p>
@@ -198,10 +195,10 @@ Book your stay through Airbnb or Booking and allow yourself to experience a drea
           </div>
 
           <div className="highlight">
-            <span className="icon">⭐</span>
+            <span className="icon"><RemoteWork/></span>
             <div>
-              <h4>Highly rated location</h4>
-              <p>Guests love the area for its convenience and atmosphere.</p>
+              <h4>Great for remote work</h4>
+              <p>Fast wifi at 52 Mbps, plus a dedicated workspace.</p>
             </div>
           </div>
         </section>
@@ -264,7 +261,6 @@ Book your stay through Airbnb or Booking and allow yourself to experience a drea
         {/* test */}
         </div>
       </aside>
-
     </div>
 {isDescOpen && (
   <div className="modal-overlay" onClick={() => setIsDescOpen(false)}>
@@ -355,8 +351,6 @@ Book your stay through Airbnb or Booking and allow yourself to experience a drea
     </div>
   </div>
 )}
-
-
 </section>
 )
 }

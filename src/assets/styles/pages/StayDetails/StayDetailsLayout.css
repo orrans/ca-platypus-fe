@@ -3,7 +3,23 @@
   grid-template-columns: minmax(0, 2fr) 1fr;
   gap: 80px;
   align-items: start;
+  position: relative;
 }
+
+.stay-booking {
+  position: sticky;
+  top: 16px;
+  align-self: start;
+  justify-self: end;
+  width: 100%;
+  max-width: 372px;
+}
+
+
+.stay-sticky-scope {
+  display: block;
+}
+
 
 .stay-details-main {
     min-width: 0;

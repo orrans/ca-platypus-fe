@@ -139,17 +139,9 @@
 .stay-details-layout,
 .stay-sleep,
 .stay-amenities {
+   
     grid-column: 2;
 }
-
-/* move to different place */
-
-/* .stay-overview {
-    grid-column: 1;
-    display: block;
-    width: 100%;
-    margin-bottom: 16px;
-} */
 
 .stay-gallery {
   margin-bottom: 16px;
