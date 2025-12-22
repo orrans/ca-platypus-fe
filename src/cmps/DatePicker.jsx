@@ -83,8 +83,8 @@ export function DatePicker({ isOpen, onToggle, dateRange, onSetDateRange, curren
 
                 {/* Weekday Names */}
                 <div className="weekdays-grid">
-                    {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
-                        <div key={day} className="weekday-name">{day}</div>
+                    {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
+                        <div key={index} className="weekday-name">{day}</div>
                     ))}
                 </div>
 
