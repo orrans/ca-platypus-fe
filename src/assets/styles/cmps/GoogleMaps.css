@@ -4,7 +4,7 @@
     position: sticky;
     top: var(--header-height);
     height: calc(100vh - var(--header-height));
-    padding: 20px 0;
+    padding: 20px 28px 20px 0;
 
     .map-wrapper {
         height: 100%;
@@ -26,5 +26,26 @@
         color: black;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18), 0px 2px 4px 0px rgba(0, 0, 0, 0.18),
             0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+        cursor: pointer;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    .map-stay-preview {
+        padding: 0;
+        
+        .stay-preview {
+            min-width: 250px;
+            max-width: 280px;
+        }
+
+        .stay-inner-img {
+            img {
+                border-radius: 8px;
+            }
+        }
     }
 }

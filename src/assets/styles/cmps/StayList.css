@@ -1,10 +1,16 @@
 .stay-list-container {
-    flex-basis: 50%;
+    flex-basis: 58%;
+
+    .stay-list-title {
+        font-size: 0.875rem;
+        padding: 20px 48px 20px 28px;
+        font-weight: 500;
+    }
 }
 
 .stay-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 40px 24px;
     flex-wrap: wrap;
     list-style: none;

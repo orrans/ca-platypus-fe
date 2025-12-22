@@ -36,7 +36,7 @@ export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
                     {stay.type} in {stay.name}
                     <span className="filtered-rating">
                         <StarIcon size={12} />
-                        &nbsp;4.9 (509)
+                        &nbsp;4.93 (509)
                     </span>
                 </h4>
                 {variant === 'filtered' && (
@@ -66,7 +66,7 @@ export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
                             &nbsp;·&nbsp;
                             <span>
                                 <StarIcon />
-                                4.9
+                                4.93
                             </span>
                         </div>
                     </>
