@@ -1,7 +1,8 @@
 
 import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { stayService } from '../services/stay'
+import { stayService } from '../services/stay/stay.service.local'
+
 import { StarIcon } from '../cmps/icons/StarIcon'
 
 import {
@@ -15,9 +16,12 @@ import {
   Wifi
 } from '../cmps/icons/amenities'
 
-import { CheckIn } from '../cmps/icons/highlights/CheckIn'
-import { GreatLocation } from '../cmps/icons/highlights/GreatLocation'
-import { RemoteWork } from '../cmps/icons/highlights/RemoteWork'
+import { 
+  CheckIn,
+GreatLocation,
+RemoteWork
+ } from '../cmps/icons/highlights'
+
 import { StayLocationMap } from '../cmps/StayLocationMap'
 
 
