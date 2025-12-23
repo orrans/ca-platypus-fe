@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { stayService } from '../services/stay'
+import { ReserveBackIcon } from '../cmps/icons/ReserveBackIcon'
+
 
 export function StayCheckout() {
   const { stayId } = useParams()
@@ -25,8 +27,9 @@ export function StayCheckout() {
 
       <header className="checkout-header">
         <button className="back-btn" onClick={() => navigate(-1)}>
-  <span className="back-arrow"></span>
+  <ReserveBackIcon className="ResereveBackIcon" stroke='black'/>
 </button>
+
 
         <h1>Request to book</h1>
       </header>
