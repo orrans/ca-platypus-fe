@@ -1,10 +1,10 @@
-/* @font-face {
+@font-face {
     font-family: 'Cereal';
     src: url('../fonts/CerealVF.woff2') format('woff2-variations');
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
-} */
+}
 
 /* Apply the font globally.
 */
@@ -21,7 +21,7 @@ body {
 /* Cereal (Web) */
 /* Tip: for production, convert these OTF files to WOFF2 and list WOFF2 first ASK ASI */
 
-@font-face {
+/* @font-face {
   font-family: "Cereal";
   src: url("../../../../fonts/AirbnbCereal_W_Lt.otf") format("opentype");
   font-weight: 300;
@@ -67,4 +67,4 @@ body {
   font-weight: 900;
   font-style: normal;
   font-display: swap;
-}
+} */
