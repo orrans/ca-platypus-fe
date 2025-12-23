@@ -21,7 +21,7 @@ function getEmptyOrder() {
             name: '',
             price: 0,
         },
-        status: 'pending'
+        status: 'pending',
     }
 }
 
@@ -30,3 +30,7 @@ const service = VITE_LOCAL === 'true' ? local : remote
 export const orderService = { getEmptyOrder, ...service }
 
 if (DEV) window.orderService = orderService
+
+if (process.env.NODE_ENV !== 'production') {
+    window.store = store
+}

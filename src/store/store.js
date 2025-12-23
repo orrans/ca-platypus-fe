@@ -19,6 +19,10 @@ const middleware = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     : undefined
 export const store = createStore(rootReducer, middleware)
 
+if (process.env.NODE_ENV !== 'production') {
+    window.store = store
+}
+
 // For debug:
 // store.subscribe(() => {
 //     console.log('**** Store state changed: ****')
