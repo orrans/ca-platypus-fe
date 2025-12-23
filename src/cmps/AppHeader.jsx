@@ -1,12 +1,16 @@
 import { useState, useRef, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { StaySearch } from './StaySearch.jsx'
+import { logout } from '../store/actions/user.actions'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
 export function AppHeader() {
     const navigate = useNavigate()
     const location = useLocation()
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const menuRef = useRef(null)
+    const user = useSelector(storeState => storeState.userModule.user)
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -20,6 +24,17 @@ export function AppHeader() {
         }
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [isMenuOpen])
+
+    async function onLogout() {
+        try {
+            await logout()
+            showSuccessMsg('Bye now')
+            setIsMenuOpen(false)
+            navigate('/')
+        } catch (err) {
+            showErrorMsg('Cannot logout')
+        }
+    }
 
     // Hide search bar on profile page
     const isUserProfile = location.pathname.includes('/user/profile')
@@ -63,11 +78,17 @@ export function AppHeader() {
                             </div>
                             {isMenuOpen && (
                                 <div className="user-nav-modal">
-                                    <Link to="#" className="nav-item">Wishlists</Link>
-                                    <Link to="#" className="nav-item">Trips</Link>
-                                    <Link to="#" className="nav-item">Profiles</Link>
-                                    <div className="divider"></div>
-                                    <Link to="#" className="nav-item">Log out</Link>
+                                    {user ? (
+                                        <>
+                                            <Link to="#" className="nav-item">Wishlists</Link>
+                                            <Link to="#" className="nav-item">Trips</Link>
+                                            <Link to="#" className="nav-item">Profiles</Link>
+                                            <div className="divider"></div>
+                                            <Link to="#" onClick={onLogout} className="nav-item">Log out</Link>
+                                        </>
+                                    ) : (
+                                        <Link to="/login" onClick={() => setIsMenuOpen(false)} className="nav-item">Log in</Link>
+                                    )}
                                 </div>
                             )}
                         </div>

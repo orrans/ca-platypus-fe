@@ -5,9 +5,9 @@ import { AppFooter } from './cmps/AppFooter'
 import { UserMsg } from './cmps/UserMsg.jsx'
 import { StayDetails } from './pages/StayDetails.jsx'
 import { StayCheckout } from './pages/StayCheckout.jsx'
-import { StayExploreList } from './cmps/StayExploreList.jsx'
 import { UserProfile } from './pages/UserProfile'
 import { SearchResults } from './pages/SearchResults.jsx'
+import { Login } from './pages/Login.jsx'
 
 export function RootCmp() {
     return (
@@ -22,6 +22,7 @@ export function RootCmp() {
                     <Route path="/stay/:stayId" element={<StayDetails />} />
                     <Route path="/stay" element={<SearchResults />} />
                     <Route path="/user/profile" element={<UserProfile />} />
+                    <Route path="/login" element={<Login />} />
                 </Routes>
             </main>
             <AppFooter />
