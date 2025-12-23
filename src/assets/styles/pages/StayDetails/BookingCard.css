@@ -1,13 +1,14 @@
 
 .booking-card {
-  width: 244px;
+  box-sizing: border-box;
+  width: 100%;
   padding: 24px;
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  box-sizing: border-box;
-  font-family: 'Airbnb Cereal VF', 'Airbnb Cereal', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
+
+
 
 .booking-price {
   font-size: 22px;
@@ -26,6 +27,7 @@
   font-weight: 400;
   margin-left: 4px;
 }
+
 
 .booking-box {
   border: 1px solid #b0b0b0;
@@ -56,6 +58,7 @@
   border-top: 1px solid #b0b0b0;
 }
 
+
 .booking-card label {
   display: block;
   font-size: 10px;
@@ -73,7 +76,8 @@
   text-overflow: ellipsis;
 }
 
-.reserve-btn {
+
+/* .reserve-btn {
   width: 100%;
   height: 56px;
   border: none;
@@ -84,7 +88,23 @@
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+} */
+
+.reserve-btn {
+  width: 100%;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  border: none;
+  border-radius: 999px;
+
+  cursor: pointer;
 }
+
 
 .booking-note {
   margin-top: 8px;
@@ -94,6 +114,11 @@
 }
 
 .ReserveBackIcon {
-  color: black
-  ba
+  color: black;
+}
+
+@media (min-width: 744px) {
+  .booking-card {
+    display: block;
+  }
 }
