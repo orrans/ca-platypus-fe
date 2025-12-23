@@ -1,3 +1,6 @@
+// we dont need it, will use the other map component with the spesific stay 
+
+
 import { Map, AdvancedMarker } from '@vis.gl/react-google-maps'
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY

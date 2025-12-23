@@ -14,7 +14,6 @@ import { Dryer } from '../cmps/icons/amenities/Dryer'
 import { CheckIn } from '../cmps/icons/highlights/CheckIn'
 import { GreatLocation } from '../cmps/icons/highlights/GreatLocation'
 import { RemoteWork } from '../cmps/icons/highlights/RemoteWork'
-
 import { StayLocationMap } from '../cmps/StayLocationMap'
 
 
