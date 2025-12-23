@@ -354,8 +354,8 @@ if (!stay) {
 </section>
 
 <section className="stay-reviews">
-  {stay.reviews.map(review => (
-    <article key={review.id} className="review-card">
+  {stay.reviews.map((review, idx) => (
+  <article key={review.id || idx} className="review-card">
       <header className="review-header">
         <img
           className="review-avatar"
