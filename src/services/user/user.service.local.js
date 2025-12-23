@@ -86,7 +86,7 @@ async function _createUsers() {
         {
             _id: 'u101',
             fullname: 'User 1',
-            imgUrl: '/img/img1.jpg',
+            imgUrl: 'https://robohash.org/user1?set=set4&size=180x180',
             username: 'user1',
             password: 'secret',
             reviews: [
@@ -97,7 +97,7 @@ async function _createUsers() {
                     by: {
                         _id: 'u102',
                         fullname: 'user2',
-                        imgUrl: '/img/img2.jpg',
+                        imgUrl: 'https://robohash.org/user2?set=set4&size=180x180',
                     },
                 },
             ],
@@ -105,7 +105,7 @@ async function _createUsers() {
         {
             _id: 'u102',
             fullname: 'User 2',
-            imgUrl: '/img/img2.jpg',
+            imgUrl: 'https://robohash.org/user2?set=set4&size=180x180',
             username: 'user2',
             password: 'secret',
         },
