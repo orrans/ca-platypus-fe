@@ -3,14 +3,18 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { stayService } from '../services/stay'
 import { StarIcon } from '../cmps/icons/StarIcon'
-import { PetsIcon } from '../cmps/icons/amenities/PetsIcon'
-import { Wifi } from '../cmps/icons/amenities/Wifi'
-import { FreeParking } from '../cmps/icons/amenities/FreeParking'
-import { Kitchen } from '../cmps/icons/amenities/Kitchen'
-import { AirConditioning } from '../cmps/icons/amenities/AirConditioning'
-import { TV } from '../cmps/icons/amenities/TV'
-import { Washer } from '../cmps/icons/amenities/Washer'
-import { Dryer } from '../cmps/icons/amenities/Dryer'
+
+import {
+  AirConditioning,
+  Dryer,
+  FreeParking,
+  Kitchen,
+  PetsIcon,
+  TV,
+  Washer,
+  Wifi
+} from '../cmps/icons/amenities'
+
 import { CheckIn } from '../cmps/icons/highlights/CheckIn'
 import { GreatLocation } from '../cmps/icons/highlights/GreatLocation'
 import { RemoteWork } from '../cmps/icons/highlights/RemoteWork'

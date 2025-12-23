@@ -1,0 +1,8 @@
+export { AirConditioning } from './AirConditioning'
+export { Dryer } from './Dryer'
+export { FreeParking } from './FreeParking'
+export { Kitchen } from './Kitchen'
+export { PetsIcon } from './PetsIcon'
+export { TV } from './TV'
+export { Washer } from './Washer'
+export { Wifi } from './Wifi'
