@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { StaySearch } from './StaySearch.jsx'
+import { LoginModal } from './LoginModal.jsx'
 import { logout } from '../store/actions/user.actions'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
@@ -9,6 +10,7 @@ export function AppHeader() {
     const navigate = useNavigate()
     const location = useLocation()
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
     const menuRef = useRef(null)
     const user = useSelector(storeState => storeState.userModule.user)
 
@@ -91,7 +93,10 @@ export function AppHeader() {
                                             <Link to="#" onClick={onLogout} className="nav-item">Log out</Link>
                                         </>
                                     ) : (
-                                        <Link to="/login" onClick={() => setIsMenuOpen(false)} className="nav-item">Log in</Link>
+                                        <Link to="#" onClick={() => {
+                                            setIsMenuOpen(false)
+                                            setIsLoginModalOpen(true)
+                                        }} className="nav-item">Log in</Link>
                                     )}
                                 </div>
                             )}
@@ -105,6 +110,8 @@ export function AppHeader() {
                         <StaySearch />
                     </div>
                 )}
+
+                {isLoginModalOpen && <LoginModal onClose={() => setIsLoginModalOpen(false)} />}
             </div>
         </header>
     )
