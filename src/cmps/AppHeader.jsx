@@ -1,12 +1,18 @@
 import { useState, useRef, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { StaySearch } from './StaySearch.jsx'
+import { LoginModal } from './LoginModal.jsx'
+import { logout } from '../store/actions/user.actions'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
 export function AppHeader() {
     const navigate = useNavigate()
     const location = useLocation()
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
     const menuRef = useRef(null)
+    const user = useSelector(storeState => storeState.userModule.user)
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -20,6 +26,17 @@ export function AppHeader() {
         }
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [isMenuOpen])
+
+    async function onLogout() {
+        try {
+            await logout()
+            showSuccessMsg('Bye now')
+            setIsMenuOpen(false)
+            navigate('/')
+        } catch (err) {
+            showErrorMsg('Cannot logout')
+        }
+    }
 
     // Hide search bar on profile page
     const isUserProfile = location.pathname.includes('/user/profile')
@@ -54,7 +71,11 @@ export function AppHeader() {
                         <button className="host-btn">Become a Host</button>
 
                         <div className="user-avatar-placeholder" onClick={() => navigate('/user/profile')}>
-                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false" style={{ display: 'block', height: '100%', width: '100%', fill: 'currentcolor' }}><path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z"></path></svg>
+                            {user && user.imgUrl ? (
+                                <img src={user.imgUrl} alt={user.fullname} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                            ) : (
+                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false" style={{ display: 'block', height: '100%', width: '100%', fill: 'currentcolor' }}><path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z"></path></svg>
+                            )}
                         </div>
 
                         <div className="user-menu-btn" ref={menuRef}>
@@ -63,11 +84,20 @@ export function AppHeader() {
                             </div>
                             {isMenuOpen && (
                                 <div className="user-nav-modal">
-                                    <Link to="#" className="nav-item">Wishlists</Link>
-                                    <Link to="#" className="nav-item">Trips</Link>
-                                    <Link to="#" className="nav-item">Profiles</Link>
-                                    <div className="divider"></div>
-                                    <Link to="#" className="nav-item">Log out</Link>
+                                    {user ? (
+                                        <>
+                                            <Link to="#" className="nav-item">Wishlists</Link>
+                                            <Link to="#" className="nav-item">Trips</Link>
+                                            <Link to="#" className="nav-item">Profiles</Link>
+                                            <div className="divider"></div>
+                                            <Link to="#" onClick={onLogout} className="nav-item">Log out</Link>
+                                        </>
+                                    ) : (
+                                        <Link to="#" onClick={() => {
+                                            setIsMenuOpen(false)
+                                            setIsLoginModalOpen(true)
+                                        }} className="nav-item">Log in</Link>
+                                    )}
                                 </div>
                             )}
                         </div>
@@ -80,6 +110,8 @@ export function AppHeader() {
                         <StaySearch />
                     </div>
                 )}
+
+                {isLoginModalOpen && <LoginModal onClose={() => setIsLoginModalOpen(false)} />}
             </div>
         </header>
     )

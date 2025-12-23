@@ -35,7 +35,7 @@ async function update({ _id, score }) {
     user.score = score
     await storageService.put('user', user)
 
-	// When admin updates other user's details, do not update loggedinUser
+    // When admin updates other user's details, do not update loggedinUser
     const loggedinUser = getLoggedinUser()
     if (loggedinUser._id === user._id) saveLoggedinUser(user)
 
@@ -66,28 +66,55 @@ function getLoggedinUser() {
 }
 
 function saveLoggedinUser(user) {
-	user = { 
-        _id: user._id, 
-        fullname: user.fullname, 
-        imgUrl: user.imgUrl, 
-        score: user.score, 
-        isAdmin: user.isAdmin 
+    user = {
+        _id: user._id,
+        fullname: user.fullname,
+        imgUrl: user.imgUrl,
+        score: user.score,
+        isAdmin: user.isAdmin
     }
-	sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
-	return user
+    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
+    return user
 }
 
-// To quickly create an admin user, uncomment the next line
-// _createAdmin()
-async function _createAdmin() {
-    const user = {
-        username: 'admin',
-        password: 'admin',
-        fullname: 'Mustafa Adminsky',
-        imgUrl: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png',
-        score: 10000,
-    }
+// create demo users
+_createUsers()
+async function _createUsers() {
+    const users = await storageService.query('user') || []
 
-    const newUser = await storageService.post('user', userCred)
-    console.log('newUser: ', newUser)
+    const usersToSave = [
+        {
+            _id: 'u101',
+            fullname: 'User 1',
+            imgUrl: 'https://robohash.org/user1?set=set4&size=180x180',
+            username: 'user1',
+            password: 'secret',
+            reviews: [
+                {
+                    id: 'madeId',
+                    txt: 'Quiet guest...',
+                    rate: 4,
+                    by: {
+                        _id: 'u102',
+                        fullname: 'user2',
+                        imgUrl: 'https://robohash.org/user2?set=set4&size=180x180',
+                    },
+                },
+            ],
+        },
+        {
+            _id: 'u102',
+            fullname: 'User 2',
+            imgUrl: 'https://robohash.org/user2?set=set4&size=180x180',
+            username: 'user2',
+            password: 'secret',
+        },
+    ]
+
+    for (const user of usersToSave) {
+        const userExists = users.find(u => u.username === user.username)
+        if (!userExists) {
+            await storageService.post('user', user)
+        }
+    }
 }

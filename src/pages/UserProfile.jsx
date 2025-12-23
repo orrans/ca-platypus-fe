@@ -1,14 +1,11 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 export function UserProfile() {
     const [activeTab, setActiveTab] = useState('about')
+    const user = useSelector(storeState => storeState.userModule.user)
 
-    // Hardcoded user for display
-    const user = {
-        fullname: "Puki Puki",
-        imgUrl: "https://robohash.org/RemoteCar?set=set4&size=180x180",
-        joined: "2023",
-    }
+    if (!user) return <div>Please log in to view your profile</div>
 
     return (
         <main className="user-profile-page">
@@ -46,13 +43,6 @@ export function UserProfile() {
                                     }
                                 </div>
                                 <h2>{user.fullname}</h2>
-                                <p className="guest-label">Tel Aviv</p>
-                            </div>
-
-                            <div className="info-block">
-                                <div className="info-item">School: Coding Academy</div>
-                                <div className="info-item">Work: Software Developer</div>
-                                <div className="info-item">Lives in Tel Aviv</div>
                             </div>
                         </div>
                     )}
