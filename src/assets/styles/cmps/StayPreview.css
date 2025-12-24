@@ -16,6 +16,7 @@
         display: block;
         aspect-ratio: 250 / 240;
         border-radius: 20px;
+        object-fit: cover;
     }
     h4 {
         margin-bottom: 0;
@@ -89,13 +90,15 @@
     .filtered-title {
         display: flex;
         justify-content: space-between;
+        font-size: 0.9375rem;
+    }
 
-        word-break: break-word;
-        display: -webkit-box;
-        -webkit-line-clamp: 1; /* The number of lines after which to clamp the text */
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    .explore-title {
+        font-size: 0.8125rem;
+    }
+
+    .explore-details {
+        font-size: 0.75rem;
     }
 
     .filtered-beds-capacity {
