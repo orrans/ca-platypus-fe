@@ -10,20 +10,12 @@ export const orderService = {
 }
 
 function query(filterBy = {}) {
-    const queryStr = Object.keys(filterBy)
-        .map((key) => `${key}=${filterBy[key]}`)
-        .join('&')
-    return httpService.get(`order?${queryStr}`)
+    return httpService.get(`order`, filterBy)
 }
 
 async function save(order) {
-    var savedOrder
-    if (order._id) {
-        savedOrder = await httpService.put(`order/${order._id}`, order)
-    } else {
-        savedOrder = await httpService.post('order', order)
-    }
-    return savedOrder
+    if (order._id) return httpService.put(`order/${order._id}`, order)
+    return httpService.post('order', order)
 }
 
 function remove(orderId) {

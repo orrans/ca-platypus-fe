@@ -20,6 +20,7 @@ function getEmptyOrder() {
         totalPrice: 0,
         startDate: '',
         endDate: '',
+        bookDate: Date.now(),
         guests: {
             adults: 0,
             kids: 0,

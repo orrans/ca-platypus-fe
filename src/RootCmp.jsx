@@ -8,6 +8,7 @@ import { StayCheckout } from './pages/StayCheckout.jsx'
 import { UserProfile } from './pages/UserProfile'
 import { SearchResults } from './pages/SearchResults.jsx'
 import { Login } from './pages/Login.jsx'
+import { OrderList } from './cmps/OrderList.jsx'
 
 export function RootCmp() {
     return (
@@ -23,6 +24,7 @@ export function RootCmp() {
                     <Route path="/stay" element={<SearchResults />} />
                     <Route path="/user/profile" element={<UserProfile />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/orders" element={<OrderList />} />
                 </Routes>
             </main>
             <AppFooter />
