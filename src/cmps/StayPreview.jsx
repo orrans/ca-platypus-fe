@@ -8,12 +8,26 @@ import { HeartIcon } from './icons/HeartIcon'
 import { Carousel } from './Carousel'
 import { formatPrice } from '../services/util.service'
 
+
 export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
     const days = differenceInDays(toDate, fromDate)
     const [isFavorite, setIsFavorite] = useState(false)
 
     return (
-        <Link to={`/stay/${stay._id}`} target="_blank" className="stay-preview">
+        // <Link to={`/stay/${stay._id}`} target="_blank" className="stay-preview">
+    //    testing 
+        <Link
+  to={`/stay/${stay._id}`}
+  className="stay-preview"
+  state={{
+    checkIn: fromDate,
+    checkOut: toDate,
+    guests: 1,
+    nights: differenceInDays(toDate, fromDate),
+    pricePerNight: stay.price
+  }}
+>
+
             <div className="stay-inner-img">
                 <div className="img-overlay">
                     <div className="favorite-icon-container">
