@@ -1,0 +1,35 @@
+.order-row {
+    .order-row-guest {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        img{
+            border-radius: 50%;
+            object-fit: cover;
+            width: 48px;
+            height: auto;
+        }
+    }
+
+    td{
+        border-bottom: 1px solid rgba(150, 150, 150, 0.2);;
+        border-top: 1px solid rgba(150, 150, 150, 0.2);
+        padding: 12px;
+    }
+
+    .order-row-actions {
+        display: flex;
+        align-items: center;
+    }
+
+    .approved {
+        color: rgb(141, 228, 10);
+    }
+    .pending {
+        color: orange;
+    }
+    .rejected {
+        color: red;
+    }
+}

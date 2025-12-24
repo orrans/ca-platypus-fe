@@ -1,0 +1,9 @@
+.listing-table table{
+    width: 100%;
+    border-collapse: collapse;
+
+    th{
+        padding: 12px;
+        text-align: left;
+    }
+}

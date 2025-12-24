@@ -4,14 +4,17 @@ import { loadOrders } from '../store/actions/order.actions'
 import { OrderPreview } from './OrderPreview'
 
 export function OrderList({}) {
-    const orders = useSelector((state) => state.orderModule.orders)
+    const loggedInUser = useSelector((state) => state.userModule.user)
+    const orders = useSelector((state) =>
+        state.orderModule.orders.filter((order) => order.hostId._id === loggedInUser?._id)
+    )
 
     useEffect(() => {
         loadOrders()
     }, [])
 
     return (
-        <div>
+        <div className="orders-table">
             <table>
                 <thead>
                     <tr>

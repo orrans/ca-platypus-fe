@@ -9,6 +9,7 @@ import { UserProfile } from './pages/UserProfile'
 import { SearchResults } from './pages/SearchResults.jsx'
 import { Login } from './pages/Login.jsx'
 import { OrderList } from './cmps/OrderList.jsx'
+import { ListingList } from './cmps/ListingList.jsx'
 
 export function RootCmp() {
     return (
@@ -25,6 +26,7 @@ export function RootCmp() {
                     <Route path="/user/profile" element={<UserProfile />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/orders" element={<OrderList />} />
+                    <Route path="/listings" element={<ListingList />} />
                 </Routes>
             </main>
             <AppFooter />

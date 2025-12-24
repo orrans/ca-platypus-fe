@@ -15,6 +15,7 @@ function getEmptyStay() {
         amenities: [],
         labels: [],
         host: {},
+        createdAt: new Date(),
         loc: {
             country: '',
             city: '',
