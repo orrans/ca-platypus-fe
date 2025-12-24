@@ -29,7 +29,7 @@
 .stay-search-container .search-item {
     height: 100%;
     border-radius: 32px;
-    padding: 14px 24px;
+    padding: 15px 4px 15px 24px;
     cursor: pointer;
     position: relative;
     display: flex;
@@ -61,8 +61,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding-right: 8px;
-
 }
 
 .stay-search-container .search-item label {
