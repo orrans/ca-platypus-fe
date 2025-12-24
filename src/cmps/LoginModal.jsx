@@ -16,7 +16,7 @@ export function LoginModal({ onClose }) {
 
     async function onLogin(user) {
         try {
-            await login({ username: user.username })
+            await login({ username: user.username, password: 'mySecretPassword' })
             onClose()
         } catch (err) {
             console.log('Login failed', err)

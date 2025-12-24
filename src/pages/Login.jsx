@@ -21,10 +21,16 @@ export function Login() {
 
     async function onLogin(ev = null) {
         if (ev) ev.preventDefault()
-
         if (!credentials.username) return
-        await login(credentials)
-        navigate('/')
+
+        try {
+            const userCreds = { ...credentials, password: 'mySecretPassword' }
+            await login(userCreds)
+            navigate('/')
+        } catch (err) {
+            console.log('Login failed', err)
+        }
+
     }
 
     function handleChange(ev) {
