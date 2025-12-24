@@ -275,7 +275,7 @@
     right: 0;
 }
 
-.stay-search-container .modal-content.location-suggestions {
+.stay-search-container .location-suggestions {
     width: 100%;
     max-width: 400px;
     margin-right: auto;
@@ -331,6 +331,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    padding: 3px;
 }
 
 /* Guest Picker Row Styles */

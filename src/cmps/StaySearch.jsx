@@ -251,7 +251,7 @@ export function StaySearch() {
                     ref={modalRef}
                     onClick={(e) => e.stopPropagation()}>
                     {activeField === 'loc' && (
-                        <div className="modal-content location-suggestions">
+                        <div className="location-suggestions">
                             <div className="suggestion-title">Suggested destinations</div>
                             {filteredLocs.map((dest, idx) => (
                                 <div
