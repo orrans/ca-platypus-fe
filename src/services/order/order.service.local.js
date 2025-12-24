@@ -10,12 +10,13 @@ export const orderServiceLocal = {
     remove,
     getUserOrders,
     getHostOrders,
+    updateStatus,
 }
 async function query(filterBy = {}) {
     let orders = await storageService.query(STORAGE_KEY)
 
     if (filterBy.hostId) {
-        orders = orders.filter((order) => order.host._id === filterBy.hostId)
+        orders = orders.filter((order) => order.hostId._id === filterBy.hostId)
     }
 
     if (filterBy.guestId) {
@@ -52,7 +53,13 @@ async function getUserOrders(userId) {
 
 async function getHostOrders(hostId) {
     const orders = await storageService.query(STORAGE_KEY)
-    return orders.filter((order) => order.host._id === hostId)
+    return orders.filter((order) => order.hostId._id === hostId)
+}
+
+async function updateStatus(orderId, status) {
+    const order = await storageService.get(STORAGE_KEY, orderId)
+    order.status = status
+    return storageService.put(STORAGE_KEY, order)
 }
 
 async function createOrders() {
