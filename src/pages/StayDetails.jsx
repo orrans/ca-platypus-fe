@@ -273,8 +273,11 @@ Looking for a serene and unforgettable escape on the edge of nature, far from th
           Show all {amenities.length} amenities
         </button>
       </section>
-<section className="stay-reviews">
-  {stay.reviews.map((review, idx) => (
+
+{/* Review section  */}
+
+{/* <section className="stay-reviews">
+  {stay.reviews.slice(0, 6).map((review, idx) => (
   <article key={review.id || idx} className="review-card">
       <header className="review-header">
         <img
@@ -284,7 +287,7 @@ Looking for a serene and unforgettable escape on the edge of nature, far from th
         />
         <div>
           <h4>{review.by.fullname}</h4>
-          <span>★★★★★</span>
+          <span><StarIcon/><StarIcon/><StarIcon/><StarIcon/><StarIcon/></span>
         </div>
       </header>
 
@@ -293,8 +296,44 @@ Looking for a serene and unforgettable escape on the edge of nature, far from th
       <button className="show-more">Show more</button>
     </article>
   ))}
-</section>
+</section> */}
 
+<section className="stay-reviews">
+  {stay.reviews && stay.reviews.slice(0, 6).map((review, idx) => (
+    <article key={review.id || idx} className="review-card">
+      <header className="review-header">
+        <img
+          className="review-avatar"
+          src={'/img/platy.jpg'} 
+          alt={review.by.fullname}
+        />
+        <div className="review-author-info">
+          <h4>{review.by.fullname}</h4>
+          <span className="review-date">
+            {review.at ? new Date(review.at).toLocaleDateString('en-GB', {
+              month: 'long',
+              year: 'numeric',
+            }) : 'Recently'}
+          </span>
+        </div>
+      </header>
+
+      <div className="review-rating-stars">
+        <StarIcon /> <StarIcon /> <StarIcon /> <StarIcon /> <StarIcon />
+      </div>
+
+      <p className="review-text">{review.txt}</p>
+      
+      <button className="show-more">Show more</button>
+    </article>
+  ))}
+
+  {stay.reviews && stay.reviews.length > 0 && (
+    <button className="show-all-reviews-btn">
+      Show all {stay.reviews.length} reviews
+    </button>
+  )}
+</section>
 <section className="stay-location">
   <h2 className="location-title">Where you’ll be</h2>
 
