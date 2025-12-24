@@ -6,11 +6,23 @@ import { StarIcon } from './icons/StarIcon'
 import { Heart } from 'lucide-react'
 import { HeartIcon } from './icons/HeartIcon'
 import { Carousel } from './Carousel'
-import { formatPrice } from '../services/util.service'
+import { formatPrice, getRandomIntInclusive } from '../services/util.service'
 
 export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
     const days = differenceInDays(toDate, fromDate)
     const [isFavorite, setIsFavorite] = useState(false)
+    const stayType = [
+        'Apartment',
+        'House',
+        'Villa',
+        'Cottage',
+        'Cabin',
+        'Bungalow',
+        'Condo',
+        'Loft',
+        'Townhouse',
+        'Chalet',
+    ]
 
     return (
         <Link to={`/stay/${stay._id}`} target="_blank" className="stay-preview">
@@ -35,11 +47,13 @@ export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
             </div>
             <div className="stay-inner-details">
                 <h4 className="filtered-title">
-                    {stay.type} in {stay.name}
-                    <span className="filtered-rating">
-                        <StarIcon size={12} />
-                        &nbsp;4.93 (509)
-                    </span>
+                    {stayType[getRandomIntInclusive(0, stayType.length - 1)]} in {stay.loc.city}
+                    {variant === 'filtered' && (
+                        <span className="filtered-rating">
+                            <StarIcon size={12} />
+                            &nbsp;4.93 (509)
+                        </span>
+                    )}
                 </h4>
                 {variant === 'filtered' && (
                     <div className="filtered-summary">
@@ -48,9 +62,6 @@ export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
                             {stay.bedrooms} bedroom{stay.bedrooms !== 1 ? 's' : ''}&nbsp;·&nbsp;
                             {stay.bathrooms} bathroom{stay.bathrooms !== 1 ? 's' : ''}
                         </span>
-                        {/* <span className="filtered-dates">
-                            {format(fromDate, shortDateFmt)} - {format(toDate, 'dd')}
-                        </span> */}
                         <span>
                             <span className="filtered-price">{formatPrice(stay.price * days)}</span>{' '}
                             for {days} nights

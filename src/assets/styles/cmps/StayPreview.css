@@ -89,6 +89,13 @@
     .filtered-title {
         display: flex;
         justify-content: space-between;
+
+        word-break: break-word;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /* The number of lines after which to clamp the text */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .filtered-beds-capacity {
