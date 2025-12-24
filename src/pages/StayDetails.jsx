@@ -228,11 +228,23 @@ Looking for a serene and unforgettable escape on the edge of nature, far from th
               </div>
 
               <button
-                className="reserve-btn"
-                onClick={() => navigate(`/stay/${stayId}/checkout`)}
-              >
-                Reserve
-              </button>
+  className="reserve-btn"
+  onClick={() =>
+    navigate(`/stay/${stayId}/checkout`, {
+      state: {
+        checkIn,
+        checkOut,
+        guests,
+        nights,
+        pricePerNight,
+        totalPrice
+      }
+    })
+  }
+>
+  Reserve
+</button>
+
 
               <p className="booking-note">
                 You won’t be charged yet
