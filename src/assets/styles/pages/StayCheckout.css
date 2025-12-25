@@ -32,6 +32,15 @@ section.stay-checkout.main-container {
   line-height: 0;
 }
 
+.checkout-card.checkout-payment {
+  border-radius: 24px;
+  padding: 24px;
+    border: 1px solid #dddddd;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02);
+}
+
+
+
 .checkout-header {
     margin-bottom: 32px;
 }
@@ -68,7 +77,7 @@ section.stay-checkout.main-container {
 
 .checkout-card {
     border: 1px solid #dddddd;
-    border-radius: 12px;
+    border-radius: 24px;
     padding: 24px;
     margin-bottom: 24px;
     background: white;
