@@ -16,7 +16,7 @@ const POPULAR_DESTINATIONS = [
     'Barcelona, Spain',
 ]
 
-export function StaySearch() {
+export function StaySearch({ onSearchFocus }) {
     const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
     const [loc, setLoc] = useState(filterBy.loc || '')
     const [dateRange, setDateRange] = useState({
@@ -92,6 +92,12 @@ export function StaySearch() {
 
         prevPathnameRef.current = currentPathname
     }, [location.pathname])
+
+    useEffect(() => {
+        if (onSearchFocus) {
+            onSearchFocus(!!activeField)
+        }
+    }, [activeField, onSearchFocus])
 
     function resetSearchState() {
         setLoc('')

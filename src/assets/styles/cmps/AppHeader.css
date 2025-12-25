@@ -6,10 +6,26 @@
     border-bottom: 1px solid var(--clr-border);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 101;
     margin-bottom: 32px;
     transition: height 0.25s cubic-bezier(0.35, 0, 0.65, 1), background-color 0.25s;
 }
+
+.main-layout-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.main-layout-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 
 .app-header.compact {
     height: 80px;
@@ -270,7 +286,12 @@
     transform: scaleY(1) translateY(0);
     transform-origin: top;
     transition: opacity 0.2s ease, transform 0.2s ease;
+
+    position: relative;
+    z-index: 102;
 }
+
+
 
 @keyframes fadeIn {
     from {
