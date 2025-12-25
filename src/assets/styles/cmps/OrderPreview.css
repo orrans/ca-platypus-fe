@@ -1,4 +1,6 @@
 .order-row {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 70px;
     transition: background-color 0.2s;
 
     &:hover {
