@@ -6,15 +6,16 @@ import { StayPreview } from './StayPreview'
 import { ClearIcon } from './icons/ClearIcon.jsx'
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
-export function GoogleMap({ stays, fromDate, toDate }) {
+export function GoogleMap({ stays, fromDate, toDate, variant = 'search' }) {
     const [selectedStay, setSelectedStay] = useState(null)
     const days = differenceInDays(toDate, fromDate)
+    const isDetailsPage = variant === 'details'
 
     function MapHandler({ stays, selectedStay }) {
         const map = useMap()
 
         useEffect(() => {
-            if (!map || !stays.length || selectedStay) return
+            if (!map || !stays.length || selectedStay || isDetailsPage) return
 
             const bounds = new google.maps.LatLngBounds()
             stays.forEach((stay) => bounds.extend(fixLoc(stay.loc)))
@@ -35,13 +36,13 @@ export function GoogleMap({ stays, fromDate, toDate }) {
     }
 
     return (
-        <section className="google-map-container">
+        <section className={`google-map-container ${isDetailsPage ? 'details-variant' : ''}`}>
             <APIProvider apiKey={API_KEY}>
                 <div className="map-wrapper">
                     <Map
                         className="map"
-                        defaultZoom={12}
-                        defaultCenter={{ lat: 32.0853, lng: 34.7818 }}
+                        defaultZoom={isDetailsPage ? 17 : 12}
+                        defaultCenter={isDetailsPage && stays[0] ? fixLoc(stays[0].loc) : { lat: 32.0853, lng: 34.7818 }}
                         mapId="cce1a61f00cdb4a0a238fe28"
                         disableDefaultUI={true}>
                         <MapHandler stays={stays} selectedStay={selectedStay} />
@@ -58,7 +59,7 @@ export function GoogleMap({ stays, fromDate, toDate }) {
                                 </div>
                             </AdvancedMarker>
                         ))}
-                        {selectedStay && (
+                        {selectedStay && !isDetailsPage && (
                             <AdvancedMarker position={fixLoc(selectedStay.loc)}>
                                 <div className="map-stay-preview">
                                     <button className="close-marker">
