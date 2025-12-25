@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { StaySearch } from './StaySearch.jsx'
+import { StaySearchCollapsed } from './StaySearchCollapsed.jsx'
 import { LoginModal } from './LoginModal.jsx'
 import { logout } from '../store/actions/user.actions'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
@@ -9,10 +10,43 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 export function AppHeader() {
     const navigate = useNavigate()
     const location = useLocation()
+
+
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+
+    const [isScrolled, setIsScrolled] = useState(false)
+    const [isSearchExpanded, setIsSearchExpanded] = useState(false)
+
+
     const menuRef = useRef(null)
     const user = useSelector(storeState => storeState.userModule.user)
+
+    useEffect(() => {
+        function handleScroll() {
+            if (window.scrollY > 0) {
+                setIsScrolled(true)
+                setIsSearchExpanded(false)
+            } else {
+                setIsScrolled(false)
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
+    useEffect(() => {
+        if (location.pathname === '/') {
+            setIsScrolled(false)
+            setIsSearchExpanded(true)
+        } else {
+            setIsScrolled(true)
+            setIsSearchExpanded(false)
+        }
+    }, [location.pathname])
+
+
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -40,12 +74,19 @@ export function AppHeader() {
 
     // Hide search bar on profile page
     const isUserProfile = location.pathname.includes('/user/profile')
+    const isHomePage = location.pathname === '/'
+
+    const showLargeSearch = !isUserProfile && ((isHomePage && !isScrolled) || isSearchExpanded)
+
+    const showSmallSearch = !isUserProfile && !showLargeSearch
+
+    const headerClass = `app-header full ${!showLargeSearch ? 'compact' : ''}`
 
     return (
-        <header className={`app-header full ${isUserProfile ? 'compact' : ''}`}>
+        <header className={headerClass}>
             <div className="header-container">
 
-                {/* Top Row: Logo, Nav, User Actions */}
+                {/* Top Row: Logo, Nav/CollapsedSearch, User Actions */}
                 <div className="header-top">
                     <div className="logo">
                         <Link to="/">
@@ -55,15 +96,19 @@ export function AppHeader() {
 
                     {!isUserProfile && (
                         <nav className="main-nav">
-                            <NavLink to="/" className="nav-link">
-                                <video
-                                    className="simi9jf atm_jp_1f51e7f atm_jr_1h6ojuz atm_vy_1osqo2v atm_e2_1osqo2v atm_tr_18ws4an atm_mj_glywfm slt01p9 atm_mk_stnw88 atm_tk_idpfg4 atm_fq_idpfg4 stz1the atm_k4_kb7nvz dir dir-ltr"
-                                    playsInline
-                                    poster="https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-search-bar-icons/original/4aae4ed7-5939-4e76-b100-e69440ebeae4.png?im_w=240"
-                                    preload="auto"
-                                ></video>
-                                Homes
-                            </NavLink>
+                            {showSmallSearch ? (
+                                <StaySearchCollapsed onToggleSearch={() => setIsSearchExpanded(true)} />
+                            ) : (
+                                <NavLink to="/" className="nav-link">
+                                    <video
+                                        className="simi9jf atm_jp_1f51e7f atm_jr_1h6ojuz atm_vy_1osqo2v atm_e2_1osqo2v atm_tr_18ws4an atm_mj_glywfm slt01p9 atm_mk_stnw88 atm_tk_idpfg4 atm_fq_idpfg4 stz1the atm_k4_kb7nvz dir dir-ltr"
+                                        playsInline
+                                        poster="https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-search-bar-icons/original/4aae4ed7-5939-4e76-b100-e69440ebeae4.png?im_w=240"
+                                        preload="auto"
+                                    ></video>
+                                    Homes
+                                </NavLink>
+                            )}
                         </nav>
                     )}
 
@@ -104,8 +149,7 @@ export function AppHeader() {
                     </div>
                 </div>
 
-                {/* Bottom Row: Search Bar */}
-                {!isUserProfile && (
+                {showLargeSearch && (
                     <div className="header-bottom">
                         <StaySearch />
                     </div>
