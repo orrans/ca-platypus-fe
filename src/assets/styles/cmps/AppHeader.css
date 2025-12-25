@@ -8,10 +8,12 @@
     top: 0;
     z-index: 100;
     margin-bottom: 32px;
+    transition: height 0.25s cubic-bezier(0.35, 0, 0.65, 1), background-color 0.25s;
 }
 
 .app-header.compact {
     height: 80px;
+    background: #ffffff;
 }
 
 .app-header.full {
@@ -38,6 +40,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    position: relative;
 }
 
 /* Logo */
@@ -59,16 +62,20 @@
     font-weight: 800;
     margin: 0;
     letter-spacing: -0.5px;
+    cursor: pointer;
 }
 
 /* Navigation (Centered) */
 .app-header .main-nav {
     flex: 0 1 auto;
     display: flex;
-    gap: 32px;
     justify-content: center;
     align-items: center;
     height: 100%;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .app-header .main-nav .nav-link {
@@ -258,6 +265,21 @@
     padding-bottom: 20px;
     /* Space from bottom */
     width: 100%;
+
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+    transform-origin: top;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 

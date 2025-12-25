@@ -11,30 +11,35 @@ export function AppHeader() {
     const navigate = useNavigate()
     const location = useLocation()
 
-
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
 
     const [isScrolled, setIsScrolled] = useState(false)
     const [isSearchExpanded, setIsSearchExpanded] = useState(false)
 
-
+    const scrollLockRef = useRef(false)
     const menuRef = useRef(null)
     const user = useSelector(storeState => storeState.userModule.user)
 
     useEffect(() => {
         function handleScroll() {
-            if (window.scrollY > 0) {
-                setIsScrolled(true)
-                setIsSearchExpanded(false)
-            } else {
-                setIsScrolled(false)
-            }
+            setIsScrolled(window.scrollY > 0)
         }
-
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
+
+    useEffect(() => {
+        if (!isSearchExpanded) return
+
+        function onScroll() {
+            if (scrollLockRef.current) return
+            setIsSearchExpanded(false)
+        }
+
+        window.addEventListener('scroll', onScroll)
+        return () => window.removeEventListener('scroll', onScroll)
+    }, [isSearchExpanded])
 
     useEffect(() => {
         if (location.pathname === '/') {
@@ -46,7 +51,17 @@ export function AppHeader() {
         }
     }, [location.pathname])
 
+    function onToggleSearch() {
 
+        scrollLockRef.current = true
+
+        setIsSearchExpanded(true)
+
+
+        setTimeout(() => {
+            scrollLockRef.current = false
+        }, 250)
+    }
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -54,10 +69,7 @@ export function AppHeader() {
                 setIsMenuOpen(false)
             }
         }
-
-        if (isMenuOpen) {
-            document.addEventListener('mousedown', handleClickOutside)
-        }
+        if (isMenuOpen) document.addEventListener('mousedown', handleClickOutside)
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [isMenuOpen])
 
@@ -72,7 +84,6 @@ export function AppHeader() {
         }
     }
 
-    // Hide search bar on profile page
     const isUserProfile = location.pathname.includes('/user/profile')
     const isHomePage = location.pathname === '/'
 
@@ -80,13 +91,11 @@ export function AppHeader() {
 
     const showSmallSearch = !isUserProfile && !showLargeSearch
 
-    const headerClass = `app-header full ${!showLargeSearch ? 'compact' : ''}`
-
     return (
-        <header className={headerClass}>
+        <header className={`app-header full ${!showLargeSearch ? 'compact' : ''}`}>
             <div className="header-container">
 
-                {/* Top Row: Logo, Nav/CollapsedSearch, User Actions */}
+                {/* Top Row */}
                 <div className="header-top">
                     <div className="logo">
                         <Link to="/">
@@ -97,16 +106,17 @@ export function AppHeader() {
                     {!isUserProfile && (
                         <nav className="main-nav">
                             {showSmallSearch ? (
-                                <StaySearchCollapsed onToggleSearch={() => setIsSearchExpanded(true)} />
+                                <StaySearchCollapsed onToggleSearch={onToggleSearch} />
                             ) : (
                                 <NavLink to="/" className="nav-link">
                                     <video
-                                        className="simi9jf atm_jp_1f51e7f atm_jr_1h6ojuz atm_vy_1osqo2v atm_e2_1osqo2v atm_tr_18ws4an atm_mj_glywfm slt01p9 atm_mk_stnw88 atm_tk_idpfg4 atm_fq_idpfg4 stz1the atm_k4_kb7nvz dir dir-ltr"
+                                        className="logo-video"
                                         playsInline
                                         poster="https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-search-bar-icons/original/4aae4ed7-5939-4e76-b100-e69440ebeae4.png?im_w=240"
                                         preload="auto"
+                                        style={{ width: '65px', height: '65px' }}
                                     ></video>
-                                    Homes
+                                    <span style={{ fontWeight: 600 }}>Homes</span>
                                 </NavLink>
                             )}
                         </nav>
@@ -114,7 +124,6 @@ export function AppHeader() {
 
                     <div className="user-actions">
                         <button className="host-btn">Become a Host</button>
-
                         <div className="user-avatar-placeholder" onClick={() => navigate('/user/profile')}>
                             {user && user.imgUrl ? (
                                 <img src={user.imgUrl} alt={user.fullname} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
@@ -149,6 +158,7 @@ export function AppHeader() {
                     </div>
                 </div>
 
+                {/* Bottom Row */}
                 {showLargeSearch && (
                     <div className="header-bottom">
                         <StaySearch />
