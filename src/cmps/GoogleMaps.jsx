@@ -19,8 +19,7 @@ export function GoogleMap({ stays, fromDate, toDate }) {
             const bounds = new google.maps.LatLngBounds()
             stays.forEach((stay) => bounds.extend(fixLoc(stay.loc)))
             map.fitBounds(bounds)
-
-        }, [map, stays]) 
+        }, [map, stays])
 
         useEffect(() => {
             if (selectedStay && map) {
@@ -61,7 +60,12 @@ export function GoogleMap({ stays, fromDate, toDate }) {
                         {selectedStay && (
                             <AdvancedMarker position={fixLoc(selectedStay.loc)}>
                                 <div className="map-stay-preview">
-                                    <button className="close-marker">
+                                    <button
+                                        className="close-marker"
+                                        onClick={(event) => {
+                                            event.stopPropagation()
+                                            event.preventDefault()
+                                        }}>
                                         <ClearIcon onClick={() => setSelectedStay(null)} />
                                     </button>
                                     <StayPreview
