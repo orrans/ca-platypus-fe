@@ -37,6 +37,10 @@
             background-color: black;
             color: white;
         }
+
+        .house-marker {
+            margin-bottom: -2px;
+        }
     }
 
     .map-stay-preview {
@@ -82,7 +86,6 @@
             border-radius: 50%;
             width: 30px;
             height: 30px;
-            
         }
 
         .stay-inner-img {

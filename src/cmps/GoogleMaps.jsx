@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react'
 import { formatPrice } from '../services/util.service'
 import { StayPreview } from './StayPreview'
 import { ClearIcon } from './icons/ClearIcon.jsx'
+import { HouseIcon } from './icons/HouseIcon.jsx'
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
-export function GoogleMap({ stays, fromDate, toDate }) {
+export function GoogleMap({ stays, fromDate = new Date(), toDate = new Date(), wishlist = false }) {
     const [selectedStay, setSelectedStay] = useState(null)
     const days = differenceInDays(toDate, fromDate)
 
@@ -53,7 +54,7 @@ export function GoogleMap({ stays, fromDate, toDate }) {
                                     className={`map-marker ${
                                         selectedStay?._id === stay._id ? 'selected-marker' : ''
                                     }`}>
-                                    {formatPrice(stay.price * days)}
+                                    {wishlist ? <HouseIcon className={'house-marker'}/> : formatPrice(stay.price * days)}
                                 </div>
                             </AdvancedMarker>
                         ))}
@@ -73,6 +74,7 @@ export function GoogleMap({ stays, fromDate, toDate }) {
                                         fromDate={fromDate}
                                         toDate={toDate}
                                         variant="explore"
+                                        showPrice={!wishlist}
                                     />
                                 </div>
                             </AdvancedMarker>
