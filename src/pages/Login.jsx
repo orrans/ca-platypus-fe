@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useLocation } from 'react-router'
 
 import { userService } from '../services/user'
 import { login } from '../store/actions/user.actions.js'
@@ -9,6 +9,7 @@ export function Login() {
     const [credentials, setCredentials] = useState(userService.getEmptyUser())
 
     const navigate = useNavigate()
+    const location = useLocation()
 
     useEffect(() => {
         loadUsers()
@@ -23,10 +24,13 @@ export function Login() {
         if (ev) ev.preventDefault()
         if (!credentials.username) return
 
+    
         try {
             const userCreds = { ...credentials, password: 'mySecretPassword' }
             await login(userCreds)
-            navigate('/')
+            const backToUrl = location.state?.from || '/'
+            navigate(backToUrl, { replace: true })
+
         } catch (err) {
             console.log('Login failed', err)
         }

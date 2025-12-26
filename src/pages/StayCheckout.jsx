@@ -39,39 +39,12 @@ export function StayCheckout() {
     setStay(stay)
   }
 
-// async function onConfirmBooking() {
-//   try {
-//     const order = orderService.getEmptyOrder()
-
-//     order.startDate = checkIn
-//     order.endDate = checkOut
-//     order.totalPrice = totalPrice
-
-//     order.guests.adults = guests
-
-//     order.stay._id = stay._id
-//     order.stay.name = stay.name
-//     order.stay.price = pricePerNight
-
-//     order.hostId._id = stay.host._id
-//     order.hostId.fullname = stay.host.fullname
-
-//     order.guest._id = 'u101'
-//     order.guest.fullname = 'User Name'
-
-//     await orderService.save(order)
-//     setIsSuccessOpen(true)
-
-//   } catch (err) {
-//     console.error('Had issues booking:', err)
-//     alert('Could not complete booking')
-//   }
-// }
-
 async function onConfirmBooking() {
   try {
-    if (!user) return navigate('/login')
-
+    if (!user) {
+return navigate('/login', { state: { from: location.pathname } })
+    }
+    
     const order = orderService.getEmptyOrder()
 
     order.startDate = checkIn
