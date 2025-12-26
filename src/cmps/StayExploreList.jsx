@@ -25,7 +25,7 @@ export function StayExploreList({ stays, title }) {
         <section className="explore-list-container">
             <div className="stay-list-title-row">
                 <h2>
-                    <Link>
+                    <Link to={`/stay?loc=${displayedStays[0]?.loc.city || ''}, ${displayedStays[0]?.loc.country || ''}`}>
                         {stayType[getRandomIntInclusive(0, stayType.length - 1)]} in {displayedStays[0]?.loc.city}
                         <ChevronRightIcon strokeWidth={5.33333} />
                     </Link>
