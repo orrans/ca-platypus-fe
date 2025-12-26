@@ -157,7 +157,7 @@ export function AppHeader() {
                                     <div className="user-nav-modal">
                                         {user ? (
                                             <>
-                                                <Link to="#" className="nav-item">Wishlists</Link>
+                                                <Link to="/wishlist" className="nav-item">Wishlists</Link>
                                                 <Link to="#" className="nav-item">Trips</Link>
                                                 <Link to="/user/profile" onClick={() => setIsMenuOpen(false)} className="nav-item">Profile</Link>
                                                 <div className="divider"></div>
