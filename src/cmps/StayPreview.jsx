@@ -10,7 +10,7 @@ import { formatPrice, getRandomIntInclusive } from '../services/util.service'
 import { useSelector } from 'react-redux'
 import { addToWishlist, removeFromWishlist } from '../store/actions/user.actions'
 
-export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
+export function StayPreview({ stay, fromDate, toDate, variant = 'explore', showPrice = true }) {
     const wishlist = useSelector((state) => state.userModule.user?.wishlist) || []
     const days = differenceInDays(toDate, fromDate)
     const isFavorite = wishlist.includes(stay._id)
@@ -89,12 +89,14 @@ export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
                                 {stay.bedrooms} bedroom{stay.bedrooms !== 1 ? 's' : ''}&nbsp;·&nbsp;
                                 {stay.bathrooms} bathroom{stay.bathrooms !== 1 ? 's' : ''}
                             </span>
-                            <span>
-                                <span className="filtered-price">
-                                    {formatPrice(stay.price * days)}
-                                </span>{' '}
-                                for {days} nights
-                            </span>
+                            {showPrice && (
+                                <span>
+                                    <span className="filtered-price">
+                                        {formatPrice(stay.price * days)}
+                                    </span>{' '}
+                                    for {days} nights
+                                </span>
+                            )}
                         </div>
                     </>
                 )}
@@ -108,9 +110,11 @@ export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
                                 {format(fromDate, shortDateFmt)} - {format(toDate, 'dd')}
                             </span>
                             <div>
-                                <span>
-                                    {formatPrice(stay.price * days)} for {days} nights
-                                </span>
+                                {showPrice && (
+                                    <span>
+                                        {formatPrice(stay.price * days)} for {days} nights
+                                    </span>
+                                )}
                                 &nbsp;·&nbsp;
                                 <span>
                                     <StarIcon />

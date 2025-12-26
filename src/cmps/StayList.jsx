@@ -1,6 +1,6 @@
 import { StayPreview } from './StayPreview.jsx'
 
-export function StayList({ stays, fromDate, toDate, location }) {
+export function StayList({ stays, fromDate, toDate, location, showPrice = true }) {
     // const fromDate = new Date()
     // const toDate = new Date()
     // toDate.setDate(toDate.getDate() + 2)
@@ -18,6 +18,7 @@ export function StayList({ stays, fromDate, toDate, location }) {
                             fromDate={fromDate}
                             toDate={toDate}
                             variant="filtered"
+                            showPrice={showPrice}
                         />
                     </li>
                 ))}

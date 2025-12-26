@@ -12,6 +12,7 @@ import { OrderList } from './cmps/OrderList.jsx'
 import { ListingList } from './cmps/ListingList.jsx'
 import { ListingForm } from './pages/ListingForm.jsx'
 import ScrollToTop from './cmps/ScrollToTop.jsx'
+import { WishList } from './pages/WishList.jsx'
 
 export function RootCmp() {
     return (
@@ -32,6 +33,7 @@ export function RootCmp() {
                     <Route path="/listings" element={<ListingList />} />
                     <Route path="/listings/create" element={<ListingForm />} />
                     <Route path="/listings/:stayId" element={<ListingForm />} />
+                    <Route path="/wishlist" element={<WishList />} />
                 </Routes>
             </main>
             <AppFooter />

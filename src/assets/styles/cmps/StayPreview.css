@@ -72,7 +72,7 @@
             position: absolute;
             inset: 0;
             width: 100%;
-            z-index: 5;
+            
 
             .favorite-icon-container {
                 position: absolute;
@@ -80,6 +80,7 @@
                 top: 12px;
                 cursor: pointer;
                 transition: transform 0.3s;
+                z-index: 5;
 
                 &:hover {
                     transform: scale(1.1);
