@@ -25,6 +25,15 @@ export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
         'Chalet',
     ]
     const [randomStayType] = useState(stayType[getRandomIntInclusive(0, stayType.length - 1)])
+    const [randomRating] = useState(() => {
+        const integerPart = getRandomIntInclusive(3, 5)
+        if (integerPart === 5) {
+            return '5.0'
+        }
+        const decimalPart = getRandomIntInclusive(7, 98)
+        return `${integerPart}.${decimalPart}`
+    })
+    const [randomReviewCount] = useState(getRandomIntInclusive(20, 500))
 
     return (
         // <Link to={`/stay/${stay._id}`} target="_blank" className="stay-preview">
@@ -68,7 +77,7 @@ export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
                             {stay.loc.city}
                             <span className="filtered-rating">
                                 <StarIcon size={12} />
-                                &nbsp;4.93&nbsp;(509)
+                                &nbsp;{randomRating}&nbsp;({randomReviewCount})
                             </span>
                         </h4>
                         <div className="filtered-summary">
@@ -103,7 +112,7 @@ export function StayPreview({ stay, fromDate, toDate, variant = 'explore' }) {
                                 &nbsp;·&nbsp;
                                 <span>
                                     <StarIcon />
-                                    &nbsp;4.93
+                                    &nbsp;{randomRating}
                                 </span>
                             </div>
                         </div>
