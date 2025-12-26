@@ -1,5 +1,5 @@
 .stay-index {
-    --header-height: 169px;
+    --header-height: 80px;
     display: flex;
     align-items: flex-start;
 }
