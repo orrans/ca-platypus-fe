@@ -1,5 +1,6 @@
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { stayService } from '../services/stay'
 import { ReserveBackIcon } from '../cmps/icons/ReserveBackIcon'
 import { orderService } from '../services/order'
@@ -12,6 +13,7 @@ export function StayCheckout() {
   const { stayId } = useParams()
   const navigate = useNavigate()
   const [stay, setStay] = useState(null)
+  const user = useSelector(storeState => storeState.userModule.user)
   const [isSuccessOpen, setIsSuccessOpen] = useState(false)
 
     const location = useLocation()
@@ -37,25 +39,55 @@ export function StayCheckout() {
     setStay(stay)
   }
 
+// async function onConfirmBooking() {
+//   try {
+//     const order = orderService.getEmptyOrder()
+
+//     order.startDate = checkIn
+//     order.endDate = checkOut
+//     order.totalPrice = totalPrice
+
+//     order.guests.adults = guests
+
+//     order.stay._id = stay._id
+//     order.stay.name = stay.name
+//     order.stay.price = pricePerNight
+
+//     order.hostId._id = stay.host._id
+//     order.hostId.fullname = stay.host.fullname
+
+//     order.guest._id = 'u101'
+//     order.guest.fullname = 'User Name'
+
+//     await orderService.save(order)
+//     setIsSuccessOpen(true)
+
+//   } catch (err) {
+//     console.error('Had issues booking:', err)
+//     alert('Could not complete booking')
+//   }
+// }
+
 async function onConfirmBooking() {
   try {
+    if (!user) return navigate('/login')
+
     const order = orderService.getEmptyOrder()
 
     order.startDate = checkIn
     order.endDate = checkOut
     order.totalPrice = totalPrice
 
-    order.guests.adults = guests
+    order.guests = guests 
 
     order.stay._id = stay._id
     order.stay.name = stay.name
     order.stay.price = pricePerNight
 
-    order.hostId._id = stay.host._id
-    order.hostId.fullname = stay.host.fullname
+    order.hostId = stay.host._id 
 
-    order.guest._id = 'u101'
-    order.guest.fullname = 'User Name'
+    order.guest._id = user._id
+    order.guest.fullname = user.fullname
 
     await orderService.save(order)
     setIsSuccessOpen(true)
