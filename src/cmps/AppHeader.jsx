@@ -29,6 +29,24 @@ export function AppHeader() {
     }, [])
 
     useEffect(() => {
+        if (!isSearchExpanded) return
+
+        function onScrollClose() {
+            setIsSearchExpanded(false)
+            setIsOverlayOpen(false)
+        }
+
+        const timeoutId = setTimeout(() => {
+            window.addEventListener('scroll', onScrollClose, { passive: true })
+        }, 300)
+
+        return () => {
+            clearTimeout(timeoutId)
+            window.removeEventListener('scroll', onScrollClose)
+        }
+    }, [isSearchExpanded])
+
+    useEffect(() => {
         if (location.pathname === '/') {
             setIsScrolled(false)
             setIsSearchExpanded(false)
@@ -46,6 +64,11 @@ export function AppHeader() {
 
     function onSearchFocus(isActive) {
         setIsOverlayOpen(isActive)
+    }
+
+    function onSearchCompleted() {
+        setIsSearchExpanded(false)
+        setIsOverlayOpen(false)
     }
 
     function onOverlayClick() {
@@ -153,7 +176,9 @@ export function AppHeader() {
 
                     {showLargeSearch && (
                         <div className="header-bottom">
-                            <StaySearch onSearchFocus={onSearchFocus} />
+                            <StaySearch onSearchFocus={onSearchFocus}
+                                onSearchCompleted={onSearchCompleted}
+                            />
                         </div>
                     )}
 
