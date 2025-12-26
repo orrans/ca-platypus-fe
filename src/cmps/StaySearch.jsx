@@ -16,7 +16,7 @@ const POPULAR_DESTINATIONS = [
     'Barcelona, Spain',
 ]
 
-export function StaySearch({ onSearchFocus }) {
+export function StaySearch({ onSearchFocus, onSearchCompleted }) {
     const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
     const [loc, setLoc] = useState(filterBy.loc || '')
     const [dateRange, setDateRange] = useState({
@@ -183,6 +183,7 @@ export function StaySearch({ onSearchFocus }) {
             pathname: '/stay',
             search: `?${createSearchParams(params)}`,
         }, { replace: true })
+        if (onSearchCompleted) onSearchCompleted()
     }
 
     function formatDate(date) {

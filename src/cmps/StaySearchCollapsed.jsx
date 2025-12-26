@@ -6,7 +6,7 @@ export function StaySearchCollapsed({ onToggleSearch }) {
 
     const locationText = filterBy.loc || 'Anywhere'
 
-    let dateText = 'Any week'
+    let dateText = 'Anytime'
     if (filterBy.checkIn && filterBy.checkOut) {
         const start = new Date(filterBy.checkIn)
         const end = new Date(filterBy.checkOut)
@@ -26,7 +26,7 @@ export function StaySearchCollapsed({ onToggleSearch }) {
                 <span className="search-text-segment strong">{dateText}</span>
                 <span className="divider"></span>
                 <div className="guest-segment">
-                    <span className={`search-text-segment ${totalGuests ? 'strong' : 'placeholder'}`}>
+                    <span className={`search-text-segment strong`}>
                         {guestText}
                     </span>
                     <div className="search-icon-wrapper">
