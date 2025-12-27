@@ -12,22 +12,23 @@ export function UserTrips() {
         if (user) loadOrders()
     }, [user])
 
-    async function loadOrders() {
-    try {
-        const filterBy = { buyerId: user._id }
-        const userOrders = await orderService.query(filterBy)
 
-        const sortedOrders = [...userOrders].sort((a, b) => {
-            const dateA = new Date(a.bookDate).getTime()
-            const dateB = new Date(b.bookDate).getTime()
-            return dateB - dateA
-        })
+async function loadOrders() {
+        try {
+            const allOrders = await orderService.query()
+            const userOrders = allOrders.filter(order => order.guest._id === user._id)
 
-        setOrders(sortedOrders)
-    } catch (err) {
-        console.error('Cannot load orders', err)
+            const sortedOrders = userOrders.sort((a, b) => {
+                const dateA = new Date(a.bookDate).getTime()
+                const dateB = new Date(b.bookDate).getTime()
+                return dateB - dateA
+            })
+
+            setOrders(sortedOrders)
+        } catch (err) {
+            console.error('Cannot load orders', err)
+        }
     }
-}
 
     if (!orders.length) return (
     <section className="user-trips-page main-container">
