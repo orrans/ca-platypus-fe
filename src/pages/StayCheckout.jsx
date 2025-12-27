@@ -6,6 +6,8 @@ import { ReserveBackIcon } from '../cmps/icons/ReserveBackIcon'
 import { orderService } from '../services/order'
 import { formatGuests } from '../services/util.service'
 import { PlatypusLoader } from '../cmps/PlatypusLoader'
+import { LoginModal } from '../cmps/LoginModal.jsx'
+import { ReservationSuccessModal } from '../cmps/ReservationSuccessModal'
 
 // import { userService } from '../services/user.service.js' 
 
@@ -18,6 +20,7 @@ export function StayCheckout() {
 
     const location = useLocation()
   const bookingState = location.state || {}
+  const [isLoginOpen, setIsLoginOpen] = useState(false)
 
   const {
     checkIn,
@@ -42,29 +45,26 @@ export function StayCheckout() {
 async function onConfirmBooking() {
   try {
     if (!user) {
-return navigate('/login', { 
-        state: { 
-          from: location.pathname, 
-          ...bookingState 
-        } 
-      })
+      setIsLoginOpen(true)
+      return
     }
-    
+
     const order = orderService.getEmptyOrder()
 
     order.startDate = checkIn
     order.endDate = checkOut
     order.totalPrice = totalPrice
-
-    order.guests = guests 
-
+    order.guests = guests
     order.stay._id = stay._id
     order.stay.name = stay.name
     order.stay.price = pricePerNight
-
     order.stay.imgUrl = stay.imgUrls[0]
 
-    order.hostId = stay.host._id 
+    order.hostId = {
+      _id: stay.host._id,
+      fullname: stay.host.fullname || '',
+      imgUrl: stay.host.imgUrl || ''
+    }
 
     order.guest._id = user._id
     order.guest.fullname = user.fullname
@@ -77,7 +77,6 @@ return navigate('/login', {
     alert('Could not complete booking')
   }
 }
-
 
   if (!stay) return  <PlatypusLoader size={72} />
 
@@ -156,23 +155,16 @@ return navigate('/login', {
         </div>
       </div>
 
+
 {isSuccessOpen && (
-  <div className="modal-overlay">
-    <div className="success-modal">
-      <button
-        className="close-btn"
-        onClick={() => {
-          setIsSuccessOpen(false)
-          navigate('/trips')
-        }}
-      >
-        ✕
-      </button>
-      <h2>Payment successful!</h2>
-    </div>
-  </div>
+    <ReservationSuccessModal 
+        stay={stay} 
+        bookingState={bookingState} 
+        onClose={() => setIsSuccessOpen(false)} 
+    />
 )}
 
+{isLoginOpen && <LoginModal onClose={() => setIsLoginOpen(false)} />}
     </section>
   )
 }
