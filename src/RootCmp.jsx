@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { StayIndex } from './pages/StayIndex.jsx'
 import { AppHeader } from './cmps/AppHeader'
 import { AppFooter } from './cmps/AppFooter'
@@ -14,6 +14,7 @@ import { ListingForm } from './pages/ListingForm.jsx'
 import ScrollToTop from './cmps/ScrollToTop.jsx'
 import { WishList } from './pages/WishList.jsx'
 import { UserTrips } from './pages/UserTrips.jsx'
+import { Dashboard } from './pages/Dashboard.jsx'
 
 export function RootCmp() {
     return (
@@ -30,7 +31,11 @@ export function RootCmp() {
                     <Route path="/stay" element={<SearchResults />} />
                     <Route path="/user/profile" element={<UserProfile />} />
                     <Route path="/login" element={<Login />} />
-                    <Route path="/orders" element={<OrderList />} />
+                    <Route path="/dashboard" element={<Dashboard />}>
+                        <Route index element={<Navigate to="orders" replace />} />
+                        <Route path="orders" element={<OrderList />} />
+                        <Route path="listing" element={<ListingList />} />
+                    </Route>
                     <Route path="/trips" element={<UserTrips />} />
                     <Route path="/listings" element={<ListingList />} />
                     <Route path="/listings/create" element={<ListingForm />} />
