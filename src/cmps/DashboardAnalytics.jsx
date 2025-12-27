@@ -24,7 +24,6 @@ export function DashboardAnalytics() {
     }, [orders.length])
 
     function prepareChartData(orders) {
-        // Generate last 5 months dynamically (current month + 4 previous)
         const months = []
         const monthLabels = []
         const now = new Date()
