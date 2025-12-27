@@ -158,7 +158,7 @@ export function AppHeader() {
                                         {user ? (
                                             <>
                                                 <Link to="/wishlist" className="nav-item">Wishlists</Link>
-                                                <Link to="#" className="nav-item">Trips</Link>
+                                                <Link to="/trips" onClick={() => setIsMenuOpen(false)} className="nav-item">Trips</Link>
                                                 <Link to="/user/profile" onClick={() => setIsMenuOpen(false)} className="nav-item">Profile</Link>
                                                 <div className="divider"></div>
                                                 <Link to="#" onClick={onLogout} className="nav-item">Log out</Link>
