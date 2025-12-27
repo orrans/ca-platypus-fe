@@ -7,6 +7,7 @@ import { orderService } from '../services/order'
 import { formatGuests } from '../services/util.service'
 import { PlatypusLoader } from '../cmps/PlatypusLoader'
 import { LoginModal } from '../cmps/LoginModal.jsx'
+import { ReservationSuccessModal } from '../cmps/ReservationSuccessModal'
 
 // import { userService } from '../services/user.service.js' 
 
@@ -40,50 +41,6 @@ export function StayCheckout() {
     const stay = await stayService.getById(stayId)
     setStay(stay)
   }
-
-// async function onConfirmBooking() {
-//   try {
-//     if (!user) {
-//       setShowLoginComponent(true);
-// return navigate('/login', { 
-//         state: { 
-//           from: location.pathname, 
-//           ...bookingState 
-//         } 
-//       })
-//     }
-    
-//     const order = orderService.getEmptyOrder()
-
-//     order.startDate = checkIn
-//     order.endDate = checkOut
-//     order.totalPrice = totalPrice
-
-//     order.guests = guests 
-
-//     order.stay._id = stay._id
-//     order.stay.name = stay.name
-//     order.stay.price = pricePerNight
-
-//     order.stay.imgUrl = stay.imgUrls[0]
-
-//     order.hostId = {
-//     _id: stay.host._id,
-//     fullname: stay.host.fullname || '',
-//     imgUrl: stay.host.imgUrl || ''
-// }
-
-//     order.guest._id = user._id
-//     order.guest.fullname = user.fullname
-
-//     await orderService.save(order)
-//     setIsSuccessOpen(true)
-
-//   } catch (err) {
-//     console.error('Had issues booking:', err)
-//     alert('Could not complete booking')
-//   }
-// }
 
 async function onConfirmBooking() {
   try {
@@ -198,25 +155,16 @@ async function onConfirmBooking() {
         </div>
       </div>
 
+
 {isSuccessOpen && (
-  <div className="modal-overlay">
-    <div className="success-modal">
-      <button
-        className="close-btn"
-        onClick={() => {
-          setIsSuccessOpen(false)
-          navigate('/trips')
-        }}
-      >
-        ✕
-      </button>
-      <h2>Payment successful!</h2>
-    </div>
-  </div>
+    <ReservationSuccessModal 
+        stay={stay} 
+        bookingState={bookingState} 
+        onClose={() => setIsSuccessOpen(false)} 
+    />
 )}
 
 {isLoginOpen && <LoginModal onClose={() => setIsLoginOpen(false)} />}
-
     </section>
   )
 }
