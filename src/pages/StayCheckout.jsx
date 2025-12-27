@@ -41,50 +41,6 @@ export function StayCheckout() {
     setStay(stay)
   }
 
-// async function onConfirmBooking() {
-//   try {
-//     if (!user) {
-//       setShowLoginComponent(true);
-// return navigate('/login', { 
-//         state: { 
-//           from: location.pathname, 
-//           ...bookingState 
-//         } 
-//       })
-//     }
-    
-//     const order = orderService.getEmptyOrder()
-
-//     order.startDate = checkIn
-//     order.endDate = checkOut
-//     order.totalPrice = totalPrice
-
-//     order.guests = guests 
-
-//     order.stay._id = stay._id
-//     order.stay.name = stay.name
-//     order.stay.price = pricePerNight
-
-//     order.stay.imgUrl = stay.imgUrls[0]
-
-//     order.hostId = {
-//     _id: stay.host._id,
-//     fullname: stay.host.fullname || '',
-//     imgUrl: stay.host.imgUrl || ''
-// }
-
-//     order.guest._id = user._id
-//     order.guest.fullname = user.fullname
-
-//     await orderService.save(order)
-//     setIsSuccessOpen(true)
-
-//   } catch (err) {
-//     console.error('Had issues booking:', err)
-//     alert('Could not complete booking')
-//   }
-// }
-
 async function onConfirmBooking() {
   try {
     if (!user) {
@@ -198,25 +154,72 @@ async function onConfirmBooking() {
         </div>
       </div>
 
+
 {isSuccessOpen && (
-  <div className="modal-overlay">
-    <div className="success-modal">
-      <button
-        className="close-btn"
-        onClick={() => {
-          setIsSuccessOpen(false)
-          navigate('/trips')
-        }}
-      >
-        ✕
-      </button>
-      <h2>Payment successful!</h2>
-    </div>
-  </div>
-)}
+        <div className="modal-overlay">
+          <div className="success-modal reservation-success-modal">
+            <header className="modal-header">
+              <div className="success-icon">✓</div>
+              <h2>Reserved successfully</h2>
+            </header>
 
-{isLoginOpen && <LoginModal onClose={() => setIsLoginOpen(false)} />}
+            <p className="modal-subtitle">
+              You can follow the order status in <span onClick={() => navigate('/trips')}>My trips</span> page
+            </p>
 
+            <div className="reservation-content">
+              <div className="reservation-details">
+                <h3 className="main-title">Reservation details</h3>
+
+                <div className="detail-item">
+                  <span className="detail-label">Trip dates</span>
+                  <p className="detail-value">{new Date(checkIn).toLocaleDateString('en-GB')} - {new Date(checkOut).toLocaleDateString('en-GB')}</p>
+                </div>
+
+                <div className="detail-item">
+                  <span className="detail-label">Guests</span>
+                  <p className="detail-value">{formatGuests(guests)}</p>
+                </div>
+
+                <div className="detail-item price-details-section">
+                  <hr className="modal-divider" />
+                  <span className="detail-label">Price Details</span>
+                  <div className="price-line">
+                    <span className="detail-value">${pricePerNight} x {nights} nights</span>
+                    <span className="detail-value">${totalPrice}</span>
+                  </div>
+                  <div className="price-line">
+                    <span className="detail-value">Service fee</span>
+                    <span className="detail-value">$0</span>
+                  </div>
+
+                  <div className="price-total-line">
+                    <span className="detail-label">Total</span>
+                    <span className="detail-label">${totalPrice}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="reservation-preview-img">
+                <img src={stay.imgUrls[0]} alt={stay.name} />
+                <div className="img-caption">
+                  <h4>{stay.name}</h4>
+                  <p>{stay.loc.city}, {stay.loc.country}</p>
+                </div>
+              </div>
+            </div>
+
+            <button className="close-modal-btn" onClick={() => {
+              setIsSuccessOpen(false)
+              navigate('/trips')
+            }}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {isLoginOpen && <LoginModal onClose={() => setIsLoginOpen(false)} />}
     </section>
   )
 }
