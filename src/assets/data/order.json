@@ -82,7 +82,8 @@
         "stay": {
             "_id": "622f337a75c7d36e498aaafa",
             "name": "M&M Space MM2  Apartamento no centro da cidade",
-            "price": 65
+            "price": 65,
+            "imgUrl": "http://res.cloudinary.com/dmtlr2viw/image/upload/v1663436861/xrxhgsif3ekhxgn8irlm.jpg"
         },
         "msgs": [],
         "status": "approved"
@@ -110,7 +111,8 @@
         "stay": {
             "_id": "622f337a75c7d36e498aaafb",
             "name": "Fresh and modern 1BR in Bed-Stuy",
-            "price": 79
+            "price": 79,
+            "imgUrl": "http://res.cloudinary.com/dmtlr2viw/image/upload/v1663436912/xle8ueqxjeazbs4bp09p.jpg"
         },
         "msgs": [],
         "status": "pending"
@@ -138,7 +140,8 @@
         "stay": {
             "_id": "622f337a75c7d36e498aaafc",
             "name": "Habitación centro de Barcelona",
-            "price": 40
+            "price": 40,
+            "imgUrl": "http://res.cloudinary.com/dmtlr2viw/image/upload/v1663436793/httqod38otalkzp9kynq.jpg"
         },
         "msgs": [],
         "status": "approved"
@@ -166,7 +169,8 @@
         "stay": {
             "_id": "622f337a75c7d36e498aaafd",
             "name": "DOUBLE ROOM IN THE HEART OF BCN",
-            "price": 25
+            "price": 25,
+            "imgUrl": "http://res.cloudinary.com/dmtlr2viw/image/upload/v1663436390/om97cgufeacwlric2r5w.jpg"
         },
         "msgs": [],
         "status": "rejected"
@@ -194,7 +198,8 @@
         "stay": {
             "_id": "622f337a75c7d36e498aaafe",
             "name": "Home, Sweet, Harlem. Welcome!",
-            "price": 110
+            "price": 110,
+            "imgUrl": "http://res.cloudinary.com/dmtlr2viw/image/upload/v1663436823/af6elioxovkhvp6cg1un.jpg"
         },
         "msgs": [],
         "status": "pending"
@@ -222,7 +227,8 @@
         "stay": {
             "_id": "622f337a75c7d36e498aaaff",
             "name": "Heroísmo IV",
-            "price": 29
+            "price": 29,
+            "imgUrl": "http://res.cloudinary.com/dmtlr2viw/image/upload/v1663436993/yzxnnw83e9qyas022au4.jpg"
         },
         "msgs": [],
         "status": "approved"
@@ -250,7 +256,8 @@
         "stay": {
             "_id": "622f337a75c7d36e498aab00",
             "name": "Monte dos Burgos - Cosy Room",
-            "price": 26
+            "price": 26,
+            "imgUrl": "http://res.cloudinary.com/dmtlr2viw/image/upload/v1663437241/wt0seud4ot4cmdrztdzz.jpg"
         },
         "msgs": [],
         "status": "pending"
@@ -278,7 +285,8 @@
         "stay": {
             "_id": "622f337a75c7d36e498aaaf8",
             "name": "Westin Kaanapali KORVN 2BR",
-            "price": 595
+            "price": 595,
+            "imgUrl": "http://res.cloudinary.com/dmtlr2viw/image/upload/v1663436321/g2cs1w7tkxsx58penq9j.jpg"
         },
         "msgs": [],
         "status": "approved"
@@ -306,7 +314,8 @@
         "stay": {
             "_id": "622f337a75c7d36e498aaafa",
             "name": "M&M Space MM2  Apartamento no centro da cidade",
-            "price": 65
+            "price": 65,
+            "imgUrl": "http://res.cloudinary.com/dmtlr2viw/image/upload/v1663436394/kscsvxyn0uro9tjhefeb.jpg"
         },
         "msgs": [],
         "status": "pending"
@@ -334,7 +343,8 @@
         "stay": {
             "_id": "622f337a75c7d36e498aaaf9",
             "name": "Belle chambre à côté Metro Papineau",
-            "price": 30
+            "price": 30,
+            "imgUrl": "http://res.cloudinary.com/dmtlr2viw/image/upload/v1663436380/ez5caladc00mgsssl6ws.jpg"
         },
         "msgs": [],
         "status": "rejected"
@@ -362,7 +372,8 @@
         "stay": {
             "_id": "622f337a75c7d36e498aaafb",
             "name": "Fresh and modern 1BR in Bed-Stuy",
-            "price": 79
+            "price": 79,
+            "imgUrl": "http://res.cloudinary.com/dmtlr2viw/image/upload/v1663436509/rii32aibnhkoeejsohie.jpg"
         },
         "msgs": [],
         "status": "approved"
@@ -390,7 +401,8 @@
         "stay": {
             "_id": "622f337a75c7d36e498aaafc",
             "name": "Habitación centro de Barcelona",
-            "price": 40
+            "price": 40,
+            "imgUrl": "http://res.cloudinary.com/dmtlr2viw/image/upload/v1663436864/ww1gixcmzwryfe1amps1.jpg"
         },
         "msgs": [],
         "status": "pending"
@@ -418,7 +430,8 @@
         "stay": {
             "_id": "622f337a75c7d36e498aaafe",
             "name": "Home, Sweet, Harlem. Welcome!",
-            "price": 110
+            "price": 110,
+            "imgUrl": "http://res.cloudinary.com/dmtlr2viw/image/upload/v1663436406/id1oo8krwgxvdf9s02qp.jpg"
         },
         "msgs": [],
         "status": "approved"
