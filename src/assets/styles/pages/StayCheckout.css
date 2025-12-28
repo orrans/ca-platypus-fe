@@ -7,7 +7,6 @@
     position: relative;
     max-width: 1100px;
     margin: 0 auto;
-    overflow-x: hidden;
 
     .back-btn {
         position: sticky;

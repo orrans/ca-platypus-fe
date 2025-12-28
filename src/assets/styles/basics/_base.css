@@ -9,14 +9,12 @@
 
 html {
     line-height: 1.6;
-    overflow-x: hidden;
     max-width: 100%;
 }
 
 body {
     margin: 0 auto;
     font-size: 1.125rem;
-    overflow-x: hidden;
     max-width: 100%;
 }
 
