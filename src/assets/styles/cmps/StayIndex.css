@@ -7,3 +7,10 @@
 .main-container main.stay-index {
     overflow: visible;
 }
+
+@media (max-width: 768px) {
+    .stay-index {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+}

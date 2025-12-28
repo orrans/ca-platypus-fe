@@ -45,3 +45,18 @@
 		color: var(--clr2);
 	}
 }
+
+@media (max-width: 768px) {
+	.login-form,
+	.signup-form {
+		width: min(90%, 100%);
+		padding: 1em;
+		max-width: 100%;
+		overflow-x: hidden;
+	}
+
+	.login-page nav {
+		margin-block: 50px 0.5em;
+		gap: 1em;
+	}
+}

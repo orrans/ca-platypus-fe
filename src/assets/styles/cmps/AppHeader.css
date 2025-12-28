@@ -307,9 +307,16 @@
     }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
+    .app-header {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+
     .app-header .header-container {
-        padding: 0 24px;
+        padding: 0 10px;
+        max-width: 100%;
+        overflow-x: hidden;
 
         .logo {
             flex: 0;
@@ -318,5 +325,10 @@
         .user-actions{
             flex:0;
         }
+    }
+
+    .app-header .header-bottom {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }

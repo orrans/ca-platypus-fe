@@ -3,6 +3,8 @@
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
     border-radius: 20px;
     padding: 20px;
+    max-width: 100%;
+    box-sizing: border-box;
 
     .card-guest {
         display: flex;
@@ -68,5 +70,20 @@
                 }
             }
         }
+    }
+}
+
+.order-count-card {
+    text-align: center;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+
+@media screen and (max-width: 768px) {
+    .order-card {
+        padding: 16px;
+        max-width: 100%;
+        overflow: hidden;
     }
 }

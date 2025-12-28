@@ -99,6 +99,40 @@
     max-width: 600px;
 }
 
+@media (max-width: 768px) {
+    .user-profile-page {
+        padding: 0 10px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .profile-layout {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .profile-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--clr-border);
+        padding-right: 0;
+        padding-bottom: 24px;
+        padding-top: 20px;
+    }
+
+    .profile-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 24px 16px;
+    }
+
+    .profile-content {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        max-width: 100%;
+    }
+}
+
 .profile-content h1 {
     font-size: 32px;
     font-weight: 700;

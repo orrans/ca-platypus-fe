@@ -98,4 +98,34 @@
 
 .airbnb-btn-pink:hover {
     background-color: #E31C5F;
+}
+
+@media (max-width: 768px) {
+    .user-trips-page {
+        padding: 20px 10px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .trip-row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px 0;
+    }
+
+    .img-container {
+        width: 100%;
+        height: 200px;
+    }
+
+    .trip-details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .airbnb-btn-pink {
+        margin-right: 0;
+        width: 100%;
+    }
 } */

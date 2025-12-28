@@ -3,6 +3,8 @@
     white-space: normal;
     flex-direction: column;
     gap: 8px;
+    max-width: 100%;
+    overflow: hidden;
     a {
         color: var(--clr4);
         padding: 0;

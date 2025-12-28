@@ -35,7 +35,7 @@ export function OrderList() {
     if (isMobile) {
         return (
             <div className="order-list-container">
-                <h3 className="order-count">{orders.length} reservations</h3>
+                <h3 className="order-count-card">{orders.length} reservations</h3>
                 {orders.map((order) => (
                     <OrderPreviewCard key={order._id} order={order} />
                 ))}

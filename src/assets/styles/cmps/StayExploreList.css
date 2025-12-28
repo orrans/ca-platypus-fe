@@ -36,6 +36,19 @@
     }
 }
 
+@media (max-width: 768px) {
+    .stay-explore-list {
+        --visible-cards: 2;
+        --card-gap: 16px;
+    }
+
+    .explore-list-container {
+        --padding: 10px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+}
+
 .explore-list-container {
     --padding: 26px;
 

@@ -201,12 +201,54 @@
   }
 }
 
-@media screen and (max-width: 800px) {
-  .dashboard-nav {
-    margin: 20px 0;
+@media screen and (max-width: 768px) {
+  .dashboard {
+    padding: 0 10px;
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
-  .dashboard {
-    padding: 0 20px;
+  .dashboard-nav {
+    margin: 20px 0;
+    overflow-x: hidden;
+  }
+
+  .dashboard-content {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .order-list-container,
+  .listing-list-container {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .order-count,
+  .listing-count {
+    padding: 0;
+  }
+
+  .dashboard-analytics {
+    padding: 0;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .dashboard-grid {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .dashboard-card {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  .orders-table,
+  .listings-table {
+    margin: 0;
+    overflow-x: auto;
+    max-width: 100%;
   }
 }

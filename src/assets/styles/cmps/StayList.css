@@ -24,3 +24,20 @@
         padding: 20px 32px 20px 12px;
     }
 }
+
+@media (max-width: 768px) {
+    .stay-list-container {
+        max-width: 100%;
+        overflow-x: hidden;
+
+        .stay-list-title {
+            padding: 20px 10px 0 10px;
+        }
+    }
+
+    .stay-list {
+        padding: 20px 10px;
+        gap: 24px;
+        max-width: 100%;
+    }
+}
