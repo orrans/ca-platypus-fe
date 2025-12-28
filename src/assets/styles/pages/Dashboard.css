@@ -50,8 +50,9 @@
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 24px;
   font-size: 18px;
+  margin-bottom: 50px;
 }
 
 .dashboard-card {
@@ -70,6 +71,39 @@
     margin-bottom: 1rem;
     color: #111827;
   }
+
+  &.full-width {
+    grid-column: 1 / -1;
+    max-height: 400px;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h2 {
+      margin-bottom: 0;
+    }
+
+    .month-income {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .income-label {
+        font-size: 0.9rem;
+        color: #6b7280;
+      }
+
+      .income-value {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: rgb(255, 56, 92);
+      }
+    }
+  }
 }
 
 .status-list {
@@ -87,20 +121,9 @@
 }
 
 .status-count {
-  font-size: 1.1rem;
-  font-weight: 600;
-
-  &.pending {
-    color: orange;
-  }
-
-  &.approved {
-    color: green;
-  }
-
-  &.rejected {
-    color: red;
-  }
+  font-size: 1rem;
+  font-weight: 500;
+    color: rgb(106, 106, 106);
 }
 
 .chart {

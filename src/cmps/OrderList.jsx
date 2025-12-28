@@ -32,7 +32,6 @@ export function OrderList() {
     
     return (
         <div className="order-list-container">
-            <DashboardAnalytics />
 
             <h3 className="order-count">{orders.length} reservations</h3>
             

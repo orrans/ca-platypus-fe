@@ -99,7 +99,52 @@ export function DashboardAnalytics() {
             ],
         }
 
-        return { revenueChartData, statusCount, listingChartData }
+        // Orders per day in current month
+        const currentMonth = new Date(now.getFullYear(), now.getMonth(), 1)
+        const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate()
+        const dailyOrders = {}
+        let currentMonthIncome = 0
+
+        orders.forEach((order) => {
+            const orderDate = new Date(order.bookDate)
+            if (orderDate.getMonth() === now.getMonth() && orderDate.getFullYear() === now.getFullYear()) {
+                const day = orderDate.getDate()
+                dailyOrders[day] = (dailyOrders[day] || 0) + 1
+                
+                if (order.status === 'approved') {
+                    currentMonthIncome += order.totalPrice
+                }
+            }
+        })
+
+        const dailyLabels = []
+        const dailyData = []
+        for (let i = 1; i <= daysInMonth; i++) {
+            dailyLabels.push(i.toString())
+            dailyData.push(dailyOrders[i] || 0)
+        }
+
+        const dailyOrdersChartData = {
+            labels: dailyLabels,
+            datasets: [
+                {
+                    label: 'Orders',
+                    data: dailyData,
+                    borderColor: 'rgb(255, 56, 92)',
+                    backgroundColor: 'rgba(255, 56, 92, 0.1)',
+                    tension: 0,
+                    fill: true,
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    pointHoverRadius: 5,
+                    pointBackgroundColor: 'rgb(255, 56, 92)',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                },
+            ],
+        }
+
+        return { revenueChartData, statusCount, listingChartData, dailyOrdersChartData, currentMonthIncome }
     }
 
     if (!chartData) return null
@@ -140,6 +185,17 @@ export function DashboardAnalytics() {
                     <h2>Reservations / listing</h2>
                     <Chart data={chartData.listingChartData} chartType="pie" />
                 </div>
+            </div>
+
+            <div className="dashboard-card full-width">
+                <div className="card-header">
+                    <h2>Orders per day - Current month</h2>
+                    <div className="month-income">
+                        <span className="income-label">Current Month Income:</span>
+                        <span className="income-value">${chartData.currentMonthIncome.toLocaleString()}</span>
+                    </div>
+                </div>
+                <Chart data={chartData.dailyOrdersChartData} chartType="line" />
             </div>
         </div>
     )

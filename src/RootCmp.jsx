@@ -15,6 +15,7 @@ import ScrollToTop from './cmps/ScrollToTop.jsx'
 import { WishList } from './pages/WishList.jsx'
 import { UserTrips } from './pages/UserTrips.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
+import { DashboardAnalytics } from './cmps/DashboardAnalytics.jsx'
 
 export function RootCmp() {
     return (
@@ -35,6 +36,7 @@ export function RootCmp() {
                         <Route index element={<Navigate to="orders" replace />} />
                         <Route path="orders" element={<OrderList />} />
                         <Route path="listing" element={<ListingList />} />
+                        <Route path="analytics" element={<DashboardAnalytics />} />
                     </Route>
                     <Route path="/trips" element={<UserTrips />} />
                     <Route path="/listings" element={<ListingList />} />

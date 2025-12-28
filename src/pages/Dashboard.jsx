@@ -11,6 +11,9 @@ export function Dashboard() {
         <NavLink to="listing" className={({ isActive }) => isActive ? 'active' : ''}>
           Listings
         </NavLink>
+        <NavLink to="analytics" className={({ isActive }) => isActive ? 'active' : ''}>
+          Analytics
+        </NavLink>
       </nav>
       <div className="dashboard-content">
         <Outlet />
