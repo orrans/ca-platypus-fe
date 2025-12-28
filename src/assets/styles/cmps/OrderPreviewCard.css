@@ -75,8 +75,9 @@
 
 .order-count-card {
     text-align: center;
-    margin-bottom: 12px;
-    font-weight: 600;
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 1.1rem;
 }
 
 
@@ -84,6 +85,5 @@
     .order-card {
         padding: 16px;
         max-width: 100%;
-        overflow: hidden;
     }
 }

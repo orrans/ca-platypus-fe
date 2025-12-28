@@ -8,6 +8,7 @@
 
 .dashboard-nav {
   display: flex;
+  flex-wrap: wrap;  
   justify-content: center;
   gap: 10px;
   margin: 32px 0;
@@ -17,10 +18,11 @@
     padding: 5px 10px;
     text-decoration: none;
     color: black;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 10px;
     border-bottom: none;
     transition: all 0.3s;
+    font-size: 1.2rem;
 
     &:hover {
       color: #111827;
@@ -154,7 +156,6 @@
   background: white;
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
   margin: 0 5px;
 
   table {
@@ -204,23 +205,19 @@
 @media screen and (max-width: 768px) {
   .dashboard {
     padding: 0 10px;
-    overflow-x: hidden;
     max-width: 100%;
   }
 
   .dashboard-nav {
-    margin: 20px 0;
-    overflow-x: hidden;
+    margin: 12px 0;
   }
 
   .dashboard-content {
-    overflow-x: hidden;
     max-width: 100%;
   }
 
   .order-list-container,
   .listing-list-container {
-    overflow-x: hidden;
     max-width: 100%;
   }
 
@@ -231,12 +228,10 @@
 
   .dashboard-analytics {
     padding: 0;
-    overflow-x: hidden;
     max-width: 100%;
   }
 
   .dashboard-grid {
-    overflow-x: hidden;
     max-width: 100%;
   }
 

@@ -93,7 +93,7 @@ export function DashboardAnalytics() {
                         'rgb(236, 72, 153)',
                         'rgb(219, 39, 119)',
                         'rgb(190, 18, 60)',
-                        'rgb(157, 23, 77)'
+                        'rgb(157, 23, 77)',
                     ],
                 },
             ],
@@ -107,10 +107,13 @@ export function DashboardAnalytics() {
 
         orders.forEach((order) => {
             const orderDate = new Date(order.bookDate)
-            if (orderDate.getMonth() === now.getMonth() && orderDate.getFullYear() === now.getFullYear()) {
+            if (
+                orderDate.getMonth() === now.getMonth() &&
+                orderDate.getFullYear() === now.getFullYear()
+            ) {
                 const day = orderDate.getDate()
                 dailyOrders[day] = (dailyOrders[day] || 0) + 1
-                
+
                 if (order.status === 'approved') {
                     currentMonthIncome += order.totalPrice
                 }
@@ -144,7 +147,13 @@ export function DashboardAnalytics() {
             ],
         }
 
-        return { revenueChartData, statusCount, listingChartData, dailyOrdersChartData, currentMonthIncome }
+        return {
+            revenueChartData,
+            statusCount,
+            listingChartData,
+            dailyOrdersChartData,
+            currentMonthIncome,
+        }
     }
 
     if (!chartData) return null
@@ -187,17 +196,19 @@ export function DashboardAnalytics() {
                     <h2>Reservations / listing</h2>
                     <Chart data={chartData.listingChartData} chartType="pie" />
                 </div>
-            </div>
 
-            <div className="dashboard-card full-width">
-                <div className="card-header">
-                    <h2>{currentMonthName} orders</h2>
-                    <div className="month-income">
-                        <span className="income-label">Monthly Income:</span>
-                        <span className="income-value">${chartData.currentMonthIncome.toLocaleString()}</span>
+                <div className="dashboard-card full-width">
+                    <div className="card-header">
+                        <h2>{currentMonthName} orders</h2>
+                        <div className="month-income">
+                            <span className="income-label">Monthly Income:</span>
+                            <span className="income-value">
+                                ${chartData.currentMonthIncome.toLocaleString()}
+                            </span>
+                        </div>
                     </div>
+                    <Chart data={chartData.dailyOrdersChartData} chartType="line" />
                 </div>
-                <Chart data={chartData.dailyOrdersChartData} chartType="line" />
             </div>
         </div>
     )
