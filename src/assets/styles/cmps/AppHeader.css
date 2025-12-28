@@ -254,7 +254,9 @@
 }
 
 .app-header .user-nav-modal .nav-item {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 12px;
     padding: 10px 16px;
     color: var(--clr-text-main);
     text-decoration: none;
