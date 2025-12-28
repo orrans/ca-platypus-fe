@@ -79,6 +79,7 @@
             height: unset;
             flex-direction: column;
             max-width: 100%;
+            gap: 20px;
         }
     }
 }
