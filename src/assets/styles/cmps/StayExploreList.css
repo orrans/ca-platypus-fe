@@ -2,6 +2,7 @@
     --total-columns: 8;
     --visible-cards: 7;
     --card-gap: 11px;
+    margin: 0;
 
     --card-width: calc(
         (100% - (var(--card-gap) * (var(--visible-cards) - 1))) / var(--visible-cards)
@@ -36,7 +37,7 @@
 }
 
 .explore-list-container {
-    --padding: 44px;
+    --padding: 46px;
 
     position: relative;
     padding: 0px var(--padding);
@@ -90,4 +91,5 @@
         margin-bottom: 0;
         text-decoration: none;
     }
+    margin-bottom: 15px;
 }
