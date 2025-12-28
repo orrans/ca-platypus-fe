@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 
-export function SpecialBtn({ txt, onClick, className = '' }) {
+export function SpecialBtn({ txt, onClick, className = '', disabled }) {
     const buttonRef = useRef(null)
 
     const handleMouseMove = (e) => {
@@ -8,9 +8,9 @@ export function SpecialBtn({ txt, onClick, className = '' }) {
         if (!button) return
 
         const rect = button.getBoundingClientRect()
-        const x = (e.clientX - rect.left) * 100 / button.clientWidth
-        const y = (e.clientY - rect.top) * 100 / button.clientHeight
-        
+        const x = ((e.clientX - rect.left) * 100) / button.clientWidth
+        const y = ((e.clientY - rect.top) * 100) / button.clientHeight
+
         button.style.setProperty('--mouse-x', x)
         button.style.setProperty('--mouse-y', y)
     }
@@ -20,8 +20,8 @@ export function SpecialBtn({ txt, onClick, className = '' }) {
             ref={buttonRef}
             className={`special-btn ${className}`}
             onClick={onClick}
-            onMouseMove={handleMouseMove}
-        >
+            disabled={disabled}
+            onMouseMove={handleMouseMove}>
             {txt}
         </button>
     )

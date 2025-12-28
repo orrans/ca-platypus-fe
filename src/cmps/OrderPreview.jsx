@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { updateOrderStatus } from '../store/actions/order.actions'
 import { format } from 'date-fns'
 import { formatPrice } from '../services/util.service'
+import { SpecialBtn } from './SpecialBtn.jsx'
 
 export function OrderPreview({ order }) {
     const dateFormat = 'dd/MM/yyyy'
@@ -31,8 +32,11 @@ export function OrderPreview({ order }) {
             <td className={order.status.toLowerCase()}>{order.status}</td>
             <td>
                 <div className="order-row-actions">
-                    <button className='accept-btn' onClick={handleAccept} disabled={!isPending}>Approve</button>
-                    <button className='reject-btn' onClick={handleReject} disabled={!isPending}>Reject</button>
+                    <SpecialBtn txt={'Approve'} onClick={handleAccept} disabled={!isPending} />
+
+                    <button className="reject-btn" onClick={handleReject} disabled={!isPending}>
+                        Reject
+                    </button>
                 </div>
             </td>
         </tr>
