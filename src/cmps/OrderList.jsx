@@ -4,14 +4,16 @@ import { loadOrders } from '../store/actions/order.actions'
 import { OrderPreview } from './OrderPreview'
 import { PlatypusLoader } from './PlatypusLoader'
 import { DashboardAnalytics } from './DashboardAnalytics'
+import { useIsMobile } from '../customHooks/useIsMobile'
+import { OrderPreviewCard } from './OrderPreviewCard'
 
 export function OrderList() {
     const [isLoading, setIsLoading] = useState(true)
     const loggedInUser = useSelector((state) => state.userModule.user)
-    const orders = useSelector(
-        (state) =>
-            state.orderModule.orders.filter((order) => order.hostId._id === loggedInUser?._id)
+    const orders = useSelector((state) =>
+        state.orderModule.orders.filter((order) => order.hostId._id === loggedInUser?._id)
     )
+    const isMobile = useIsMobile()
 
     useEffect(() => {
         const loadData = async () => {
@@ -29,12 +31,21 @@ export function OrderList() {
 
     if (isLoading) return <PlatypusLoader />
     if (!orders.length) return <div>No orders found</div>
-    
+
+    if (isMobile) {
+        return (
+            <div className="order-list-container">
+                <h3 className="order-count">{orders.length} reservations</h3>
+                {orders.map((order) => (
+                    <OrderPreviewCard key={order._id} order={order} />
+                ))}
+            </div>
+        )
+    }
     return (
         <div className="order-list-container">
-
             <h3 className="order-count">{orders.length} reservations</h3>
-            
+
             <div className="orders-table">
                 <table>
                     <thead>

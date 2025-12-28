@@ -1,0 +1,72 @@
+.order-card {
+    margin-bottom: 12px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+    border-radius: 20px;
+    padding: 20px;
+
+    .card-guest {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 12px;
+
+        img {
+            width: 72px;
+            height: auto;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+
+    .card-data {
+        b {
+            margin-right: 0.5ch;
+        }
+    }
+
+    .order-card-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 16px;
+
+        .special-btn {
+            padding: 5px 10px;
+            margin: 5px;
+            font-size: 0.825rem;
+
+            &:disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+            }
+        }
+
+        button {
+            width: 100%;
+
+            &.reject-btn {
+                color: #484848;
+                background-color: transparent;
+                border: 1px solid #959595;
+                border-radius: 50px;
+
+                padding: 5px 10px;
+                margin: 5px;
+                font-size: 0.825rem;
+                line-height: 15px;
+                transition: all 0.2s ease;
+
+                &:hover:not(:disabled) {
+                    background-color: #f7f7f7;
+                    border-color: #484848;
+                    color: black;
+                }
+
+                &:disabled {
+                    border-color: #e0e0e0;
+                    color: #b0b0b0;
+                }
+            }
+        }
+    }
+}

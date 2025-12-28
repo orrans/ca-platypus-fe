@@ -25,7 +25,6 @@
     pointer-events: auto;
 }
 
-
 .app-header.compact {
     height: 80px;
     background: #ffffff;
@@ -46,7 +45,6 @@
     flex-direction: column;
     /* Stack top and bottom rows */
 }
-
 
 /* --- Top Row (Logo, Nav, User) --- */
 .app-header .header-top {
@@ -292,8 +290,6 @@
     z-index: 102;
 }
 
-
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -314,5 +310,13 @@
 @media (max-width: 720px) {
     .app-header .header-container {
         padding: 0 24px;
+
+        .logo {
+            flex: 0;
+        }
+
+        .user-actions{
+            flex:0;
+        }
     }
 }
