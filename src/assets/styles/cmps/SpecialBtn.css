@@ -1,9 +1,9 @@
 .special-btn {
     --mouse-x: 92;
     --mouse-y: 73;
-    padding: 13px 23px;
+    padding: 14px 24px;
     width: 100%;
-    min-width: 200px;
+    min-width: 233px;
     background-position: calc((100 - var(--mouse-x, 0)) * 1%) calc((100 - var(--mouse-y, 0)) * 1%);
     background-image: radial-gradient(
         circle,
@@ -15,11 +15,8 @@
         rgb(189, 30, 89) 100%
     );
     background-size: 200% 200%;
-    border-radius: 8px;
+    border-radius: 50px;
     border: none;
-    text-align: center;
-    color: rgb(255, 255, 255);
-    font-family: cereal-Medium;
     font-size: 1rem;
     line-height: 20px;
     cursor: pointer;
