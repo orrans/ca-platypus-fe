@@ -115,19 +115,44 @@
   margin-bottom: 12px;
 }
 
-.review-author-info h4 {
+/* .review-author-info h4 {
   margin: 0;
   font-size: 16px;
+} */
+
+.review-author-info h4,
+.review-author-info h3 {
+  font-family: "Airbnb Cereal VF", Circular, -apple-system,
+    BlinkMacSystemFont, Roboto, sans-serif;
+
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #222222;
+  margin: 0;
 }
 
-.review-date {
+/* .review-date {
   font-size: 14px;
   color: #717171;
+} */
+
+.review-author-info .review-date,
+.review-author-info span {
+  font-family: "Airbnb Cereal VF", Circular, -apple-system,
+    BlinkMacSystemFont, Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #222222;
+  margin-top: 2px;
+  display: block;
 }
 
+
 .review-avatar {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   object-fit: cover;
 }
