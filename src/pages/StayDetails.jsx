@@ -194,7 +194,10 @@ Looking for a serene and unforgettable escape on the edge of nature, far from th
                             alt={stay.host.fullname}
                         />
                         <div className="host-info">
-                            <h3>Hosted by {stay.host.fullname}</h3>
+                            {/* <h3>Hosted by {stay.host.fullname}</h3> */}
+                            <span className="host-name">
+  Hosted by {stay.host.fullname}
+</span>
                         </div>
                     </section>
 
