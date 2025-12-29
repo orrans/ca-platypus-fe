@@ -25,6 +25,14 @@ export async function addOrder(order) {
     }
 }
 
+export function addOrderFromSocket(order) {
+    store.dispatch(getCmdAddOrder(order))
+}
+
+export function updateOrderFromSocket(order) {
+    store.dispatch(getCmdUpdateOrder(order))
+}
+
 export async function updateOrder(order) {
     try {
         const updatedOrder = await orderService.save(order)
