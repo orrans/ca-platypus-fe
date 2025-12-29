@@ -32,7 +32,7 @@ export function StayPreview({ stay, fromDate, toDate, variant = 'explore', showP
     ]
     const [randomStayType] = useState(stayType[getRandomIntInclusive(0, stayType.length - 1)])
     const [randomRating] = useState(() => {
-        const integerPart = getRandomIntInclusive(3, 5)
+        const integerPart = getRandomIntInclusive(4, 5)
         if (integerPart === 5) {
             return '5.0'
         }
