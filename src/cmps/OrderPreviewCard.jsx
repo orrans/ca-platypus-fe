@@ -5,10 +5,9 @@ import { format } from 'date-fns'
 import { formatPrice } from '../services/util.service'
 import { SpecialBtn } from './SpecialBtn.jsx'
 
-export function OrderPreviewCard({ order }) {
+export function OrderPreviewCard({ order, isOpen, onToggle }) {
     const dateFormat = 'dd/MM/yyyy'
     const isPending = order.status.toLowerCase() === 'pending'
-    const [isOpen, setIsOpen] = useState(false)
 
     function handleAccept(ev) {
         ev.stopPropagation()
@@ -21,7 +20,7 @@ export function OrderPreviewCard({ order }) {
     }
 
     return (
-        <div className="order-card" onClick={() => setIsOpen((prev) => !prev)}>
+        <div className="order-card" onClick={onToggle}>
             <div className="card-guest">
                 <img src={order.guest.imgUrl} />
                 <div className="guest-title-data">

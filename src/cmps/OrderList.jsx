@@ -9,6 +9,7 @@ import { OrderPreviewCard } from './OrderPreviewCard'
 
 export function OrderList() {
     const [isLoading, setIsLoading] = useState(true)
+    const [openOrderId, setOpenOrderId] = useState(null)
     const loggedInUser = useSelector((state) => state.userModule.user)
     const orders = useSelector((state) =>
         state.orderModule.orders
@@ -39,7 +40,12 @@ export function OrderList() {
             <div className="order-list-container">
                 <h3 className="order-count-card">{orders.length} reservations</h3>
                 {orders.map((order) => (
-                    <OrderPreviewCard key={order._id} order={order} />
+                    <OrderPreviewCard 
+                        key={order._id} 
+                        order={order} 
+                        isOpen={openOrderId === order._id}
+                        onToggle={() => setOpenOrderId(openOrderId === order._id ? null : order._id)}
+                    />
                 ))}
             </div>
         )
