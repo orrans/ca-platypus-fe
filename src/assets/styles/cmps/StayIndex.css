@@ -2,6 +2,7 @@
     --header-height: 80px;
     display: flex;
     align-items: flex-start;
+    margin-bottom: 49px;
 }
 
 .main-container main.stay-index {
