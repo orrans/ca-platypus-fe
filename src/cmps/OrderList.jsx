@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { loadOrders } from '../store/actions/order.actions'
 import { OrderPreview } from './OrderPreview'
@@ -11,10 +11,12 @@ export function OrderList() {
     const [isLoading, setIsLoading] = useState(true)
     const [openOrderId, setOpenOrderId] = useState(null)
     const loggedInUser = useSelector((state) => state.userModule.user)
-    const orders = useSelector((state) =>
-        state.orderModule.orders
+    const allOrders = useSelector((state) => state.orderModule.orders)
+    const orders = useMemo(() => 
+        allOrders
             .filter((order) => order.hostId._id === loggedInUser?._id)
-            .sort((a, b) => new Date(b.bookDate) - new Date(a.bookDate))
+            .sort((a, b) => new Date(b.bookDate) - new Date(a.bookDate)),
+        [allOrders, loggedInUser?._id]
     )
     const isMobile = useIsMobile()
 
