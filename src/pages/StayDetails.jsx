@@ -1,6 +1,7 @@
 import { useParams, useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { stayService } from '../services/stay/stay.service.local'
+import { prefetchCriticalData } from '../services/prefetch.service'
 
 import { StayHighlights } from '../cmps/StayHighlights'
 import { StayBooking } from '../cmps/StayBooking'
@@ -95,6 +96,8 @@ export function StayDetails() {
 
     useEffect(() => {
         loadStay()
+        // Prefetch critical data in background
+        prefetchCriticalData()
     }, [stayId])
 
     async function loadStay() {

@@ -6,6 +6,7 @@ import { StayList } from '../cmps/StayList'
 import { loadStays, setFilterBy } from '../store/actions/stay.actions'
 import { add } from 'date-fns'
 import { stayService } from '../services/stay'
+import { prefetchCriticalData } from '../services/prefetch.service'
 
 export function SearchResults({ }) {
     const [hoveredStayId, setHoveredStayId] = useState(null)
@@ -28,6 +29,8 @@ export function SearchResults({ }) {
 
     useEffect(() => {
         loadStays(filterBy)
+        // Prefetch critical data in background
+        prefetchCriticalData()
     }, [filterBy])
 
     return (

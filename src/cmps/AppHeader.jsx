@@ -6,6 +6,7 @@ import { StaySearchCollapsed } from './StaySearchCollapsed.jsx'
 import { LoginModal } from './LoginModal.jsx'
 import { logout } from '../store/actions/user.actions'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { prefetchRouteData } from '../services/prefetch.service'
 
 export function AppHeader() {
     const navigate = useNavigate()
@@ -169,7 +170,7 @@ export function AppHeader() {
                                                     <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{ display: 'block', height: '16px', width: '16px', fill: 'currentcolor' }}><path d="m8 0c4.4183 0 8 3.58172 8 8 0 4.4183-3.5817 8-8 8-4.41828 0-8-3.5817-8-8 0-4.41828 3.58172-8 8-8zm.00052 11.5c-1.55234 0-2.95811.6253-3.98006 1.6398 1.09966.8526 2.48033 1.3602 3.97954 1.3602 1.49949 0 2.8804-.5077 3.9801-1.3607-1.0219-1.0141-2.42753-1.6393-3.97958-1.6393zm-.00052-10c-3.58985 0-6.5 2.91015-6.5 6.5 0 1.55014.54263 2.9735 1.44831 4.0906 1.29288-1.2909 3.07941-2.0906 5.05221-2.0906 1.97257 0 3.75878.7994 5.05168 2.09.9054-1.1169 1.4478-2.54013 1.4478-4.09 0-3.58985-2.9102-6.5-6.5-6.5zm.00024 1.75c1.65688 0 2.99996 1.34315 2.99996 3 0 1.65687-1.34308 3-2.99996 3-1.65685 0-3-1.34312-3-3 0-1.65686 1.34315-3 3-3zm0 1.5c-.82842 0-1.5.67157-1.5 1.5 0 .82844.67157 1.5 1.5 1.5.82845 0 1.5-.67155 1.5-1.5 0-.82843-.67155-1.5-1.5-1.5z" fillRule="evenodd"></path></svg>
                                                     Profile
                                                 </Link>
-                                                <Link to="/dashboard" onClick={() => setIsMenuOpen(false)} className="nav-item">
+                                                <Link to="/dashboard" onClick={() => setIsMenuOpen(false)} onMouseEnter={() => prefetchRouteData('/dashboard')} className="nav-item">
                                                     <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{ display: 'block', height: '16px', width: '16px', fill: 'currentcolor' }}><path d="M1 1h6v6H1V1zm8 0h6v6H9V1zM1 9h6v6H1V9zm8 0h6v6H9V9z"></path></svg>
                                                     Dashboard
                                                 </Link>
