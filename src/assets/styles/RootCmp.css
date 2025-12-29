@@ -2,3 +2,10 @@
     min-height: calc(100vh - 7rem);
     overflow: visible;
 }
+
+@media (max-width: 768px) {
+    .main-container main {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+}

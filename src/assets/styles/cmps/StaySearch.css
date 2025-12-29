@@ -375,3 +375,42 @@
     align-items: center;
     gap: 12px;
 }
+
+@media screen and (max-width: 768px) {
+    .stay-search-container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .stay-search-container .search-modal-dropdown {
+        min-width: unset;
+        width: 100%;
+        max-width: calc(100vw - 20px);
+        left: 10px;
+        right: 10px;
+        padding: 16px;
+    }
+
+    .stay-search-container .search-modal-dropdown.loc {
+        width: 100%;
+        max-width: calc(100vw - 20px);
+        padding: 16px;
+    }
+
+    .stay-search-container .search-modal-dropdown.guests {
+        width: 100%;
+        max-width: calc(100vw - 20px);
+        padding: 16px;
+    }
+
+    .stay-search-container .guest-row {
+        min-width: unset;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .stay-search-container .location-suggestions {
+        margin-left: 0;
+        max-width: 100%;
+    }
+}

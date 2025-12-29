@@ -8,6 +8,7 @@
 
 .dashboard-nav {
   display: flex;
+  flex-wrap: wrap;  
   justify-content: center;
   gap: 10px;
   margin: 32px 0;
@@ -17,10 +18,11 @@
     padding: 5px 10px;
     text-decoration: none;
     color: black;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 10px;
     border-bottom: none;
     transition: all 0.3s;
+    font-size: 1.2rem;
 
     &:hover {
       color: #111827;
@@ -50,8 +52,9 @@
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 24px;
   font-size: 18px;
+  margin-bottom: 50px;
 }
 
 .dashboard-card {
@@ -70,6 +73,39 @@
     margin-bottom: 1rem;
     color: #111827;
   }
+
+  &.full-width {
+    grid-column: 1 / -1;
+    max-height: 400px;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h2 {
+      margin-bottom: 0;
+    }
+
+    .month-income {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .income-label {
+        font-size: 0.9rem;
+        color: #6b7280;
+      }
+
+      .income-value {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: rgb(255, 56, 92);
+      }
+    }
+  }
 }
 
 .status-list {
@@ -87,20 +123,9 @@
 }
 
 .status-count {
-  font-size: 1.1rem;
-  font-weight: 600;
-
-  &.pending {
-    color: orange;
-  }
-
-  &.approved {
-    color: green;
-  }
-
-  &.rejected {
-    color: red;
-  }
+  font-size: 1rem;
+  font-weight: 500;
+    color: rgb(106, 106, 106);
 }
 
 .chart {
@@ -131,7 +156,6 @@
   background: white;
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
   margin: 0 5px;
 
   table {
@@ -141,7 +165,7 @@
 
   th {
     text-align: left;
-    padding: 1rem;
+    padding: 16px 12px;
     font-weight: 500;
     color: #6b7280;
     border-bottom: 1px solid #e5e7eb;
@@ -149,7 +173,7 @@
   }
 
   td {
-    padding: 1rem;
+    padding: 16px 12px;
     border-bottom: 1px solid #f3f4f6;
     font-size: 0.875rem;
   }
@@ -178,12 +202,121 @@
   }
 }
 
-@media screen and (max-width: 800px) {
-  .dashboard-nav {
-    margin: 20px 0;
+@media screen and (max-width: 768px) {
+  .dashboard {
+    padding: 0 10px;
+    max-width: 100%;
   }
 
-  .dashboard {
-    padding: 0 20px;
+  .dashboard-nav {
+    margin: 12px 0;
+    gap: 8px;
+    
+    a {
+      font-size: 1rem;
+      padding: 8px 12px;
+    }
+  }
+
+  .dashboard-content {
+    max-width: 100%;
+  }
+
+  .order-list-container,
+  .listing-list-container {
+    max-width: 100%;
+  }
+
+  .order-count,
+  .listing-count {
+    padding: 0;
+    font-size: 1.25rem;
+  }
+
+  .dashboard-analytics {
+    padding: 0;
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .dashboard-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    gap: 16px;
+  }
+
+  .dashboard-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+    margin: 0;
+    box-sizing: border-box;
+    max-height: none;
+    min-height: 250px;
+    
+    h2 {
+      font-size: 0.95rem;
+    }
+
+    &.full-width {
+      max-height: none;
+      min-height: 300px;
+    }
+
+    .card-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+
+      .month-income {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        width: 100%;
+
+        .income-label {
+          font-size: 0.8rem;
+        }
+
+        .income-value {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+
+  .status-list {
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .status-item {
+    font-size: 0.9rem;
+  }
+
+  .status-count {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .chart {
+    height: 200px;
+    padding: 5px;
+
+    canvas {
+      max-height: 200px;
+    }
+  }
+
+  .orders-table,
+  .listings-table {
+    margin: 0;
+    max-width: 100%;
+    
+    table {
+      min-width: 800px;
+    }
   }
 }

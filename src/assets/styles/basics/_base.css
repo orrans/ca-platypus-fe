@@ -9,11 +9,13 @@
 
 html {
     line-height: 1.6;
+    max-width: 100%;
 }
 
 body {
     margin: 0 auto;
     font-size: 1.125rem;
+    max-width: 100%;
 }
 
 h1,

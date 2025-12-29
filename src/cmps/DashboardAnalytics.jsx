@@ -57,12 +57,28 @@ export function DashboardAnalytics() {
 
         const revenueData = months.map((month) => monthlyRevenue[month] || 0)
 
+        const createGradient = (ctx, chartArea) => {
+            if (!chartArea) return null
+            const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top)
+            gradient.addColorStop(0, 'rgb(189, 30, 89)')
+            gradient.addColorStop(0.25, 'rgb(215, 4, 102)')
+            gradient.addColorStop(0.5, 'rgb(227, 28, 95)')
+            gradient.addColorStop(0.75, 'rgb(230, 30, 77)')
+            gradient.addColorStop(1, 'rgb(255, 56, 92)')
+            return gradient
+        }
+
         const revenueChartData = {
             labels: monthLabels,
             datasets: [
                 {
                     data: revenueData,
-                    backgroundColor: ['#8b5cf6', '#3b82f6', '#60a5fa', '#22d3ee', '#2dd4bf'],
+                    backgroundColor: (context) => {
+                        const chart = context.chart
+                        const { ctx, chartArea } = chart
+                        if (!chartArea) return null
+                        return createGradient(ctx, chartArea)
+                    },
                 },
             ],
         }
@@ -72,15 +88,77 @@ export function DashboardAnalytics() {
             datasets: [
                 {
                     data: Object.values(listingReservations),
-                    backgroundColor: ['#8b5cf6', '#3b82f6', '#60a5fa', '#22d3ee'],
+                    backgroundColor: [
+                        'rgb(255, 56, 92)',
+                        'rgb(236, 72, 153)',
+                        'rgb(219, 39, 119)',
+                        'rgb(190, 18, 60)',
+                        'rgb(157, 23, 77)',
+                    ],
                 },
             ],
         }
 
-        return { revenueChartData, statusCount, listingChartData }
+        // Orders per day in current month
+        const currentMonth = new Date(now.getFullYear(), now.getMonth(), 1)
+        const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate()
+        const dailyOrders = {}
+        let currentMonthIncome = 0
+
+        orders.forEach((order) => {
+            const orderDate = new Date(order.bookDate)
+            if (
+                orderDate.getMonth() === now.getMonth() &&
+                orderDate.getFullYear() === now.getFullYear()
+            ) {
+                const day = orderDate.getDate()
+                dailyOrders[day] = (dailyOrders[day] || 0) + 1
+
+                if (order.status === 'approved') {
+                    currentMonthIncome += order.totalPrice
+                }
+            }
+        })
+
+        const dailyLabels = []
+        const dailyData = []
+        for (let i = 1; i <= daysInMonth; i++) {
+            dailyLabels.push(i.toString())
+            dailyData.push(dailyOrders[i] || 0)
+        }
+
+        const dailyOrdersChartData = {
+            labels: dailyLabels,
+            datasets: [
+                {
+                    label: 'Orders',
+                    data: dailyData,
+                    borderColor: 'rgb(255, 56, 92)',
+                    backgroundColor: 'rgba(255, 56, 92, 0.1)',
+                    tension: 0,
+                    fill: true,
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    pointHoverRadius: 5,
+                    pointBackgroundColor: 'rgb(255, 56, 92)',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                },
+            ],
+        }
+
+        return {
+            revenueChartData,
+            statusCount,
+            listingChartData,
+            dailyOrdersChartData,
+            currentMonthIncome,
+        }
     }
 
     if (!chartData) return null
+
+    const currentMonthName = new Date().toLocaleDateString('en-US', { month: 'long' })
 
     return (
         <div className="dashboard-analytics">
@@ -117,6 +195,19 @@ export function DashboardAnalytics() {
                 <div className="dashboard-card">
                     <h2>Reservations / listing</h2>
                     <Chart data={chartData.listingChartData} chartType="pie" />
+                </div>
+
+                <div className="dashboard-card full-width">
+                    <div className="card-header">
+                        <h2>{currentMonthName} orders</h2>
+                        <div className="month-income">
+                            <span className="income-label">Monthly Income:</span>
+                            <span className="income-value">
+                                ${chartData.currentMonthIncome.toLocaleString()}
+                            </span>
+                        </div>
+                    </div>
+                    <Chart data={chartData.dailyOrdersChartData} chartType="line" />
                 </div>
             </div>
         </div>

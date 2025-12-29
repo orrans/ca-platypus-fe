@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { loadOrders } from '../store/actions/order.actions'
 import { OrderPreview } from './OrderPreview'
 import { PlatypusLoader } from './PlatypusLoader'
 import { DashboardAnalytics } from './DashboardAnalytics'
+import { useIsMobile } from '../customHooks/useIsMobile'
+import { OrderPreviewCard } from './OrderPreviewCard'
 
 export function OrderList() {
     const [isLoading, setIsLoading] = useState(true)
+    const [openOrderId, setOpenOrderId] = useState(null)
     const loggedInUser = useSelector((state) => state.userModule.user)
-    const orders = useSelector(
-        (state) =>
-            state.orderModule.orders.filter((order) => order.hostId._id === loggedInUser?._id)
+    const allOrders = useSelector((state) => state.orderModule.orders)
+    const orders = useMemo(() => 
+        allOrders
+            .filter((order) => order.hostId._id === loggedInUser?._id)
+            .sort((a, b) => new Date(b.bookDate) - new Date(a.bookDate)),
+        [allOrders, loggedInUser?._id]
     )
+    const isMobile = useIsMobile()
 
     useEffect(() => {
         const loadData = async () => {
@@ -29,13 +36,26 @@ export function OrderList() {
 
     if (isLoading) return <PlatypusLoader />
     if (!orders.length) return <div>No orders found</div>
-    
+
+    if (isMobile) {
+        return (
+            <div className="order-list-container">
+                <h3 className="order-count-card">{orders.length} reservations</h3>
+                {orders.map((order) => (
+                    <OrderPreviewCard 
+                        key={order._id} 
+                        order={order} 
+                        isOpen={openOrderId === order._id}
+                        onToggle={() => setOpenOrderId(openOrderId === order._id ? null : order._id)}
+                    />
+                ))}
+            </div>
+        )
+    }
     return (
         <div className="order-list-container">
-            <DashboardAnalytics />
-
             <h3 className="order-count">{orders.length} reservations</h3>
-            
+
             <div className="orders-table">
                 <table>
                     <thead>
@@ -47,7 +67,7 @@ export function OrderList() {
                             <th>Listing</th>
                             <th>Total Payout</th>
                             <th>Status</th>
-                            <th>To do</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>

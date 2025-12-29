@@ -2,8 +2,16 @@
     --header-height: 80px;
     display: flex;
     align-items: flex-start;
+    margin-bottom: 49px;
 }
 
 .main-container main.stay-index {
     overflow: visible;
+}
+
+@media (max-width: 768px) {
+    .stay-index {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
 }

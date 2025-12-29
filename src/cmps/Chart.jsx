@@ -1,13 +1,16 @@
-import { Bar, Doughnut, Pie } from 'react-chartjs-2'
+import { Bar, Doughnut, Pie, Line } from 'react-chartjs-2'
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   BarElement,
   ArcElement,
+  LineElement,
+  PointElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 } from 'chart.js'
 
 ChartJS.register(
@@ -15,9 +18,12 @@ ChartJS.register(
   LinearScale,
   BarElement,
   ArcElement,
+  LineElement,
+  PointElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 )
 
 export function Chart({ data, chartType }) {
@@ -54,6 +60,45 @@ export function Chart({ data, chartType }) {
     },
   }
 
+  const lineOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          font: {
+            size: 14
+          }
+        },
+        grid: {
+          display: false,
+          drawBorder: false,
+        },
+      },
+      y: {
+        beginAtZero: true,
+        grid: {
+          display: true,
+          color: 'rgba(0, 0, 0, 0.05)',
+          drawBorder: false,
+        },
+        ticks: {
+          display: true,
+          font: {
+            size: 14
+          },
+          stepSize: 1,
+          precision: 0,
+        },
+      },
+    },
+  }
+
   const pieOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -83,6 +128,7 @@ export function Chart({ data, chartType }) {
       {chartType === 'bar' && <Bar data={data} options={options} />}
       {chartType === 'doughnut' && <Doughnut data={data} options={pieOptions} />}
       {chartType === 'pie' && <Pie data={data} options={pieOptions} />}
+      {chartType === 'line' && <Line data={data} options={lineOptions} />}
     </section>
   )
 }
