@@ -143,13 +143,13 @@ export function StayCheckout() {
                                 <h3>Price details</h3>
                                 <div className="price-row">
                                     <span>
-                                        {nights} nights × ${pricePerNight}
+                                        {nights} {nights === 1 ? 'night' : 'nights'} × ${pricePerNight || stay.price}
                                     </span>
-                                    <span>${totalPrice}</span>
+                                    <span>${totalPrice || (nights * (pricePerNight || stay.price))}</span>
                                 </div>
                                 <div className="price-total">
                                     <span>Total (USD)</span>
-                                    <span>${totalPrice}</span>
+                                    <span>${totalPrice || (nights * (pricePerNight || stay.price))}</span>
                                 </div>
                             </div>
                         </div>
