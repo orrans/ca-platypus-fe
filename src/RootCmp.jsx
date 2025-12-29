@@ -1,4 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { StayIndex } from './pages/StayIndex.jsx'
 import { AppHeader } from './cmps/AppHeader'
 import { AppFooter } from './cmps/AppFooter'
@@ -16,8 +18,18 @@ import { WishList } from './pages/WishList.jsx'
 import { UserTrips } from './pages/UserTrips.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
 import { DashboardAnalytics } from './cmps/DashboardAnalytics.jsx'
+import { socketService } from './services/socket.service.js'
 
 export function RootCmp() {
+    const user = useSelector(storeState => storeState.userModule.user)
+
+    // Setup socket connection when user logs in
+    useEffect(() => {
+        if (user) {
+            socketService.login(user._id)
+        }
+    }, [user])
+
     return (
         <div className="main-container">
             <ScrollToTop />
