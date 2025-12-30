@@ -20,6 +20,7 @@ import {
     TV,
     Washer,
     Wifi,
+    FirstAidIcon,
 } from '../cmps/icons/amenities'
 
 import { GoogleMap } from '../cmps/GoogleMaps'
@@ -63,6 +64,8 @@ export function StayDetails() {
         'Air conditioning': <AirConditioning />,
         Washer: <Washer />,
         Dryer: <Dryer />,
+        'First aid kit': <FirstAidIcon/>,
+        // 'Fire extinguisher': 
     }
 
     const getAmenityIcon = (amenity) => AMENITY_ICON_MAP[amenity] || <PetsIcon />
@@ -225,7 +228,14 @@ Looking for a serene and unforgettable escape on the edge of nature, far from th
                 <h2>Where you’ll sleep</h2>
 
                 <div className="sleep-card">
-                    <img src={stay.imgUrls[0]} alt="Where you’ll sleep" />
+
+                  {/* change back after demo  */}
+
+                    {/* <img src={stay.imgUrls[3]} alt="Where you’ll sleep" /> */}
+                    <img src={stay.imgUrls[4]} alt="Where you’ll sleep" />
+                    {/* <img src=
+                    "http://res.cloudinary.com/dmtlr2viw/image/upload/v1663436815/ou3m2jicqonj8yhxdshq.jpg"
+ alt="Where you’ll sleep" /> */}
                 </div>
 </section>
                 </div>
@@ -242,31 +252,7 @@ Looking for a serene and unforgettable escape on the edge of nature, far from th
                 />
             </div>
 
-            {/* <section className="stay-amenities">
-                <h2>What this place offers</h2>
-
-                <ul className="amenities-list">
-                    {amenities.slice(0, 8).map((amenity) => (
-                        <li key={amenity}>
-                            <span>{getAmenityIcon(amenity)}</span>
-                            {amenity}
-                        </li>
-                    ))}
-                </ul>
-
-                <button className="show-more-btn" onClick={() => setIsAmenitiesOpen(true)}>
-                    Show all {amenities.length} amenities
-                </button>
-            </section>
-
-            <section className="stay-sleep">
-                <h2>Where you’ll sleep</h2>
-
-                <div className="sleep-card">
-                    <img src={stay.imgUrls[0]} alt="Where you’ll sleep" />
-                </div>
-            </section> */}
-
+          
             <section className="stay-reviews">
                 {stay.reviews &&
                     stay.reviews.slice(0, 6).map((review, idx) => (
