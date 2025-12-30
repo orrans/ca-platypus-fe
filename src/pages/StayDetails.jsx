@@ -159,6 +159,7 @@ Looking for a serene and unforgettable escape on the edge of nature, far from th
                 </div>
             </div>
 
+
             <div className="stay-details-layout">
                 <div className="stay-details-main">
                     <div className="stay-overview">
@@ -202,21 +203,8 @@ Looking for a serene and unforgettable escape on the edge of nature, far from th
                             Show more
                         </button>
                     </section>
-                </div>
 
-                <StayBooking
-                    stay={stay}
-                    checkIn={checkIn}
-                    checkOut={checkOut}
-                    guests={guests}
-                    nights={nights}
-                    totalPrice={totalPrice}
-                    pricePerNight={pricePerNight}
-                    getGuestsText={getGuestsText}
-                />
-            </div>
-
-            <section className="stay-amenities">
+<section className="stay-amenities">
                 <h2>What this place offers</h2>
 
                 <ul className="amenities-list">
@@ -239,9 +227,46 @@ Looking for a serene and unforgettable escape on the edge of nature, far from th
                 <div className="sleep-card">
                     <img src={stay.imgUrls[0]} alt="Where you’ll sleep" />
                 </div>
+</section>
+                </div>
+
+                <StayBooking
+                    stay={stay}
+                    checkIn={checkIn}
+                    checkOut={checkOut}
+                    guests={guests}
+                    nights={nights}
+                    totalPrice={totalPrice}
+                    pricePerNight={pricePerNight}
+                    getGuestsText={getGuestsText}
+                />
+            </div>
+
+            {/* <section className="stay-amenities">
+                <h2>What this place offers</h2>
+
+                <ul className="amenities-list">
+                    {amenities.slice(0, 8).map((amenity) => (
+                        <li key={amenity}>
+                            <span>{getAmenityIcon(amenity)}</span>
+                            {amenity}
+                        </li>
+                    ))}
+                </ul>
+
+                <button className="show-more-btn" onClick={() => setIsAmenitiesOpen(true)}>
+                    Show all {amenities.length} amenities
+                </button>
             </section>
 
-            {/* </div> */}
+            <section className="stay-sleep">
+                <h2>Where you’ll sleep</h2>
+
+                <div className="sleep-card">
+                    <img src={stay.imgUrls[0]} alt="Where you’ll sleep" />
+                </div>
+            </section> */}
+
             <section className="stay-reviews">
                 {stay.reviews &&
                     stay.reviews.slice(0, 6).map((review, idx) => (
