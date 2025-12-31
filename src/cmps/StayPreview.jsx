@@ -9,7 +9,14 @@ import { formatPrice, getRandomIntInclusive } from '../services/util.service'
 import { useSelector } from 'react-redux'
 import { addToWishlist, removeFromWishlist } from '../store/actions/user.actions'
 
-export function StayPreview({ stay, fromDate, toDate, variant = 'explore', showPrice = true ,isMapPreview=false}) {
+export function StayPreview({
+    stay,
+    fromDate,
+    toDate,
+    variant = 'explore',
+    showPrice = true,
+    isMapPreview = false,
+}) {
     const wishlist = useSelector((state) => state.userModule.user?.wishlist) || []
     const days = differenceInDays(toDate, fromDate)
     const isFavorite = wishlist.includes(stay._id)
@@ -27,19 +34,19 @@ export function StayPreview({ stay, fromDate, toDate, variant = 'explore', showP
     })
     const [randomReviewCount] = useState(getRandomIntInclusive(20, 500))
 
-const location = useLocation()
-const params = new URLSearchParams(location.search)
+    const location = useLocation()
+    const params = new URLSearchParams(location.search)
 
-const guests = {
-  adults: +params.get('adults') || 0,
-  kids: +params.get('children') || 0,
-  infants: +params.get('infants') || 0,
-  pets: +params.get('pets') || 0,
-}
+    const guests = {
+        adults: +params.get('adults') || 0,
+        kids: +params.get('children') || 0,
+        infants: +params.get('infants') || 0,
+        pets: +params.get('pets') || 0,
+    }
 
     return (
         // <Link to={`/stay/${stay._id}`} target="_blank" className="stay-preview">
-        //    testing 
+        //    testing
         <Link
             to={`/stay/${stay._id}`}
             className="stay-preview"
@@ -47,11 +54,9 @@ const guests = {
                 checkIn: fromDate,
                 checkOut: toDate,
                 guests,
-    nights: differenceInDays(toDate, fromDate),
-                pricePerNight: stay.price
-            }}
-        >
-
+                nights: differenceInDays(toDate, fromDate),
+                pricePerNight: stay.price,
+            }}>
             <div className="stay-inner-img">
                 <div className="img-overlay">
                     <div className="favorite-icon-container">
@@ -63,8 +68,20 @@ const guests = {
                                 setIsFavorite()
                             }}
                             size={isMapPreview ? 16 : 24}
-                            fill={isFavorite ? `var(--clr-brand)` : isMapPreview ? 'transparent' : undefined}
-                            strokeColor={isFavorite && isMapPreview ? `var(--clr-brand)` : isMapPreview ? 'rgba(0, 0, 0, 0.7)' : undefined}
+                            fill={
+                                isFavorite
+                                    ? `var(--clr-brand)`
+                                    : isMapPreview
+                                    ? 'transparent'
+                                    : undefined
+                            }
+                            strokeColor={
+                                isFavorite && isMapPreview
+                                    ? `var(--clr-brand)`
+                                    : isMapPreview
+                                    ? 'rgba(0, 0, 0, 0.7)'
+                                    : undefined
+                            }
                             strokeWidth={isMapPreview ? 3 : 2}
                         />
                     </div>
@@ -94,7 +111,7 @@ const guests = {
                                 <span>
                                     <span className="filtered-price">
                                         {formatPrice(stay.price * days)}
-                                    </span>{' '}
+                                    </span>
                                     for {days} nights
                                 </span>
                             )}
