@@ -87,8 +87,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   border-bottom: 1px solid #ddd;
-  padding-bottom: 48px;
-  margin-bottom: 48px;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
   margin-top: 32px;
 }
 
