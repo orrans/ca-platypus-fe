@@ -69,6 +69,10 @@ export function UserTrips() {
                                     <span className={`status-label ${order.status.toLowerCase()}`}>
                                         {order.status}
                                     </span>
+
+                                    {/* <span className={`status-label ${order.status.toLowerCase()}`}>
+                                        {order.status.charAt(0) + order.status.slice(1).toLowerCase()}
+                                    </span> */}
                                 </div>
                             </div>
                         </div>
@@ -77,7 +81,7 @@ export function UserTrips() {
                 ))}
             </div>
 
-<SpecialBtn txt="Look for more places to stay" onClick={() => navigate('/')} />
+            <SpecialBtn txt="Look for more places to stay" onClick={() => navigate('/')} />
 
         </section>
     )
