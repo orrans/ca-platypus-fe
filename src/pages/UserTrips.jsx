@@ -16,6 +16,14 @@ export function UserTrips() {
         }
     }, [user])
 
+useEffect(() => {
+  document.body.classList.add('hide-collapsed-search')
+
+  return () => {
+    document.body.classList.remove('hide-collapsed-search')
+  }
+}, [])
+
 
     const sortedOrders = orders?.slice().sort((a, b) => {
         const dateA = new Date(a.bookDate || a.createdAt).getTime()

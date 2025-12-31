@@ -1,3 +1,8 @@
+.hide-collapsed-search .collapsed-search-btn {
+  display: none;
+}
+
+
 .user-trips-page {
     padding-top: 80px;
     max-width: 1080px;
